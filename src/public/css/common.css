@@ -1,0 +1,25 @@
+.header {
+    width: 100%;
+    height: 60px;
+    padding: 10px 0px;
+    background-color: #000;
+    display: flex;
+}
+
+.header-text {
+    color: #fff;
+}
+
+.main {
+    width: 100%;
+}
+
+.inner-header {
+    text-align: center;
+    margin-top: 70px;
+}
+
+.content {
+    width: 60%;
+    margin: 0 auto;
+}
