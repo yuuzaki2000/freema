@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UploadController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,3 +20,5 @@ use App\Http\Controllers\ProfileController;
 Route::get('/', [ProductController::class, 'index']);
 
 Route::get('/mypage/profile', [ProfileController::class, 'index']);
+
+Route::resource('/upload', UploadController::class);

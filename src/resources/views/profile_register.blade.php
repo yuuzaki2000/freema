@@ -6,14 +6,22 @@
 @section('link')
 
 @section('content')
+    <h2 class="inner-header">プロフィール設定</h2>
+    <div>
+        <img src="{{asset($imageFilePath)}}" alt="サンプル画像" width="100px" height="100px">
+    </div>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+    @csrf
+        <input type="file" name="file">
+        <button type="submit">アップロード</button>
+    </form>
     <form class="inner" action="/mypage/profile" method="post">
     @csrf
-        <h2 class="inner-header">プロフィール設定</h2>
+        
         <div class="content">
-            <div>画像を選択する</div>
             <div>
                 <p>ユーザー名</p>
-                <input class="input" type="text" name="name">
+                <input class="input" type="text" name="name" value="{{$userInfo->name}}">
             </div>
             <div>
                 <p>郵便番号</p>
