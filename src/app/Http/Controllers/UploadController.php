@@ -12,6 +12,7 @@ class UploadController extends Controller
         $imageName = Auth::user()->name . "_image.png";
         $request->file('file')->storeAs('public/img',$imageName);
         return redirect('/mypage/profile');
+        return redirect('/mypage/profile');
     }
 
 }

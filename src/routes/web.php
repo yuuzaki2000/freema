@@ -18,7 +18,10 @@ use App\Http\Controllers\UploadController;
 */
 
 Route::get('/', [ProductController::class, 'index']);
+Route::get('/sell', [ProductController::class, 'add']);
 
-Route::get('/mypage/profile', [ProfileController::class, 'index']);
+Route::get('/mypage/profile', [ProfileController::class, 'edit']);
+Route::post('/mypage/profile', [ProfileController::class, 'store']);
+Route::get('/mypage', [ProfileController::class, 'index']);
 
 Route::resource('/upload', UploadController::class);

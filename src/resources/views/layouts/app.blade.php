@@ -11,10 +11,24 @@
 </head>
 <body>
     <header  class="header">
-            <h1 class="header-text">COACHTECH</h1>
+        <h1 class="header-text">COACHTECH</h1>
+        <nav class="link">
+            <form action="/search" method="post">
+                <input type="text" name="keyword">
+            </form>
+            <form action="/logout" method="post">
+            @csrf
+                <button>
+                    <p style="color:#fff">ログアウト</p>
+                </button>
+            </form>
             <div>
-                @yield('link')
+                <a href="/mypage">マイページ</a>
             </div>
+            <div>
+                <a href="/sell">出品</a>
+            </div>
+        </nav>
     </header>
     <div class="middle">
         @yield('middle')

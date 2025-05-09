@@ -17,12 +17,12 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('image');
             $table->string('name');
-            $table->string('brand');
+            $table->string('brand')->nullable();
             $table->integer('price');
             $table->string('description');
             $table->string('condition');
-            $table->timestamp('created_at')->useCurrent()->cascadeOnDelete;
-            $table->timestamp('updated_at')->useCurrent()->cascadeOnDelete;
+            $table->timestamp('created_at')->useCurrent()->nullable();
+            $table->timestamp('updated_at')->useCurrent()->nullable();
         });
     }
 
