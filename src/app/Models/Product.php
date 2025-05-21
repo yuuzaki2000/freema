@@ -13,7 +13,7 @@ class Product extends Model
 
     protected $fillable = ['image', 'name', 'brand', 'price', 'description', 'condition'];
 
-    public function user() {
-        return $this->belongsTo(User::class);
+    public function categories(){
+        return $this->belongsToMany(Category::class)->withTimestamps();
     }
 }

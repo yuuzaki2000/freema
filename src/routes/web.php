@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UploadController;
+use App\Http\Controllers\ProfileUploadController;
+use App\Http\Controllers\ProductUploadController;
+use App\Http\Controllers\ExhibitController;
 
 
 /*
@@ -19,9 +21,11 @@ use App\Http\Controllers\UploadController;
 
 Route::get('/', [ProductController::class, 'index']);
 Route::get('/sell', [ProductController::class, 'add']);
+Route::post('/sell', [ProductController::class, 'store']);
 
 Route::get('/mypage/profile', [ProfileController::class, 'edit']);
 Route::post('/mypage/profile', [ProfileController::class, 'store']);
 Route::get('/mypage', [ProfileController::class, 'index']);
 
-Route::resource('/upload', UploadController::class);
+Route::resource('/upload/profile', ProfileUploadController::class);
+Route::resource('/upload/product', ProductUploadController::class);

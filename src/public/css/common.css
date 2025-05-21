@@ -4,10 +4,18 @@
     padding: 10px 0px;
     background-color: #000;
     display: flex;
+    justify-content: space-around;
 }
 
 .header-text {
     color: #fff;
+    margin-right: 80px;
+}
+
+.keyword-input {
+    width: 420px;
+    height: 35px;
+    background-color: #fff;
 }
 
 .main {
@@ -26,4 +34,8 @@
 
 .link {
     display: flex;
+}
+
+.logout-form {
+    margin-right: 30px;
 }

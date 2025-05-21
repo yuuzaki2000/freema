@@ -105,15 +105,5 @@ class ProductsTableSeeder extends Seeder
             'condition' => '目立った傷や汚れなし',
         ];
         DB::table('products')->insert($data);
-        $data = [
-            'id' => 11,
-            'image' => 'storage/img/product_image_sample.png',
-            'name' => '商品名',
-            'brand' => 'アルマーニ',
-            'price' => 310000,
-            'description' => '商品説明',
-            'condition' => '良好',
-        ];
-        DB::table('products')->insert($data);
     }
 }

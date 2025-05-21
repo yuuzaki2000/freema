@@ -11,12 +11,14 @@
 </head>
 <body>
     <header  class="header">
-        <h1 class="header-text">COACHTECH</h1>
+        <div class="header-text">
+            <img src="{{asset('img/logo.svg')}}" alt="ロゴ">
+        </div>
+        <form action="/search" method="post">
+            <input type="text" class="keyword-input" name="keyword" placeholder="　　なにをお探しですか？">
+        </form>
         <nav class="link">
-            <form action="/search" method="post">
-                <input type="text" name="keyword">
-            </form>
-            <form action="/logout" method="post">
+            <form class="logout-form" action="/logout" method="post">
             @csrf
                 <button>
                     <p style="color:#fff">ログアウト</p>
@@ -25,14 +27,15 @@
             <div>
                 <a href="/mypage">マイページ</a>
             </div>
-            <div>
-                <a href="/sell">出品</a>
-            </div>
+            <form action="/sell" method="get">
+            @csrf
+                <button>
+                    <p style="color:#fff">出品</p>
+                </button>
+            </form>
         </nav>
     </header>
-    <div class="middle">
-        @yield('middle')
-    </div>
+    @yield('middle')
     <div class="main">
         <h2 class="inner-header">
             @yield('title')

@@ -9,6 +9,10 @@ use App\Models\Profile;
 class ProfileController extends Controller
 {
     //
+    public function index(){
+        return view('mypage');
+    }
+
     public function edit(){
         $userInfo = Auth::user();
         $imageFilePath = 'storage/img/' . $userInfo->name . "_image.png";
@@ -19,13 +23,9 @@ class ProfileController extends Controller
         return view('profile_register', $data);
     }
 
-    public function index(){
-        return view('profile');
-    }
-
     public function store(Request $request){
         $profile = $request->all();
         Profile::create($profile);
-        return redirect('/');
+        return redirect('/login');
     }
 }

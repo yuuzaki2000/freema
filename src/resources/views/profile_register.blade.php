@@ -5,17 +5,16 @@
 
 @section('content')
     <h2 class="inner-header">プロフィール設定</h2>
-    <div>
-        <img src="{{asset($imageFilePath)}}" alt="サンプル画像" width="100px" height="100px">
-    </div>
-    <form action="/upload" method="POST" enctype="multipart/form-data">
+    <form action="/upload/profile" method="POST" enctype="multipart/form-data">
     @csrf
+        <div>
+            <img src="{{asset($imageFilePath)}}" alt="サンプル画像" width="100px" height="100px">
+        </div>
         <input type="file" name="file">
         <button type="submit">アップロード</button>
     </form>
     <form class="inner" action="/mypage/profile" method="post">
     @csrf
-        
         <div class="content">
             <div>
                 <input type="hidden" name="image" value="{{$imageFilePath}}">

@@ -7,17 +7,21 @@
 <h2>商品の出品</h2>
 <div>
     <h4>商品画像</h4>
-    <form action="/upload" method="post" enctype="multipart/form-data">
+    <form action="/upload/product" method="post" enctype="multipart/form-data">
     @csrf
         <input type="file" name="file">
         <button type="submit">画像を選択する</button>
     </form>
 </div>
 <div>
-    <form>
+    <form action="/sell" method="post">
+    @csrf
         <h3>商品の詳細</h3>
         <div>
+            <input type="hidden" name="user_id" value="{{$userId}}">
+            <input type="hidden" name="product_id" value="{{$productNextId}}">
             <input type="hidden" name="image" value="{{$imageFilePath}}">
+            {{--
             <h4>カテゴリー</h4>
             <input type="checkbox" name="category" value="1">ファッション
             <input type="checkbox" name="category" value="2">家電
@@ -32,7 +36,7 @@
             <input type="checkbox" name="category" value="11">ハンドメイド
             <input type="checkbox" name="category" value="12">アクセサリー
             <input type="checkbox" name="category" value="13">おもちゃ
-            <input type="checkbox" name="category" value="14">ベビー・キッズ
+            <input type="checkbox" name="category" value="14">ベビー・キッズ  --}}
         </div>
         <div>
             <h4>商品の状態</h4>
