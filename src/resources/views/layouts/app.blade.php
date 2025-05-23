@@ -15,7 +15,8 @@
             <img src="{{asset('img/logo.svg')}}" alt="ロゴ">
         </div>
         <form action="/search" method="post">
-            <input type="text" class="keyword-input" name="keyword" placeholder="　　なにをお探しですか？">
+        @csrf
+            <input type="text" class="keyword-input" name="keyword" placeholder="    なにをお探しですか？">
         </form>
         <nav class="link">
             <form class="logout-form" action="/logout" method="post">
@@ -35,7 +36,6 @@
             </form>
         </nav>
     </header>
-    @yield('middle')
     <div class="main">
         <h2 class="inner-header">
             @yield('title')

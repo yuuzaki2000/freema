@@ -1,14 +1,16 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 
 @section('css')
 <link rel="stylesheet" href="{{asset('css/member_login.css')}}">
 
-@section('link')
+@section('title')
+ログイン
+    
+@endsection
 
 @section('content')
     <form class="inner" action="/login" method="post">
     @csrf
-        <h2 class="inner-header">ログイン</h2>
         <div class="content">
             <div>
                 <p>メールアドレス</p>

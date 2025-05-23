@@ -3,8 +3,10 @@
 @section('css')
 <link rel="stylesheet" href="{{asset('css/product_register.css')}}">
 
+@section('title')
+商品の出品
+
 @section('content')
-<h2>商品の出品</h2>
 <div>
     <h4>商品画像</h4>
     <form action="/upload/product" method="post" enctype="multipart/form-data">

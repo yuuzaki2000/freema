@@ -3,8 +3,10 @@
 @section('css')
 <link rel="stylesheet" href="{{asset('css/profile_register.css')}}">
 
+@section('title')
+プロフィール設定
+
 @section('content')
-    <h2 class="inner-header">プロフィール設定</h2>
     <form action="/upload/profile" method="POST" enctype="multipart/form-data">
     @csrf
         <div>
@@ -21,7 +23,8 @@
             </div>
             <div>
                 <p>ユーザー名</p>
-                <input class="input" type="text" name="user_id" value="{{$userInfo->id}}">
+                <input class="input" type="hidden" name="user_id" value="{{$userInfo->id}}">
+                <input class="input" type="text" name="" value="{{$userInfo->name}}">
             </div>
             <div>
                 <p>郵便番号</p>

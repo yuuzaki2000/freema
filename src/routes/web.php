@@ -22,6 +22,7 @@ use App\Http\Controllers\ExhibitController;
 Route::get('/', [ProductController::class, 'index']);
 Route::get('/sell', [ProductController::class, 'add']);
 Route::post('/sell', [ProductController::class, 'store']);
+Route::post('/search', [ProductController::class, 'search']);
 
 Route::get('/mypage/profile', [ProfileController::class, 'edit']);
 Route::post('/mypage/profile', [ProfileController::class, 'store']);

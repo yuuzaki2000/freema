@@ -3,8 +3,10 @@
 @section('css')
 <link rel="stylesheet" href="{{asset('css/profile_register.css')}}">
 
+@section('title')
+プロフィール設定
+
 @section('content')
-    <h2 class="inner-header">プロフィール設定</h2>
     <form action="/upload/profile" method="POST" enctype="multipart/form-data">
     @csrf
         <div>
@@ -15,7 +17,6 @@
     </form>
     <form class="inner" action="/mypage" method="post">
     @csrf
-        
         <div class="content">
             <div>
                 <input type="hidden" name="image" value="{{$imageFilePath}}">

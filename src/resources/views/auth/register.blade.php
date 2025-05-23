@@ -1,14 +1,16 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 
 @section('css')
 <link rel="stylesheet" href="{{asset('css/member_register.css')}}">
 
-@section('link')
+@section('title')
+会員登録
+
+@endsection
 
 @section('content')
     <form class="inner" action="/register" method="post">
     @csrf
-        <h2 class="inner-header">会員登録</h2>
         <div class="content">
             <div>
                 <p>ユーザー名</p>

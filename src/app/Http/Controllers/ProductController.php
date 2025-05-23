@@ -13,8 +13,7 @@ class ProductController extends Controller
     //
     public function index() {
         $products = Product::all();
-        $exhibit = Exhibit::where('user_id', Auth::id())->first();
-        return view('index', compact('products','exhibit'));
+        return view('index', compact('products'));
     }
 
     public function add(){
@@ -35,5 +34,10 @@ class ProductController extends Controller
         $exhibit = $request->all();
         Exhibit::create($exhibit);
         return redirect('/');
+    }
+
+    public function search(Request $request){
+        $products = Product::where('name', 'like', "%{$request->keyword}%")->get();
+        return view('index', compact('products'));
     }
 }
