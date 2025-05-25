@@ -40,9 +40,10 @@ class ProfileController extends Controller
         return view('mypage', $data);
     }
 
-    public function edit(){
+    public function configure(){
         $userInfo = Auth::user();
         $imageFilePath = 'storage/img/' . $userInfo->name . "_image.png";
+
         $data = [
             'userInfo' => $userInfo,
             'imageFilePath' => $imageFilePath,
@@ -50,9 +51,26 @@ class ProfileController extends Controller
         return view('profile_register', $data);
     }
 
+    /*
+    public function configure(){
+        $userInfo = Auth::user();
+        $profile = Profile::where('user_id', $userInfo->id);
+        $data = [
+            'userInfo' => $userInfo,
+            'profile' => $profile,
+        ];
+        return view('profile_register', $data);
+    }  */
+
     public function store(Request $request){
         $profile = $request->all();
         Profile::create($profile);
         return redirect('/login');
+    }
+
+    public function update(Request $request){
+        $profile = Profile::where('user_id', $request->user_id)->first();
+        $profile->update($request->all());
+        return redirect('/profile_update', compact('profile'));
     }
 }

@@ -8,10 +8,10 @@
     <ul class="group">
             @foreach ($products as $product)
                     <li class="compartment">
-                        <div class="img-wrapper">
+                        <a href="/item/{{$product->id}}">
                             <img src="{{$product->image}}" alt="商品画像" width="100%">
                             <p>{{$product->name}}</p>
-                        </div>
+                        </a>
                     </li>
             @endforeach
     </ul>

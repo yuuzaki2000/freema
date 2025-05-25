@@ -1,0 +1,39 @@
+.around-btn {
+    border: 1px dotted #5F5F5F;
+}
+
+.h3 {
+    border-bottom: 1px solid #5F5F5F;
+}
+
+.category-part {
+    margin-top:30px;
+}
+
+.condition-part {
+    margin-top:30px;
+}
+
+.name-part {
+    margin-top:30px;
+}
+
+.brand-part {
+    margin-top:30px;
+}
+
+.description-part {
+    margin-top:30px;
+}
+
+.price-part {
+    margin-top:30px;
+}
+
+.btn {
+    width: 600px;
+    height: 40px;
+    background-color: #FF5555;
+    color:#fff;
+    margin-top:30px;
+}

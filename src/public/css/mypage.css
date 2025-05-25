@@ -2,3 +2,19 @@
     display: flex;
     justify-content: space-around;
 }
+
+.container {
+    width: 100%;
+}
+
+.group {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.compartment {
+    list-style: none;
+    width: 24%;
+    margin-bottom: 20px;
+}

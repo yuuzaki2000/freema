@@ -10,7 +10,7 @@
     <form action="/upload/profile" method="POST" enctype="multipart/form-data">
     @csrf
         <div>
-            <img src="{{asset($imageFilePath)}}" alt="サンプル画像" width="100px" height="100px">
+            <img src="{{asset('img/onepiece06_chopper.png'){{-- {{$profile->image}}--}}}}" alt="サンプル画像" width="100px" height="100px">
         </div>
         <input type="file" name="file">
         <button type="submit">アップロード</button>
