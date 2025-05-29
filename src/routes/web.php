@@ -5,7 +5,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfileUploadController;
 use App\Http\Controllers\ProductUploadController;
-use App\Http\Controllers\ExhibitController;
+use App\Http\Controllers\ExhibitionController;
 
 
 /*

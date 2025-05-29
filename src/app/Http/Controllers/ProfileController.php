@@ -43,12 +43,14 @@ class ProfileController extends Controller
     public function configure(){
         $userInfo = Auth::user();
         $imageFilePath = 'storage/img/' . $userInfo->name . "_image.png";
+        $profile = Profile::where('user_id', Auth::id())->first();
 
         $data = [
             'userInfo' => $userInfo,
             'imageFilePath' => $imageFilePath,
+            'profile' => $profile,
         ];
-        return view('profile_register', $data);
+        return view('profile_update', $data);
     }
 
     /*
@@ -71,6 +73,11 @@ class ProfileController extends Controller
     public function update(Request $request){
         $profile = Profile::where('user_id', $request->user_id)->first();
         $profile->update($request->all());
-        return redirect('/profile_update', compact('profile'));
+        return redirect('/mypage');
     }
+
+    /*
+    public function addressChange(){
+        return view('address_change');
+    }  */
 }

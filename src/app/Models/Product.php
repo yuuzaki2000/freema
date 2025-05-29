@@ -16,4 +16,8 @@ class Product extends Model
     public function categories(){
         return $this->belongsToMany(Category::class)->withTimestamps();
     }
+
+    public function exhibitions(){
+        return $this->hasMany(Exhibition::class);
+    }
 }

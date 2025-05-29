@@ -4,20 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Exhibition;
 use Illuminate\Support\Facades\DB;
-use App\Models\Exhibit;
+
 use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
     //
     public function index() {
-
-        $exhibits = Exhibit::where('user_id', Auth::id())->get();
+        $exhibitions = Exhibition::where('user_id', Auth::id())->get();
         $products = Product::all();
-        foreach($exhibits as $exhibit){
-            if($exhibit->product_id != null){
-                $products->find($exhibit->product_id)->delete();
+        foreach($exhibitions as $exhibition){
+            if($exhibition->product_id != null){
+                $products->find($exhibition->product_id)->delete();
             }
         }
         /*  where('user_id', '!=', Auth::id()) */
@@ -30,17 +30,14 @@ class ProductController extends Controller
         $imageFilePath = 'storage/product_img/product_' . $productNextId . ".png";
         $data = [
             'userId' => $userId,
-            'productNextId' => $productNextId,
             'imageFilePath' => $imageFilePath,
         ];
-        return view('product_register', $data);
+        return view('exhibition', $data);
     }
 
     public function store(Request $request){
         $product = $request->all();
         Product::create($product);
-        $exhibit = $request->all();
-        Exhibit::create($exhibit);
         return redirect('/');
     }
 

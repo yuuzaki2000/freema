@@ -28,7 +28,8 @@ class Bind extends Component
             'payment_method' => $this->paymentMethod
         ];
         Purchase::create($data);
-        return redirect('/');
+        $product = Product::find($id);
+        return view('address_change', compact('product'));
     }
 
     public function render()

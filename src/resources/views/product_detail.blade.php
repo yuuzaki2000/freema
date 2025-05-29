@@ -14,6 +14,6 @@
         <p>{{$product->name}}</p>
         <p>{{$product->price}}</p>
     </div>
-    <a href="/purchase/{{$product->id}}">購入画面へ</a>
+    <a href="/purchase/{{$product->id}}" class="btn">購入画面へ</a>
 </div>
 @endsection
