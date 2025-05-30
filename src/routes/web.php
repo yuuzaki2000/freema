@@ -30,6 +30,7 @@ Route::get('/mypage/profile', [ProfileController::class, 'configure']);
 Route::patch('/mypage/profile', [ProfileController::class, 'update']);
 Route::post('/mypage/profile', [ProfileController::class, 'store']);
 Route::get('/mypage', [ProfileController::class, 'index']);
+Route::get('/purchase/address/{product_id}', [ProfileController::class, 'addressChange'])->name('addressChange');
 
 Route::resource('/upload/profile', ProfileUploadController::class);
 Route::resource('/upload/product', ProductUploadController::class);

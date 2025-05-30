@@ -13,11 +13,11 @@
         <a href="/mypage/profile">プロフィールを編集</a>
     </div>
     <div class="bottom">
-        <form action="/mypage" method="get">
+        <form action="/mypage" method="get" class="exhibition">
             <input type="hidden" name="page" value="sell">
             <button type="submit">出品した商品</button>
         </form>
-        <form action="/mypage" method="get">
+        <form action="/mypage" method="get" class="purchase">
             <input type="hidden" name="page" value="buy">
             <button type="submit">購入した商品</button>
         </form>

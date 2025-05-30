@@ -1,6 +1,20 @@
 .upper {
     display: flex;
     justify-content: space-around;
+    margin-bottom: 80px;
+}
+
+.bottom {
+    display: flex;
+    border-bottom: 1px solid #000;
+}
+
+.exhibition {
+
+}
+
+.purchase {
+    margin-left: 30px;
 }
 
 .container {

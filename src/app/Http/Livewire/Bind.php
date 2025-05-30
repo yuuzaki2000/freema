@@ -29,7 +29,7 @@ class Bind extends Component
         ];
         Purchase::create($data);
         $product = Product::find($id);
-        return view('address_change', compact('product'));
+        return redirect()->route('addressChange', $product);
     }
 
     public function render()
