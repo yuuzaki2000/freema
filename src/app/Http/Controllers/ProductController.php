@@ -37,10 +37,10 @@ class ProductController extends Controller
     public function store(Request $request){
         $product = $request->all();
         Product::create($product);
-        $productNextId = DB::table('products')->max('id');
+        $productId = DB::table('products')->max('id');
 
         $data = [
-            'product_id' => $productNextId,
+            'product_id' => $producId,
             'user_id' => $request->user_id,
         ];
         Exhibition::create($data);
