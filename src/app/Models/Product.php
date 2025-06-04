@@ -4,7 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
+use App\Models\Purchase;
+use App\Models\Exhibition;
+use App\Models\Category;
 
 
 class Product extends Model
@@ -13,11 +15,15 @@ class Product extends Model
 
     protected $fillable = ['image', 'name', 'brand', 'price', 'description', 'condition'];
 
-    public function categories(){
-        return $this->belongsToMany(Category::class)->withTimestamps();
+    public function exhibition(){
+        return $this->hasOne(Exhibition::class);
     }
 
-    public function exhibitions(){
-        return $this->hasMany(Exhibition::class);
+    public function purchase(){
+        return $this->hasOne(Purchase::class);
+    }
+
+    public function categories(){
+        return $this->belongsToMany(Category::class)->withTimestamps();
     }
 }

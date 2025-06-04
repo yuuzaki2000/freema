@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
-    <link rel="stylesheet" href="{{asset('css/common.css')}}">
+    <link rel="stylesheet" href="{{asset('css/app.css')}}">
     @yield('css')
 </head>
 <body>
@@ -25,13 +25,16 @@
                     <p style="color:#fff">ログアウト</p>
                 </button>
             </form>
-            <div>
-                <a href="/mypage">マイページ</a>
-            </div>
-            <form action="/sell" method="get">
-            @csrf
+            <form class="mypage-form" action="/mypage" method="get">
+                @csrf
                 <button>
-                    <p style="color:#fff">出品</p>
+                    <p style="color:#fff">マイページ</p>
+                </button>
+            </form>
+            <form class="sell-form" action="/sell" method="get">
+            @csrf
+                <button class="sell-btn">
+                    <p class="sell-txt">出品</p>
                 </button>
             </form>
         </nav>

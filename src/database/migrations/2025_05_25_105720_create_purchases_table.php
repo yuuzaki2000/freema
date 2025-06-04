@@ -15,8 +15,8 @@ class CreatePurchasesTable extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id')->constrained('users', 'id')->cascadeOnDelete();
-            $table->string('product_id')->constrained('products', 'id')->cascadeOnDelete();
+            $table->string('user_id')->constrained('users')->cascadeOnDelete();
+            $table->string('product_id')->constrained('products')->cascadeOnDelete();
             $table->string('payment_method');
             $table->timestamp('created_at')->useCurrent()->nullable();
             $table->timestamp('updated_at')->useCurrent()->nullable();

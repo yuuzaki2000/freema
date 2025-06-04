@@ -23,7 +23,7 @@
         <h3 class="h3">商品の詳細</h3>
         <div class="category-part">
             <input type="hidden" name="user_id" value="{{$userId}}">
-            <input type="hidden" name="image" value="{{$imageFilePath}}">
+            <input type="hidden" name="image" value="img/coffee_cup.jpg">
 
             <h4>カテゴリー</h4>
             <input type="checkbox" name="category" value="1">ファッション

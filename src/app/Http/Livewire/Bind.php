@@ -5,6 +5,8 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Product;
 use App\Models\Purchase;
+use App\Models\Profile;
+use Illuminate\Support\Facades\Auth;
 
 
 class Bind extends Component
@@ -13,22 +15,29 @@ class Bind extends Component
     public $product;
     public $productName;
     public $productPrice;
+    public $text;
 
 
-    public function mount($id){
-        $this->product = Product::find($id);
+    public function mount($productId, $text){
+        $this->product = Product::find($productId);
         $this->productName = $this->product->name;
         $this->productPrice = $this->product->price;
+        $this->text = $text;
     }
 
-    public function store($id){
+    public function store($productId){
         $data = [
-            'user_id' => 1,
-            'product_id' => $id,
+            'user_id' => Auth::id(),
+            'product_id' => $productId,
             'payment_method' => $this->paymentMethod
         ];
         Purchase::create($data);
-        $product = Product::find($id);
+        $product = Product::find($productId);
+        return redirect('/');
+    }
+
+    public function getAddressChangeView($productId){
+        $product = Product::find($productId);
         return redirect()->route('addressChange', $product);
     }
 

@@ -16,6 +16,8 @@ use Laravel\Fortify\Contracts\LogoutResponse;
 use Laravel\Fortify\Contracts\RegisterResponse;
 use Laravel\Fortify\Http\Requests\LoginRequest as FortifyLoginRequest;
 use App\Http\Requests\LoginRequest;
+use Laravel\Fortify\Http\Controllers\RegisteredUserController as FortifyRegisteredUserController;
+use App\Http\Controllers\RegisteredUserController;
 
 
 
@@ -63,7 +65,6 @@ class FortifyServiceProvider extends ServiceProvider
 
         
         $this->app->bind(FortifyLoginRequest::class, LoginRequest::class);
-        
-
+        /*$this->app->bind(FortifyRegisteredUserController::class, RegisteredUserController::class);*/
     }
 }

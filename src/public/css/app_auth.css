@@ -1,0 +1,42 @@
+.header {
+    width: 100%;
+    height: 60px;
+    padding: 10px 0px;
+    background-color: #000;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.header-text {
+    color: #fff;
+    margin-right: 80px;
+}
+
+.keyword-input {
+    width: 420px;
+    height: 35px;
+    background-color: #fff;
+}
+
+.main {
+    width: 100%;
+}
+
+.inner-header {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+.content {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.link {
+    display: flex;
+}
+
+.logout-form {
+    margin-right: 30px;
+}

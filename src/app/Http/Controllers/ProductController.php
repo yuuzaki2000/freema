@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Exhibition;
 use Illuminate\Support\Facades\DB;
-
 use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
@@ -38,6 +37,13 @@ class ProductController extends Controller
     public function store(Request $request){
         $product = $request->all();
         Product::create($product);
+        $productNextId = DB::table('products')->max('id');
+
+        $data = [
+            'product_id' => $productNextId,
+            'user_id' => $request->user_id,
+        ];
+        Exhibition::create($data);
         return redirect('/');
     }
 

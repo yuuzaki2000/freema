@@ -31,7 +31,7 @@
                 @enderror
             </div>
             <button type="submit" class="btn">ログインする</button>
-            <div><a href="/register" class="register-text">会員登録はこちら</a></div>
+            <div class="register-text-container"><a href="/register" class="register-text">会員登録はこちら</a></div>
         </div>
     </form>
 @endsection

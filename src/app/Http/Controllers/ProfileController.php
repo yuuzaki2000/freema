@@ -41,7 +41,7 @@ class ProfileController extends Controller
 
     public function configure(){
         $userInfo = Auth::user();
-        $imageFilePath = 'storage/img/' . $userInfo->name . "_image.png";
+        $imageFilePath = 'storage/profile_img/' . $userInfo->name . "_image.png";
         $profile = Profile::where('user_id', Auth::id())->first();
 
         $data = [

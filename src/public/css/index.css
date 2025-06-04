@@ -1,3 +1,10 @@
+.tab {
+    display: flex;
+    border-bottom: 1px solid #000;
+}
+
+
+
 .container {
     width: 100%;
 }
@@ -11,5 +18,10 @@
 .compartment {
     list-style: none;
     width: 24%;
+    margin-right: 10px;
     margin-bottom: 20px;
+}
+
+.item {
+    text-decoration: none;
 }

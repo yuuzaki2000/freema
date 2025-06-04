@@ -9,7 +9,7 @@
     width: 600px;
     height: 40px;
     background-color: #FF5555;
-    color:#fff;
+    color: #fff;
 }
 
 .inner {
@@ -18,6 +18,11 @@
 
 .inner-header {
     text-align: center;
+}
+
+.login-text-container {
+    text-align: center;
+    margin-top: 20px;
 }
 
 .login-text {

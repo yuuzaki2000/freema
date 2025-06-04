@@ -49,7 +49,7 @@
                 @enderror
             </div>
             <button type="submit" class="btn">登録する</button>
-            <div><a href="/login" class="login-text">ログインはこちら</a></div>
+            <div class="login-text-container"><a href="/login" class="login-text">ログインはこちら</a></div>
         </div>
     </form>
 @endsection
