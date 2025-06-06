@@ -65,6 +65,6 @@ class FortifyServiceProvider extends ServiceProvider
 
         
         $this->app->bind(FortifyLoginRequest::class, LoginRequest::class);
-        /*$this->app->bind(FortifyRegisteredUserController::class, RegisteredUserController::class);*/
+        $this->app->bind(FortifyRegisteredUserController::class, RegisteredUserController::class);
     }
 }

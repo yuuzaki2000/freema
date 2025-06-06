@@ -4,19 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
-use App\Models\Exhibition;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Listing;
+use App\Models\User;
 
 class ProductController extends Controller
 {
     //
     public function index() {
-        $exhibitions = Exhibition::where('user_id', Auth::id())->get();
+        $listings = Listing::where('user_id', Auth::id())->get();
         $products = Product::all();
-        foreach($exhibitions as $exhibition){
-            if($exhibition->product_id != null){
-                $products->find($exhibition->product_id)->delete();
+        foreach($listings as $listing){
+            if($listing->product_id != null){
+                $products->find($listing->product_id)->delete();
             }
         }
         /*  where('user_id', '!=', Auth::id()) */
@@ -31,19 +32,30 @@ class ProductController extends Controller
             'userId' => $userId,
             'imageFilePath' => $imageFilePath,
         ];
-        return view('exhibition', $data);
+        return view('listing', $data);
     }
 
     public function store(Request $request){
-        $product = $request->all();
-        Product::create($product);
-        $productId = DB::table('products')->max('id');
+        try{
+            $product = new Product();
+            $product->name = $request->name;
+            $product->image = $request->image;
+            $product->brand = $request->brand;
+            $product->price = $request->price;
+            $product->description = $request->description;
+            $product->condition = $request->condition;
+            $product->save();
 
-        $data = [
-            'product_id' => $producId,
-            'user_id' => $request->user_id,
-        ];
-        Exhibition::create($data);
+            $productId = $product->id;
+
+            $listing = new Listing();
+            $listing->user_id = Auth::id();
+            $listing->product_id = $productId;
+            $listing->save();
+
+        }catch(Exception $e){
+            echo $e->getMessage();
+        }
         return redirect('/');
     }
 

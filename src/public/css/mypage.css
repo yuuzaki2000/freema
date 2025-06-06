@@ -4,14 +4,25 @@
     margin-bottom: 80px;
 }
 
+.skt-btn {
+    display: block;
+    width: 200px;
+    padding: 10px 0;
+    color: #ff5555;
+    background-color: #FFF;
+    border: 1px solid #ff5555;
+    border-radius: 10px;
+    text-align: center;
+    text-decoration: none;
+
+}
+
 .bottom {
     display: flex;
     border-bottom: 1px solid #000;
 }
 
-.exhibition {
-
-}
+.exhibition {}
 
 .purchase {
     margin-left: 30px;

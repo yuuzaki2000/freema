@@ -26,13 +26,25 @@ class Bind extends Component
     }
 
     public function store($productId){
+        /*
+        $data = [
+            'id' => 11,
+            'image' => 'storage/product_img/Leather+Shoes+Product+Photo.jpg',
+            'name' => '革靴',
+            'price' => 4000,
+            'description' => 'クラシックなデザインの革靴',
+            'condition' => '状態が悪い',
+        ];
+
+        Product::create($data);  */
+
+
         $data = [
             'user_id' => Auth::id(),
             'product_id' => $productId,
             'payment_method' => $this->paymentMethod
         ];
         Purchase::create($data);
-        $product = Product::find($productId);
         return redirect('/');
     }
 

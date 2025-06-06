@@ -2,6 +2,7 @@
 
 @section('css')
 <link rel="stylesheet" href="{{asset('css/app_wide.css')}}">
+@livewireStyles
 
 @section('content')
 <div>

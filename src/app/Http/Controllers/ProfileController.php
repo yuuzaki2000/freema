@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Profile;
 use App\Models\Product;
-use App\Models\Exhibition;
+use App\Models\Listing;
 use App\Models\Purchase;
 
 class ProfileController extends Controller
@@ -25,11 +25,11 @@ class ProfileController extends Controller
                 'products' => $products_unique,
             ];
         }else{
-            $exhibits = Exhibition::where('user_id', Auth::id())->get();
-            $exhibits_unique_product_id = $exhibits->unique('product_id');
+            $listings = Listing::where('user_id', Auth::id())->get();
+            $listings_unique_product_id = $listings->unique('product_id');
             $products_unique = [];
-            foreach($exhibits_unique_product_id as $exhibit){
-                array_push($products_unique, Product::find($exhibit->product_id));
+            foreach($listings_unique_product_id as $listing){
+                array_push($products_unique, Product::find($listing->product_id));
             };
             $data = [
                 'page' => $request->page,

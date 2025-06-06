@@ -105,5 +105,6 @@ class ProductsTableSeeder extends Seeder
             'condition' => '目立った傷や汚れなし',
         ];
         DB::table('products')->insert($data);
+        
     }
 }

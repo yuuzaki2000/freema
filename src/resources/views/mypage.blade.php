@@ -10,7 +10,7 @@
             <img src="" alt="">
         </div>
         <h2>ユーザー名</h2>
-        <a href="/mypage/profile">プロフィールを編集</a>
+        <a href="/mypage/profile" class="skt-btn">プロフィールを編集</a>
     </div>
     <div class="bottom">
         <form action="/mypage" method="get" class="exhibition">

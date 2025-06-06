@@ -46,7 +46,7 @@ class RegisteredUserController extends Controller
      * Create a new registered user.
      *
      */
-    public function store(Request $request,
+    public function store(RegisterRequest $request,
                           CreatesNewUsers $creator): RegisterResponse
     {
         if (config('fortify.lowercase_usernames')) {
