@@ -7,23 +7,22 @@
 住所の変更
 
 @section('content')
-<form class="inner" action="/purchase/address/{{$product->id}}" method="post">
-    @csrf
+    <form class="inner" action="/purchase/address/{{$product->id}}" method="post">
+        @csrf
         <div class="content">
             <div>
                 <p>郵便番号</p>
-                <input class="input" type="text" name="post_code" value="{{}}">
+                <input class="input" type="text" name="post_code" value={{$profile->post_code}}>
             </div>
             <div>
                 <p>住所</p>
-                <input class="input" type="text" name="address" value="">
+                <input class="input" type="text" name="address" value={{$profile->address}}>
             </div>
             <div>
                 <p>建物名</p>
-                <input class="input" type="text" name="building" value="">
+                <input class="input" type="text" name="building" value={{$profile->building}}>
             </div>
             <button type="submit" class="btn">更新する</button>
         </div>
-</form>
-
+    </form>
 @endsection

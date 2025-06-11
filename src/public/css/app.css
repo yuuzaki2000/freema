@@ -50,6 +50,8 @@
 
 .sell-btn {
     background-color: #fff;
+    padding: 5px 10px;
+    border-radius: 2px;
 }
 
 .sell-txt {

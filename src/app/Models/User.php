@@ -9,7 +9,10 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Profile;
 use App\Models\Purchase;
-use App\Models\Exhibition;
+use App\Models\Listing;
+use App\Models\Favorite;
+use App\Models\Comment;
+
 
 class User extends Authenticatable
 {
@@ -49,11 +52,19 @@ class User extends Authenticatable
         return $this->hasOne(Profile::class);
     }
 
-    public function exhibitions(){
-        return $this->hasMany(Exhibition::class);
+    public function listings(){
+        return $this->hasMany(Listing::class);
     }
 
     public function purchases(){
         return $this->hasMany(Purchase::class);
+    }
+
+    public function favorites(){
+        return $this->hasMany(Favorite::class);
+    }
+
+    public function comments(){
+        return $this->hasMany(Comment::class);
     }
 }

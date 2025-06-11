@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href="{{asset('css/profile_register.css')}}">
+<link rel="stylesheet" href="{{asset('css/profile_update.css')}}">
 
 @section('title')
 プロフィール設定
@@ -9,9 +9,11 @@
 @section('content')
     <form action="/upload/profile" method="POST" enctype="multipart/form-data">
     @csrf
+        @if (isset($profile))
         <div>
-            <img src="{{$imageFilePath{{-- {{$profile->image}}--}}}}" alt="サンプル画像" width="100px" height="100px">
+            <img src="{{asset($profile->image)}}" alt="サンプル画像" width="100px" height="100px">
         </div>
+        @endif
         <input type="file" name="file">
         <button type="submit">アップロード</button>
     </form>

@@ -12,6 +12,10 @@
     flex-direction: column;
 }
 
+.title-name {
+    font-size: 30px;
+}
+
 .btn-group {
     display: flex;
     flex-direction: row;

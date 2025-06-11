@@ -5,6 +5,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfileUploadController;
 use App\Http\Controllers\ProductUploadController;
+use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\CommentController;
 
 
 /*
@@ -30,7 +32,10 @@ Route::middleware('auth')->group(function(){
     Route::patch('/mypage/profile', [ProfileController::class, 'update']);
     Route::post('/mypage/profile', [ProfileController::class, 'store']);
     Route::get('/mypage', [ProfileController::class, 'index']);
-    Route::get('/purchase/address/{product_id}', [ProfileController::class, 'addressChange'])->name('addressChange');
+    Route::post('/favorite/{product_id}', [FavoriteController::class, 'store']);
+    Route::post('/comment/{product_id}', [CommentController::class, 'store']);
+    Route::get('/purchase/address/{product_id}', [ProfileController::class, 'getAddressChangeView'])->name('addressChange');
+    Route::post('/purchase/address/{product_id}', [ProfileController::class, 'updateAddress']);
 });
 
 Route::resource('/upload/profile', ProfileUploadController::class);

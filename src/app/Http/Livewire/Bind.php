@@ -15,14 +15,17 @@ class Bind extends Component
     public $product;
     public $productName;
     public $productPrice;
-    public $text;
+    public $profileAddress;
+    public $profileBuilding;
 
 
-    public function mount($productId, $text){
+    public function mount($productId){
         $this->product = Product::find($productId);
         $this->productName = $this->product->name;
         $this->productPrice = $this->product->price;
-        $this->text = $text;
+        $this->productImage = $this->product->image;
+        $this->profileAddress = Profile::where('user_id', Auth::id())->first()->address;
+        $this->profileBuilding = Profile::where('user_id', Auth::id())->first()->building;
     }
 
     public function store($productId){

@@ -20,4 +20,16 @@ class RegistrationTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    public function test_new_users_can_register()
+    {
+        $response = $this->post('/register', [
+            'name' => 'hanako',
+            'email' => 'hanako0813@gmail.com',
+            'password' => bcrypt('hanako0813'),
+            'password_confirmation' => bcrypt('hanako0813'),
+        ]);
+
+        $this->assertAuthenticated();
+    }
 }

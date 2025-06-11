@@ -8,28 +8,20 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Listing;
 use App\Models\User;
+use App\Models\Profile;
 
 class ProductController extends Controller
 {
     //
     public function index() {
-        $listings = Listing::where('user_id', Auth::id())->get();
         $products = Product::all();
-        foreach($listings as $listing){
-            if($listing->product_id != null){
-                $products->find($listing->product_id)->delete();
-            }
-        }
-        /*  where('user_id', '!=', Auth::id()) */
         return view('index', compact('products'));
     }
 
     public function add(){
-        $userId = Auth::id();
         $productNextId = DB::table('products')->max('id') + 1;
         $imageFilePath = 'storage/product_img/product_' . $productNextId . ".png";
         $data = [
-            'userId' => $userId,
             'imageFilePath' => $imageFilePath,
         ];
         return view('listing', $data);
@@ -46,11 +38,13 @@ class ProductController extends Controller
             $product->condition = $request->condition;
             $product->save();
 
+            $product->categories()->sync($request->input('category'));
+
             $productId = $product->id;
 
             $listing = new Listing();
             $listing->user_id = Auth::id();
-            $listing->product_id = $productId;
+            $listing->productId = $productId;
             $listing->save();
 
         }catch(Exception $e){
@@ -70,8 +64,8 @@ class ProductController extends Controller
     }
 
     public function purchase($product_id){
-        $userId = Auth::id();
         $product = Product::find($product_id);
-        return view('purchase', compact('product', 'userId'));
+        $profile = Profile::where('user_id', Auth::id())->first();
+        return view('purchase', compact('product', 'profile'));
     }
 }

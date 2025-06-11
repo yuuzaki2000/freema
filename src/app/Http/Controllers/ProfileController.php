@@ -75,8 +75,16 @@ class ProfileController extends Controller
         return redirect('/mypage');
     }
 
-    public function addressChange($product_id){
+    public function getAddressChangeView($product_id){
         $product = Product::find($product_id);
-        return view('address_change',compact('product'));
+        $profile = Profile::where('user_id', Auth::id())->first();
+        return view('address_change',compact('product', 'profile'));
+    }
+
+    public function updateAddress(Request $request, $product_id){
+        $profile = Profile::where('user_id', Auth::id())->first();
+        $profile->update($request->all());
+        $product = Product::find($product_id);
+        return view('purchase', compact('product'));
     }
 }

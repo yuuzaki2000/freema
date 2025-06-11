@@ -5,42 +5,39 @@
 
 @section('content')
 <div>
-    <div>
-        <div>
-            <h4>商品画像</h4>
-        </div>
-        <div class="">
+    <form action="/upload/product" method="POST" enctype="multipart/form-data">
+        @csrf
             <div>
-                <button class="select-btn" type="submit">画像を選択する</button>
+                <img src="{{$imageFilePath}}" alt="サンプル画像" width="100px" height="100px">
             </div>
-        </div>
-    </div>
+            <input type="file" name="file">
+            <button type="submit">アップロード</button>
+        </form>
     <form action="/sell" method="post">
     @csrf
         <div>
             <h3 class="h3">商品の詳細</h3>
-            <input type="hidden" name="image" value="img/coffee_cup.jpg">
-            <input type="hidden" name="user_id" value="1">
+            <input type="hidden" name="image" value="{{$imageFilePath}}">
         </div>
         <div class="">
             <div>
                 <h4>カテゴリー</h4>
             </div>
             <div>
-                <input type="checkbox" name="category" value="1">ファッション
-                <input type="checkbox" name="category" value="2">家電
-                <input type="checkbox" name="category" value="3" checked="checked">インテリア
-                <input type="checkbox" name="category" value="4">レディース
-                <input type="checkbox" name="category" value="5">メンズ
-                <input type="checkbox" name="category" value="6">コスメ
-                <input type="checkbox" name="category" value="7">本
-                <input type="checkbox" name="category" value="8">ゲーム
-                <input type="checkbox" name="category" value="9">スポーツ
-                <input type="checkbox" name="category" value="10">キッチン
-                <input type="checkbox" name="category" value="11">ハンドメイド
-                <input type="checkbox" name="category" value="12">アクセサリー
-                <input type="checkbox" name="category" value="13">おもちゃ
-                <input type="checkbox" name="category" value="14">ベビー・キッズ
+                <input type="checkbox" name="category[]" value="1">ファッション
+                <input type="checkbox" name="category[]" value="2">家電
+                <input type="checkbox" name="category[]" value="3" checked="checked">インテリア
+                <input type="checkbox" name="category[]" value="4">レディース
+                <input type="checkbox" name="category[]" value="5">メンズ
+                <input type="checkbox" name="category[]" value="6">コスメ
+                <input type="checkbox" name="category[]" value="7">本
+                <input type="checkbox" name="category[]" value="8">ゲーム
+                <input type="checkbox" name="category[]" value="9">スポーツ
+                <input type="checkbox" name="category[]" value="10">キッチン
+                <input type="checkbox" name="category[]" value="11">ハンドメイド
+                <input type="checkbox" name="category[]" value="12">アクセサリー
+                <input type="checkbox" name="category[]" value="13">おもちゃ
+                <input type="checkbox" name="category[]" value="14">ベビー・キッズ
             </div>
         </div>
         <div class="condition-part">

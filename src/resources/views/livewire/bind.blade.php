@@ -2,7 +2,7 @@
     <div class="left-side">
         <div class="upper">
             <div class="upper-left">
-                <img src="{{asset($product->image)}}" alt="" width="60%">
+                <img src="{{asset($productImage)}}" alt="" width="60%">
             </div>
             <div class="upper-right">
                 <p>{{$productName}}</p>
@@ -21,18 +21,17 @@
         </div>
         <div class="bottom">
             <div>
-                <p>配送先</p>
+                <p>配送先:</p>
+                <p>{{$profileAddress}}</p>
+                <p>{{$profileBuilding}}</p>
             </div>
             <div>
                 <button wire:click="getAddressChangeView({{$product->id}})">変更する</button>
             </div>
-            <div>
-                <p>{{$text}}</p>
-            </div>
         </div>
     </div>
     <div class="right-side">
-        <table>
+        <table border="1" style="border:1px solid #000;width:400px;border-collapse: collapse;">
             <tr>
                 <td>商品代金</td>
                 <th>{{$productPrice}}</th>
@@ -53,6 +52,23 @@
         border-bottom: 1px solid #000;
     }
 
+    .container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .left-side {
+        width:60%;
+    }
+
+    .right-side {
+        width:30%;
+    }
+
+    .upper {
+
+    }
+
     .upper-left {
         width:25%;
     }
@@ -61,22 +77,25 @@
         width:75%;
     }
 
-    .container {
+    .middle {
+        height:200px;
         display: flex;
-    }
-
-    .left-side {
-        width:70%;
-    }
-
-    .right-side {
-        width:30%;
+        flex-direction: column;
+        justify-content: space-around;
+        padding-bottom: 40px;
+        border-bottom: 1px solid #000;
+        margin-bottom: 30px;
     }
 
     .btn {
-        width: 600px;
+        width: 400px;
         height: 40px;
         background-color: #FF5555;
         color: #fff;
+        margin-top: 60px;
+    }
+
+    th, td{
+        padding:10px 30px;
     }
 </style>
