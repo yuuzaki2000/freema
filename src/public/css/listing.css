@@ -1,0 +1,25 @@
+.btn-label-fashion {
+    display: block;
+    width: 70px;
+    height: 30px;
+    background-color: #FFF;
+    text-align: center;
+    padding-top: 5px;
+    border-radius: 50%;
+    border: 3px solid #FF5555;
+    cursor: pointer;
+}
+
+.btn-label-fashion::before {
+    content: "ファッション";
+    font-size: 10px;
+    color: #FF5555;
+}
+
+.checkbox-fashion:checked+.btn-label-fashion {
+    background-color: #FF5655;
+}
+
+.checkbox-fashion:checked+.btn-label-fashion::before {
+    color: #FFF;
+}

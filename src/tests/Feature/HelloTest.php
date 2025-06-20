@@ -21,7 +21,7 @@ class HelloTest extends TestCase
     {
         $this->assertTrue(true);
 
-        $response = $this->get('/register');
+        $response = $this->get('/');
         $response->assertStatus(200);
 
         $response = $this->post('/register', [

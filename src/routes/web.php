@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileUploadController;
 use App\Http\Controllers\ProductUploadController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\EmailController;
 
 
 /*
@@ -21,8 +22,9 @@ use App\Http\Controllers\CommentController;
 */
 
 Route::get('/', [ProductController::class, 'index']);
-Route::get('/item/{product_id}', [ProductController::class, 'getDetail']);
+Route::get('/item/{product_id}', [ProductController::class, 'getDetail'])->name('item.detail');
 Route::post('/search', [ProductController::class, 'search']);
+Route::get('/email/verify', [EmailController::class, 'index']);
 
 Route::middleware('auth')->group(function(){
     Route::get('/sell', [ProductController::class, 'add']);

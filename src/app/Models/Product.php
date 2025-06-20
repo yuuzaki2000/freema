@@ -17,10 +17,6 @@ class Product extends Model
 
     protected $fillable = ['image', 'name', 'brand', 'price', 'description', 'condition'];
 
-    public function listing(){
-        return $this->hasOne(Listing::class);
-    }
-
     public function purchase(){
         return $this->hasOne(Purchase::class);
     }

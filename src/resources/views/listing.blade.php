@@ -1,10 +1,13 @@
-@extends('layouts.app')
+@extends('layouts.app_slim')
 
 @section('css')
 <link rel="stylesheet" href="{{asset('css/listing.css')}}">
 
 @section('content')
 <div>
+    <div>
+        <h2>商品の出品</h2>
+    </div>
     <form action="/upload/product" method="POST" enctype="multipart/form-data">
         @csrf
             <div>
@@ -24,7 +27,8 @@
                 <h4>カテゴリー</h4>
             </div>
             <div>
-                <input type="checkbox" name="category[]" value="1">ファッション
+                <input type="checkbox" name="category[]" value="1" id="fashion" class="checkbox-fashion">
+                <label for="fashion" class="btn-label-fashion"></label>
                 <input type="checkbox" name="category[]" value="2">家電
                 <input type="checkbox" name="category[]" value="3" checked="checked">インテリア
                 <input type="checkbox" name="category[]" value="4">レディース
@@ -46,10 +50,10 @@
             </div>
             <div>
                 <select name="condition">
-                    <option value="1">良好</option>
-                    <option value="2">目立った傷や汚れなし</option>
-                    <option value="3">やや傷や汚れあり</option>
-                    <option value="4">状態が悪い</option>
+                    <option value="良好">良好</option>
+                    <option value="目立った傷や汚れなし">目立った傷や汚れなし</option>
+                    <option value="やや傷や汚れあり">やや傷や汚れあり</option>
+                    <option value="状態が悪い">状態が悪い</option>
                 </select>
             </div>
         </div>
@@ -92,9 +96,5 @@
             <button class="btn" type="submit">出品する</button>
         </div>
     </form>
-</div>
-
-    
-@endsection
-    
+</div>    
 @endsection

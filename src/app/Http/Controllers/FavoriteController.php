@@ -17,7 +17,6 @@ class FavoriteController extends Controller
             'product_id' => $product_id
         ];
         Favorite::create($data);
-        $product = Product::find($product_id);
-        return view('product_detail', compact('product'));
+        return redirect()->route('item.detail', ['product_id' => $product_id]);
     }
 }

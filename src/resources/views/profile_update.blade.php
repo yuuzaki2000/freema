@@ -3,9 +3,6 @@
 @section('css')
 <link rel="stylesheet" href="{{asset('css/profile_update.css')}}">
 
-@section('title')
-プロフィール設定
-
 @section('content')
     <form action="/upload/profile" method="POST" enctype="multipart/form-data">
     @csrf
@@ -26,8 +23,8 @@
             </div>
             <div>
                 <p>ユーザー名</p>
-                <input class="input" type="hidden" name="user_id" value="{{$userInfo->id}}">
-                <input class="input" type="text" name="" value="{{$userInfo->name}}">
+                <input class="input" type="hidden" name="user_id" value="{{$user->id}}">
+                <input class="input" type="text" name="user_name" value="{{$user->name}}">
             </div>
             <div>
                 <p>郵便番号</p>
@@ -51,8 +48,8 @@
             </div>
             <div>
                 <p>ユーザー名</p>
-                <input class="input" type="hidden" name="user_id" value="{{$userInfo->id}}">
-                <input class="input" type="text" name="" value="{{$userInfo->name}}">
+                <input class="input" type="hidden" name="user_id" value="{{$user->id}}">
+                <input class="input" type="text" name="" value="{{$user->name}}">
             </div>
             <div>
                 <p>郵便番号</p>

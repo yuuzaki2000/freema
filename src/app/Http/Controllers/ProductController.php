@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Listing;
 use App\Models\User;
 use App\Models\Profile;
+use App\Http\Requests\ExhibitionRequest;
+use App\Models\Category;
 
 class ProductController extends Controller
 {
@@ -27,7 +29,7 @@ class ProductController extends Controller
         return view('listing', $data);
     }
 
-    public function store(Request $request){
+    public function store(ExhibitionRequest $request){
         try{
             $product = new Product();
             $product->name = $request->name;
@@ -60,7 +62,8 @@ class ProductController extends Controller
 
     public function getDetail($product_id){
         $product = Product::find($product_id);
-        return view('product_detail', compact('product'));
+        $categories = Category::all();
+        return view('product_detail', compact('product', 'categories'));
     }
 
     public function purchase($product_id){

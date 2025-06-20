@@ -14,6 +14,8 @@ class RegistrationTest extends TestCase
      *
      * @return void
      */
+    use RefreshDatabase;
+
     public function test_registration_screen_can_be_rendered()
     {
         $response = $this->get('/register');
@@ -24,10 +26,10 @@ class RegistrationTest extends TestCase
     public function test_new_users_can_register()
     {
         $response = $this->post('/register', [
-            'name' => 'hanako',
-            'email' => 'hanako0813@gmail.com',
-            'password' => bcrypt('hanako0813'),
-            'password_confirmation' => bcrypt('hanako0813'),
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+            'password' => 'password',
+            'password_confirmation' => 'password',
         ]);
 
         $this->assertAuthenticated();

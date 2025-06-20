@@ -1,9 +1,6 @@
 <?php $__env->startSection('css'); ?>
 <link rel="stylesheet" href="<?php echo e(asset('css/profile_update.css')); ?>">
 
-<?php $__env->startSection('title'); ?>
-プロフィール設定
-
 <?php $__env->startSection('content'); ?>
     <form action="/upload/profile" method="POST" enctype="multipart/form-data">
     <?php echo csrf_field(); ?>
@@ -24,8 +21,8 @@
             </div>
             <div>
                 <p>ユーザー名</p>
-                <input class="input" type="hidden" name="user_id" value="<?php echo e($userInfo->id); ?>">
-                <input class="input" type="text" name="" value="<?php echo e($userInfo->name); ?>">
+                <input class="input" type="hidden" name="user_id" value="<?php echo e($user->id); ?>">
+                <input class="input" type="text" name="user_name" value="<?php echo e($user->name); ?>">
             </div>
             <div>
                 <p>郵便番号</p>
@@ -49,8 +46,8 @@
             </div>
             <div>
                 <p>ユーザー名</p>
-                <input class="input" type="hidden" name="user_id" value="<?php echo e($userInfo->id); ?>">
-                <input class="input" type="text" name="" value="<?php echo e($userInfo->name); ?>">
+                <input class="input" type="hidden" name="user_id" value="<?php echo e($user->id); ?>">
+                <input class="input" type="text" name="" value="<?php echo e($user->name); ?>">
             </div>
             <div>
                 <p>郵便番号</p>

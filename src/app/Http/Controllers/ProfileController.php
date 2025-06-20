@@ -8,6 +8,7 @@ use App\Models\Profile;
 use App\Models\Product;
 use App\Models\Listing;
 use App\Models\Purchase;
+use App\Http\Requests\AddressRequest;
 
 class ProfileController extends Controller
 {
@@ -40,12 +41,12 @@ class ProfileController extends Controller
     }
 
     public function configure(){
-        $userInfo = Auth::user();
-        $imageFilePath = 'storage/profile_img/' . $userInfo->name . "_image.png";
+        $user = Auth::user();
+        $imageFilePath = 'storage/profile_img/' . $user->name . "_image.png";
         $profile = Profile::where('user_id', Auth::id())->first();
 
         $data = [
-            'userInfo' => $userInfo,
+            'user' => $user,
             'imageFilePath' => $imageFilePath,
             'profile' => $profile,
         ];
@@ -63,13 +64,13 @@ class ProfileController extends Controller
         return view('profile_register', $data);
     }  */
 
-    public function store(Request $request){
+    public function store(AddressRequest $request){
         $profile = $request->all();
         Profile::create($profile);
         return redirect('/login');
     }
 
-    public function update(Request $request){
+    public function update(AddressRequest $request){
         $profile = Profile::where('user_id', $request->user_id)->first();
         $profile->update($request->all());
         return redirect('/mypage');
