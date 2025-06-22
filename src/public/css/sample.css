@@ -1,0 +1,29 @@
+.btn-label-babiesAndKids {
+    display: block;
+    width: 70px;
+    height: 20px;
+    background-color: #FFF;
+    text-align: center;
+    border-radius: 100vh;
+    border: 3px solid #FF5555;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.btn-label-babiesAndKids::before {
+    content: "ベビー・キッズ";
+    font-size: 10px;
+    color: #FF5555;
+}
+
+.checkbox-babiesAndKids {
+    display: none;
+}
+
+.checkbox-babiesAndKids:checked+.btn-label-babiesAndKids {
+    background-color: #FF5655;
+}
+
+.checkbox-babiesAndKids:checked+.btn-label-babiesAndKids::before {
+    color: #FFF;
+}

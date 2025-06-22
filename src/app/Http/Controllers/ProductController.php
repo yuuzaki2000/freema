@@ -21,8 +21,7 @@ class ProductController extends Controller
     }
 
     public function add(){
-        $productNextId = DB::table('products')->max('id') + 1;
-        $imageFilePath = 'storage/product_img/product_' . $productNextId . ".png";
+        $imageFilePath = '';
         $data = [
             'imageFilePath' => $imageFilePath,
         ];
@@ -52,6 +51,7 @@ class ProductController extends Controller
         }catch(Exception $e){
             echo $e->getMessage();
         }
+
         return redirect('/');
     }
 

@@ -26,23 +26,26 @@ class ExhibitionRequest extends FormRequest
         return [
             //
             'name' => 'required',
-            'description' => 'required',
-            'price' => 'required',
+            'description' => 'required|max:255',
             'image' => 'required',
+            'category' => 'required',
             'condition' => 'required',
+            'price' => 'required|numeric|min:0',
         ];
     }
 
     public function messages(){
         return [
-            'name.required' => 'Name is required',
-            'description.required' => 'Description is required',
-            'image.required' => 'Image is required',
-            'image.mimes' => 'Image must be a file of type: jpeg, png.',
-            'condition.required' => 'Condition is required',
-            'price.required' => 'Price is required',
-            'price.numeric' => 'Price must be a number',
-            'price.min' => 'Price must be greater than 0',
+            'name.required' => '名前を入力してください',
+            'description.required' => '商品説明を入力してください',
+            'description.max' => '商品説明は255文字までで記載してください',
+            'image.required' => '商品画像のアップロードが必須です',
+            /*'image.mimes:jpg,jpeg,png' => 'jpg, jpeg, pngのみアップロード可能です',*/
+            'category.required' => 'カテゴリーを入力してください',
+            'condition.required' => '商品状況を入力してください',
+            'price.required' => '商品価格を入力してください',
+            'price.numeric' => '商品価格は数値で入力してください',
+            'price.min' => '商品価格は0円以上で入力してください',
         ];
     }
 }

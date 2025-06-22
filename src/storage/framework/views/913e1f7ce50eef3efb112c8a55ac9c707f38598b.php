@@ -18,7 +18,7 @@
                 <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <li class="compartment">
                             <a href="/item/<?php echo e($product->id); ?>" class="item">
-                                <img src="<?php echo e($product->image); ?>" alt="商品画像" width="100%">
+                                <img src="<?php echo e(asset($product->image)); ?>" alt="商品画像" width="100%">
                                 <p><?php echo e($product->name); ?></p>
                             </a>
                         </li>

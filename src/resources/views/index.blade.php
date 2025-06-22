@@ -20,7 +20,7 @@
                 @foreach ($products as $product)
                         <li class="compartment">
                             <a href="/item/{{$product->id}}" class="item">
-                                <img src="{{$product->image}}" alt="商品画像" width="100%">
+                                <img src="{{asset($product->image)}}" alt="商品画像" width="100%">
                                 <p>{{$product->name}}</p>
                             </a>
                         </li>

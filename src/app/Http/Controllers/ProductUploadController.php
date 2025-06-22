@@ -9,9 +9,9 @@ class ProductUploadController extends Controller
 {
     //
     public function store(Request $request){
-        $nextId =  DB::table('products')->max('id') + 1;
-        $imageName = 'product_' . $nextId . ".png";
-        $request->file('file')->storeAs('public/product_img', $imageName);
+        $file_name =$request->file('file')->getClientOriginalName();
+        $request->file('file')->storeAs('public/product_img', $file_name);
+        $imageFilePath = 'storage/product_img/' . $file_name;
         return redirect('/sell');
     }
 }
