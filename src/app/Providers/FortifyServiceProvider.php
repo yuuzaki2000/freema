@@ -18,6 +18,7 @@ use Laravel\Fortify\Http\Requests\LoginRequest as FortifyLoginRequest;
 use App\Http\Requests\LoginRequest;
 use Laravel\Fortify\Http\Controllers\RegisteredUserController as FortifyRegisteredUserController;
 use App\Http\Controllers\RegisteredUserController;
+use Laravel\Fortify\Contracts\VerifyEmailResponse;
 
 
 
@@ -38,6 +39,12 @@ class FortifyServiceProvider extends ServiceProvider
         $this->app->instance(RegisterResponse::class, new class implements RegisterResponse {
             public function toResponse($request){
                 return redirect('/email/verify');
+            }
+        });
+
+        $this->app->instance(VerifyEmailResponse::class, new class implements VerifyEmailResponse {
+            public function toResponse($request){
+                return redirect('/mypage/profile');
             }
         });
     }

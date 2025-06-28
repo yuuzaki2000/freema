@@ -18,6 +18,6 @@ class CommentController extends Controller
         ];
         Comment::create($data);
         $product = Product::find($product_id);
-        return view('product_detail', compact('product'));
+        return redirect()->route('item.detail', ['product_id' => $product_id]);
     }
 }

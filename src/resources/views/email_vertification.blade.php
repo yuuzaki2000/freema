@@ -12,7 +12,10 @@
     </div>
     <div>
         <a href="https://mailtrap.io/inboxes/3822474/messages" style="display:block; width:100px; height:20px;">認証はこちらから</a>
-        <a href="">認証メールを再送する</a>
+        <form action="/email/verification-notification" method="POST">
+            @csrf
+            <button type="submit">認証メールを再送する</button>
+        </form>
     </div>
 </div>
     

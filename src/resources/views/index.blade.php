@@ -2,7 +2,7 @@
 
 @section('css')
 <link rel="stylesheet" href="{{asset('css/index.css')}}">
-
+@endsection
 @section('content')
 <div>
     <div class="tab">
@@ -21,11 +21,15 @@
                         <li class="compartment">
                             <a href="/item/{{$product->id}}" class="item">
                                 <img src="{{asset($product->image)}}" alt="商品画像" width="100%">
-                                <p>{{$product->name}}</p>
+                                <div class="product-info">
+                                    <p>{{$product->name}}</p>
+                                    <p>{{$product->isSold}}</p>
+                                </div>
                             </a>
                         </li>
                 @endforeach
         </ul>
+        <p>{{$page}}</p>
     </div>
 </div>
 @endsection

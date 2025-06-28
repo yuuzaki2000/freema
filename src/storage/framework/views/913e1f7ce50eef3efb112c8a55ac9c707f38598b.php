@@ -1,6 +1,6 @@
 <?php $__env->startSection('css'); ?>
 <link rel="stylesheet" href="<?php echo e(asset('css/index.css')); ?>">
-
+<?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
 <div>
     <div class="tab">
@@ -19,11 +19,15 @@
                         <li class="compartment">
                             <a href="/item/<?php echo e($product->id); ?>" class="item">
                                 <img src="<?php echo e(asset($product->image)); ?>" alt="商品画像" width="100%">
-                                <p><?php echo e($product->name); ?></p>
+                                <div class="product-info">
+                                    <p><?php echo e($product->name); ?></p>
+                                    <p><?php echo e($product->isSold); ?></p>
+                                </div>
                             </a>
                         </li>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </ul>
+        <p><?php echo e($page); ?></p>
     </div>
 </div>
 <?php $__env->stopSection(); ?>

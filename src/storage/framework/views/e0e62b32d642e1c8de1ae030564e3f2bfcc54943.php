@@ -4,7 +4,7 @@
 <?php $__env->startSection('content'); ?>
 <div class="total-container">
     <div class="left-container">
-        <div><img src="<?php echo e(asset('img/coffee_cup.jpg')); ?>" alt="" width="400px"></div>
+        <div><img src="<?php echo e(asset($product->image)); ?>" alt="" width="400px"></div>
     </div>
     <div class="right-container">
         <div>
@@ -18,18 +18,15 @@
                         <button type="submit">
                             <img src="<?php echo e(asset('img/star_icon.png')); ?>" alt="いいね" width="30px" height="30px">
                         </button>
-                        <p style="text-align: center;">3</p>
+                        <p style="text-align: center;"><?php echo e($favoriteCount); ?></p>
                     </div>
                 </form>
-                <form action="" method="post">
-                <?php echo csrf_field(); ?>
+                <div>
                     <div>
-                        <button type="submit">
-                            <img src="<?php echo e(asset('img/comment_icon.png')); ?>" alt="いいね" width="30px" height="30px">
-                        </button>
-                        <p style="text-align: center;">1</p>
+                        <img src="<?php echo e(asset('img/comment_icon.png')); ?>" alt="いいね" width="30px" height="30px">
                     </div>
-                </form>
+                    <p style="text-align: center;"><?php echo e($commentCount); ?></p>
+                </div>
             </div>
             <form action="/purchase/<?php echo e($product->id); ?>" method="get">
                 <button type="submit" class="btn">購入手続きへ</button>

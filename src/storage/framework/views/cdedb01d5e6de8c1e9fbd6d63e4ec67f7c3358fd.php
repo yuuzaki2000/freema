@@ -1,5 +1,7 @@
 <?php $__env->startSection('css'); ?>
 <link rel="stylesheet" href="<?php echo e(asset('css/listing.css')); ?>">
+<?php echo \Livewire\Livewire::styles(); ?>
+
 
 <?php $__env->startSection('content'); ?>
 <div>
@@ -20,7 +22,7 @@
             <h3 class="h3">商品の詳細</h3>
         </div>
         <div>
-            <input type="hidden" name="image" value="<?php echo e(asset('storage/product_img/uranai_tarot_card.png')); ?>">
+            <input type="hidden" name="image" value="storage/product_img/uranai_tarot_card.png">
         </div>
         <?php $__errorArgs = ['image'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -222,6 +224,23 @@ unset($__errorArgs, $__bag); ?>
             <button class="btn" type="submit">出品する</button>
         </div>
     </form>
+    <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('chain', [])->html();
+} elseif ($_instance->childHasBeenRendered('D9dh5Hd')) {
+    $componentId = $_instance->getRenderedChildComponentId('D9dh5Hd');
+    $componentTag = $_instance->getRenderedChildComponentTagName('D9dh5Hd');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('D9dh5Hd');
+} else {
+    $response = \Livewire\Livewire::mount('chain', []);
+    $html = $response->html();
+    $_instance->logRenderedChild('D9dh5Hd', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
+    <?php echo \Livewire\Livewire::scripts(); ?>
+
 </div>    
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.app_slim', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/resources/views/listing.blade.php ENDPATH**/ ?>

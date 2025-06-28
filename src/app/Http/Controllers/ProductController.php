@@ -11,13 +11,59 @@ use App\Models\User;
 use App\Models\Profile;
 use App\Http\Requests\ExhibitionRequest;
 use App\Models\Category;
+use App\Models\Purchase;
+use App\Models\Favorite;
+use App\Models\Comment;
+
 
 class ProductController extends Controller
 {
     //
-    public function index() {
-        $products = Product::all();
-        return view('index', compact('products'));
+    public function index(Request $request) {
+        $particularFavorites = Favorite::where('user_id', Auth::id())->get();
+
+        $particularListings = Listing::where('user_id', Auth::id())->get();
+
+        if($request->page == "mylist"){
+            $products = collect();
+            if(empty($particularFavorites)){
+                return;
+            }else{
+                foreach($particularFavorites as $particularFavorite){
+                    $product = Product::find($particularFavorite->product_id);
+                    $products->push($product);
+                }
+            }
+            $page = $request->page;
+            
+        }else if($request->page == "recommendation"){
+            $products = Product::all();
+            $page = $request->page;
+        }else{
+            $products = Product::all();
+
+            if(empty($particularListings)){
+                return;
+            }else{
+                foreach($particularListings as $particularListing){
+                    $product = Product::find($particularListing->productId);
+                    $products->pull($product->id - 1);
+                }
+            }
+            $page ="";
+        }
+
+        foreach($products as $product){
+            $purchase = Purchase::where('product_id', $product->id)->first();
+            if($purchase){
+                $product['isSold'] = 'Sold';
+            }else{
+                $product['isSold'] = '';
+            }
+            
+        }
+
+        return view('index', compact('products', 'page'));
     }
 
     public function add(){
@@ -30,6 +76,9 @@ class ProductController extends Controller
 
     public function store(ExhibitionRequest $request){
         try{
+
+            DB::beginTransaction();
+
             $product = new Product();
             $product->name = $request->name;
             $product->image = $request->image;
@@ -48,22 +97,37 @@ class ProductController extends Controller
             $listing->productId = $productId;
             $listing->save();
 
-        }catch(Exception $e){
-            echo $e->getMessage();
-        }
+            DB::commit();
 
-        return redirect('/');
+            return redirect('/');
+
+        }catch(Exception $e){
+            DB::rollBack();
+            return redirect()->back()->with('error', 'エラーが発生しました。');
+        }
     }
 
     public function search(Request $request){
-        $products = Product::where('name', 'like', "%{$request->keyword}%")->get();
-        return view('index', compact('products'));
+        $keyword = $request->keyword;
+        $products = Product::where('name', 'like', "%{$keyword}%")->get();
+        return view('search_result', compact('products', 'keyword'));
     }
 
     public function getDetail($product_id){
         $product = Product::find($product_id);
         $categories = Category::all();
-        return view('product_detail', compact('product', 'categories'));
+        $favorites = Favorite::all();
+        $favoriteCount = $favorites->count();
+        $comments = Comment::all();
+        $commentCount = $comments->count();
+
+        $data = [
+            'product' => $product,
+            'categories' => $categories,
+            'favoriteCount' => $favoriteCount,
+            'commentCount' => $commentCount,
+        ];
+        return view('product_detail', $data);
     }
 
     public function purchase($product_id){

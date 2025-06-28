@@ -3,7 +3,16 @@
     border-bottom: 1px solid #000;
 }
 
+.favorite {}
 
+.farorite-btn {}
+
+.mylist {}
+
+.mylist-btn {
+    margin-left: 40px;
+    color: #ff0000;
+}
 
 .container {
     width: 100%;
@@ -24,4 +33,9 @@
 
 .item {
     text-decoration: none;
+}
+
+.product-info {
+    display: flex;
+    justify-content: space-between;
 }

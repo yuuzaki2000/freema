@@ -2,6 +2,7 @@
 
 @section('css')
 <link rel="stylesheet" href="{{asset('css/listing.css')}}">
+@livewireStyles
 
 @section('content')
 <div>
@@ -175,5 +176,7 @@
             <button class="btn" type="submit">出品する</button>
         </div>
     </form>
+    <livewire:chain>
+    @livewireScripts
 </div>    
 @endsection

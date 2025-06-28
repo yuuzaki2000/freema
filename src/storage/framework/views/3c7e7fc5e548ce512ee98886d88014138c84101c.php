@@ -7,9 +7,16 @@
         <div class="">
             <div>
                 <div>
-                    <img src="<?php echo e($productImagePath); ?>" alt="">
+                    <div>
+                        <input type="file" wire:model="file" wire:change = "onChange($event.target.value)">
+                    </div>
+                    <div>
+                        <button wire:click="upload" >画像を選択する</button>
+                    </div>
+                    <div>
+                        <img src="<?php echo e(asset($image_url)); ?>" alt="">
+                    </div>
                 </div>
-                <button wire:click="selectAndUpload" >画像を選択する</button>
             </div>
         </div>
     </div>
