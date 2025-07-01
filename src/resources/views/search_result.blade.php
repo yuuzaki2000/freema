@@ -11,7 +11,8 @@
             <button type="submit" class="favorite-btn">おすすめ</button>
         </form>
         <form action="/" method="get" class="mylist">
-            <input type="hidden" name="page" value="mylist">
+            <input type="hidden" name ="page" value="mylist">
+            <input type="hidden" name ="keyword" value="{{$keyword}}">
             <button type="submit" class="mylist-btn">マイリスト</button>
         </form>
     </div>

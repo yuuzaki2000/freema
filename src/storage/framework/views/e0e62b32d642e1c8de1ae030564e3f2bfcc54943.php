@@ -45,8 +45,8 @@
                 <div class="item-label">カテゴリー</div>
                 <div class="item-content">
                     <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <input type="checkbox" id="category" value="<?php echo e($category->id); ?>" <?php echo e(in_array($category->id, $product->categories->pluck('id')->toArray()) ? 'checked' : ''); ?> name="category_product[]">
-                    <label for="category"><?php echo e($category->content); ?></label>                    
+                    <input type="checkbox" id="category" class="checkbox" value="<?php echo e($category->id); ?>" <?php echo e(in_array($category->id, $product->categories->pluck('id')->toArray()) ? 'checked' : ''); ?> name="category_product[]">
+                    <label for="category" class="category-label"><?php echo e($category->content); ?></label>                    
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
             </div>

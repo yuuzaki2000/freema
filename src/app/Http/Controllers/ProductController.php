@@ -24,7 +24,11 @@ class ProductController extends Controller
 
         $particularListings = Listing::where('user_id', Auth::id())->get();
 
-        if($request->page == "mylist"){
+        if($request->page == null){
+            $products = Product::all();
+            $page = $request->page;
+            $keyword = "";
+        }else if($request->page == "mylist"){
             $products = collect();
             if(empty($particularFavorites)){
                 return;
@@ -35,10 +39,7 @@ class ProductController extends Controller
                 }
             }
             $page = $request->page;
-            
-        }else if($request->page == "recommendation"){
-            $products = Product::all();
-            $page = $request->page;
+            $keyword = $request->keyword;
         }else{
             $products = Product::all();
 
@@ -47,10 +48,12 @@ class ProductController extends Controller
             }else{
                 foreach($particularListings as $particularListing){
                     $product = Product::find($particularListing->productId);
-                    $products->pull($product->id - 1);
+                    dd($product);
+                    $products->pull($product->id);
                 }
             }
-            $page ="";
+            $page = "";
+            $keyword = "";
         }
 
         foreach($products as $product){
@@ -63,7 +66,7 @@ class ProductController extends Controller
             
         }
 
-        return view('index', compact('products', 'page'));
+        return view('index', compact('products', 'page', 'keyword'));
     }
 
     public function add(){
@@ -94,7 +97,7 @@ class ProductController extends Controller
 
             $listing = new Listing();
             $listing->user_id = Auth::id();
-            $listing->productId = $productId;
+            $listing->product_id = $productId;
             $listing->save();
 
             DB::commit();

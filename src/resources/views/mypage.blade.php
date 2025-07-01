@@ -7,9 +7,9 @@
 <div>
     <div class="upper">
         <div>
-            <img src="" alt="">
+            <img src="{{asset($profile->image)}}" alt="プロフィール画像">
         </div>
-        <h2>ユーザー名</h2>
+        <h2>{{$user->name}}</h2>
         <a href="/mypage/profile" class="skt-btn">プロフィールを編集</a>
     </div>
     <div class="bottom">
@@ -27,7 +27,7 @@
             @foreach ($products as $product)
                     <li class="compartment">
                         <div class="img-wrapper">
-                            <img src="{{$product->image}}" alt="商品画像" width="100%">
+                            <img src="{{asset($product->image)}}" alt="商品画像" width="100%">
                             <p>{{$product->name}}</p>
                         </div>
                     </li>

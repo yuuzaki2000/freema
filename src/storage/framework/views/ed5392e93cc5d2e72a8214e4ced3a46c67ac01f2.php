@@ -5,9 +5,9 @@
 <div>
     <div class="upper">
         <div>
-            <img src="" alt="">
+            <img src="<?php echo e(asset($profile->image)); ?>" alt="プロフィール画像">
         </div>
-        <h2>ユーザー名</h2>
+        <h2><?php echo e($user->name); ?></h2>
         <a href="/mypage/profile" class="skt-btn">プロフィールを編集</a>
     </div>
     <div class="bottom">
@@ -25,7 +25,7 @@
             <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <li class="compartment">
                         <div class="img-wrapper">
-                            <img src="<?php echo e($product->image); ?>" alt="商品画像" width="100%">
+                            <img src="<?php echo e(asset($product->image)); ?>" alt="商品画像" width="100%">
                             <p><?php echo e($product->name); ?></p>
                         </div>
                     </li>

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app_keyword')
 
 @section('css')
 <link rel="stylesheet" href="{{asset('css/index.css')}}">
@@ -30,6 +30,7 @@
                 @endforeach
         </ul>
         <p>{{$page}}</p>
+        <p>{{$keyword}}</p>
     </div>
 </div>
 @endsection

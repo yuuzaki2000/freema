@@ -9,6 +9,8 @@ use App\Models\Product;
 use App\Models\Listing;
 use App\Models\Purchase;
 use App\Http\Requests\AddressRequest;
+use App\Models\User;
+
 
 class ProfileController extends Controller
 {
@@ -16,28 +18,26 @@ class ProfileController extends Controller
     public function index(Request $request){
         if($request->page == "buy"){
             $purchases = Purchase::where('user_id', Auth::id())->get();
-            $purchases_unique_product_id = $purchases->unique('product_id');
-            $products_unique = [];
-            foreach($purchases_unique_product_id as $purchase){
-                array_push($products_unique, Product::find($purchase->product_id));
-            };
-            $data = [
-                'page' => $request->page,
-                'products' => $products_unique,
-            ];
+            $products = collect();
+            foreach($purchases as $purchase){
+                $product = Product::find($purchase->product_id);
+                $products->push($product);
+            }
+            $page = $request->page;
         }else{
             $listings = Listing::where('user_id', Auth::id())->get();
-            $listings_unique_product_id = $listings->unique('product_id');
-            $products_unique = [];
-            foreach($listings_unique_product_id as $listing){
-                array_push($products_unique, Product::find($listing->product_id));
-            };
-            $data = [
-                'page' => $request->page,
-                'products' => $products_unique,
-            ];
+            $products = collect();
+            foreach($listings as $listing){
+                $product = Product::find($listing->product_id);
+                $products->push($product);
+            }
+            $page = $request->page;
         }
-        return view('mypage', $data);
+
+        $profile = Profile::where('user_id', Auth::id())->first();
+        $user = User::find(Auth::id());
+
+        return view('mypage', compact('products', 'page', 'user', 'profile'));
     }
 
     public function configure(){

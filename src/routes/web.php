@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductUploadController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\EmailController;
+use App\Http\Controllers\StripeController;
 
 
 /*
@@ -38,6 +39,9 @@ Route::middleware('auth')->group(function(){
     Route::post('/comment/{product_id}', [CommentController::class, 'store']);
     Route::get('/purchase/address/{product_id}', [ProfileController::class, 'getAddressChangeView'])->name('addressChange');
     Route::post('/purchase/address/{product_id}', [ProfileController::class, 'updateAddress']);
+    Route::get('/stripe', [StripeController::class, 'index'])->name('index');
+    Route::post('/checkout', [StripeController::class, 'checkout'])->name('checkout');
+    Route::get('/success', [StripeController::class, 'success'])->name('success');
 });
 
 Route::resource('/upload/profile', ProfileUploadController::class);

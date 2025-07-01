@@ -47,8 +47,8 @@
                 <div class="item-label">カテゴリー</div>
                 <div class="item-content">
                     @foreach ($categories as $category)
-                    <input type="checkbox" id="category" value="{{$category->id}}" {{in_array($category->id, $product->categories->pluck('id')->toArray()) ? 'checked' : ''}} name="category_product[]">
-                    <label for="category">{{$category->content}}</label>                    
+                    <input type="checkbox" id="category" class="checkbox" value="{{$category->id}}" {{in_array($category->id, $product->categories->pluck('id')->toArray()) ? 'checked' : ''}} name="category_product[]">
+                    <label for="category" class="category-label">{{$category->content}}</label>                    
                     @endforeach
                 </div>
             </div>
