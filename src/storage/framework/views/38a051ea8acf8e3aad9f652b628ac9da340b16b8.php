@@ -9,7 +9,7 @@
         <p>メール認証を完了してください。</p>
     </div>
     <div>
-        <a href="https://mailtrap.io/inboxes/3822474/messages" style="display:block; width:100px; height:20px;">認証はこちらから</a>
+        <a href="https://mailtrap.io/inboxes/3854519/messages" style="display:block; width:100px; height:20px;">認証はこちらから</a>
         <form action="/email/verification-notification" method="POST">
             <?php echo csrf_field(); ?>
             <button type="submit">認証メールを再送する</button>

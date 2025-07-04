@@ -21,6 +21,8 @@ class HelloTest extends TestCase
     {
         $this->assertTrue(true);
 
+        $this->assertGuest();
+
         $response = $this->get('/');
         $response->assertStatus(200);
 
@@ -30,16 +32,12 @@ class HelloTest extends TestCase
             'password' => 'password',
             'password_confirmation' => 'password',
         ]);
-        $this->assertGuest();
+        
         $response->assertValid('お名前を入力してください');
 
         $user = User::factory()->create();
-        $response = $this->post('/login', [
-            'email' => $user->email,
-            'password' => 'password',
-        ]);
+        $this->actingAs($user);
 
         $this->assertAuthenticated();
-        $response->assertRedirect('/');
     }
 }

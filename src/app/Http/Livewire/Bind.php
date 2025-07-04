@@ -36,7 +36,6 @@ class Bind extends Component
             'payment_method' => $this->paymentMethod
         ];
         Purchase::create($data);
-        return redirect('/stripe');
     }
 
     public function getAddressChangeView($productId){

@@ -77,14 +77,18 @@ class ProductController extends Controller
         return view('listing', $data);
     }
 
-    public function store(ExhibitionRequest $request){
+    public function store(Request $request){
         try{
 
             DB::beginTransaction();
 
+            $dir = 'product_img';
+            $file_name = $request->file('file')->getClientOriginalName();
+            $request->file('file')->storeAs('public/' . $dir, $file_name);
+
             $product = new Product();
             $product->name = $request->name;
-            $product->image = $request->image;
+            $product->image = 'storage/' . $dir . '/' . $file_name;
             $product->brand = $request->brand;
             $product->price = $request->price;
             $product->description = $request->description;

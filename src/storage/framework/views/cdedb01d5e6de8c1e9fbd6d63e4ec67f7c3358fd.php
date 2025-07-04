@@ -11,13 +11,11 @@
     <div>
         <img src="<?php echo e(asset($imageFilePath)); ?>" alt="サンプル画像" width="200px">
     </div>
-    <form action="/upload/product" method="POST" enctype="multipart/form-data">
-        <?php echo csrf_field(); ?>
-        <input type="file" name="file">
-        <button type="submit">アップロード</button>
-    </form>
-    <form action="/sell" method="post">
+    <form action="/sell" method="post" enctype="multipart/form-data">
     <?php echo csrf_field(); ?>
+        <div>
+            <input type="file" name="file">
+        </div>
         <div>
             <h3 class="h3">商品の詳細</h3>
         </div>
@@ -36,81 +34,7 @@ $message = $__bag->first($__errorArgs[0]); ?>
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-        <div class="">
-            <div>
-                <h4>カテゴリー</h4>
-            </div>
-            <div class="checkbox-group"> 
-                <div>
-                    <input type="checkbox" name="category[]" value="1" id="fashion" class="checkbox-fashion">
-                    <label for="fashion" class="btn-label-fashion"></label>
-                </div>
-                <div>
-                    <input type="checkbox" name="category[]" value="2" id="home-appliance" class="checkbox-home-appliance">
-                    <label for="home-appliance" class="btn-label-home-appliance"></label>
-                </div>
-                <div>
-                    <input type="checkbox" name="category[]" value="3" id="interior" class="checkbox-interior">
-                    <label for="interior" class="btn-label-interior"></label>
-                </div>
-                <div>
-                    <input type="checkbox" name="category[]" value="4" id="ladies" class="checkbox-ladies">
-                    <label for="ladies" class="btn-label-ladies"></label>
-                </div>
-                <div>
-                    <input type="checkbox" name="category[]" value="5" id="mens" class="checkbox-mens">
-                    <label for="mens" class="btn-label-mens"></label>
-                </div>
-                <div>
-                    <input type="checkbox" name="category[]" value="6" id="cosmetics" class="checkbox-cosmetics">
-                    <label for="cosmetics" class="btn-label-cosmetics"></label>
-                </div>
-                <div>
-                    <input type="checkbox" name="category[]" value="7" id="books" class="checkbox-books">
-                    <label for="books" class="btn-label-books"></label>
-                </div>
-                <div>
-                    <input type="checkbox" name="category[]" value="8" id="games" class="checkbox-games">
-                    <label for="games" class="btn-label-games"></label>
-                </div>
-                <div>
-                    <input type="checkbox" name="category[]" value="9" id="sports" class="checkbox-sports">
-                    <label for="sports" class="btn-label-sports"></label>
-                </div>
-                <div>
-                    <input type="checkbox" name="category[]" value="10" id="kitchen" class="checkbox-kitchen">
-                    <label for="kitchen" class="btn-label-kitchen"></label>
-                </div>
-                <div>
-                    <input type="checkbox" name="category[]" value="11" id="handmade" class="checkbox-handmade">
-                    <label for="handmade" class="btn-label-handmade"></label>
-                </div>
-                <div>
-                    <input type="checkbox" name="category[]" value="12" id="accessories" class="checkbox-accessories">
-                    <label for="accessories" class="btn-label-accessories"></label>
-                </div>
-                <div>
-                    <input type="checkbox" name="category[]" value="13" id="toys" class="checkbox-toys">
-                    <label for="toys" class="btn-label-toys"></label>
-                </div>
-                <div>
-                    <input type="checkbox" name="category[]" value="14" id="babiesAndKids" class="checkbox-babiesAndKids">
-                    <label for="babiesAndKids" class="btn-label-babiesAndKids"></label>
-                </div>
-            </div>
-            <?php $__errorArgs = ['category'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-            <div>
-                <p><?php echo e($errors->first('category')); ?></p>
-            </div>
-            <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-        </div>
+        
         <div class="condition-part">
             <div>
                 <h4>商品の状態</h4>
@@ -227,15 +151,15 @@ unset($__errorArgs, $__bag); ?>
     <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('chain', [])->html();
-} elseif ($_instance->childHasBeenRendered('D9dh5Hd')) {
-    $componentId = $_instance->getRenderedChildComponentId('D9dh5Hd');
-    $componentTag = $_instance->getRenderedChildComponentTagName('D9dh5Hd');
+} elseif ($_instance->childHasBeenRendered('7yyO3yg')) {
+    $componentId = $_instance->getRenderedChildComponentId('7yyO3yg');
+    $componentTag = $_instance->getRenderedChildComponentTagName('7yyO3yg');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('D9dh5Hd');
+    $_instance->preserveRenderedChild('7yyO3yg');
 } else {
     $response = \Livewire\Livewire::mount('chain', []);
     $html = $response->html();
-    $_instance->logRenderedChild('D9dh5Hd', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('7yyO3yg', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>

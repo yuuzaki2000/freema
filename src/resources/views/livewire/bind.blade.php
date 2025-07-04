@@ -1,4 +1,5 @@
-<div class="container">
+<form class="container" action="/checkout" method="post">
+    @csrf
     <div class="left-side">
         <div class="upper">
             <div class="upper-left">
@@ -8,25 +9,28 @@
                 <p>{{$productName}}</p>
                 <p>{{$productPrice}}</p>
             </div>
+            <div>
+                <input type="hidden" name="product_id" value="{{$product->id}}">
+            </div>
         </div>
         <div class="middle">
             <div>
                 <p>支払い方法</p>
             </div>
-            <select wire:model="paymentMethod" name="" style="border:1px solid #000;">
+            <select wire:model="paymentMethod" name="payment_method" style="border:1px solid #000;">
                 <option value="">選択してください</option>
                 <option value="コンビニ支払">コンビニ支払</option>
                 <option value="カード支払い">カード支払い</option>
             </select>
         </div>
         <div class="bottom">
-            <div>
+            <div style="display: flex; justify-content:space-between;">
                 <p>配送先:</p>
-                <p>{{$profileAddress}}</p>
-                <p>{{$profileBuilding}}</p>
+                <button wire:click="getAddressChangeView({{$product->id}})">変更する</button>
             </div>
             <div>
-                <button wire:click="getAddressChangeView({{$product->id}})">変更する</button>
+                <input type="text" name="address" value="{{$profileAddress}}">
+                <input type="text" name="building" value="{{$profileBuilding}}">
             </div>
         </div>
     </div>
@@ -41,9 +45,9 @@
                 <th>{{$paymentMethod}}</th>
             </tr>
         </table>
-        <button class="btn" wire:click="store({{$product->id}})">購入する</button>
+        <button type="submit" wire:click="{{$product->id}}" class="btn">購入する</button>
     </div>
-</div>
+</form>
 <style>
     .upper {
         width:100%;

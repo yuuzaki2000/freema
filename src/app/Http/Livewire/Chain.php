@@ -25,13 +25,6 @@ class Chain extends Component
         $this->image_url = 'storage/product_img/'. $this->file_name;
     }
 
-    public function upload(){
-        $this->file->storeAs('public/product_img', $this->file_name);
-
-    }
-
-
-
     public function render()
     {
         return view('livewire.chain');

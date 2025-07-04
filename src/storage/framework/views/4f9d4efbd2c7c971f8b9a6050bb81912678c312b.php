@@ -1,4 +1,5 @@
-<div class="container">
+<form class="container" action="/checkout" method="post">
+    <?php echo csrf_field(); ?>
     <div class="left-side">
         <div class="upper">
             <div class="upper-left">
@@ -8,25 +9,28 @@
                 <p><?php echo e($productName); ?></p>
                 <p><?php echo e($productPrice); ?></p>
             </div>
+            <div>
+                <input type="hidden" name="product_id" value="<?php echo e($product->id); ?>">
+            </div>
         </div>
         <div class="middle">
             <div>
                 <p>支払い方法</p>
             </div>
-            <select wire:model="paymentMethod" name="" style="border:1px solid #000;">
+            <select wire:model="paymentMethod" name="payment_method" style="border:1px solid #000;">
                 <option value="">選択してください</option>
                 <option value="コンビニ支払">コンビニ支払</option>
                 <option value="カード支払い">カード支払い</option>
             </select>
         </div>
         <div class="bottom">
-            <div>
+            <div style="display: flex; justify-content:space-between;">
                 <p>配送先:</p>
-                <p><?php echo e($profileAddress); ?></p>
-                <p><?php echo e($profileBuilding); ?></p>
+                <button wire:click="getAddressChangeView(<?php echo e($product->id); ?>)">変更する</button>
             </div>
             <div>
-                <button wire:click="getAddressChangeView(<?php echo e($product->id); ?>)">変更する</button>
+                <input type="text" name="address" value="<?php echo e($profileAddress); ?>">
+                <input type="text" name="building" value="<?php echo e($profileBuilding); ?>">
             </div>
         </div>
     </div>
@@ -41,9 +45,9 @@
                 <th><?php echo e($paymentMethod); ?></th>
             </tr>
         </table>
-        <button class="btn" wire:click="store(<?php echo e($product->id); ?>)">購入する</button>
+        <button type="submit" wire:click="<?php echo e($product->id); ?>" class="btn">購入する</button>
     </div>
-</div>
+</form>
 <style>
     .upper {
         width:100%;

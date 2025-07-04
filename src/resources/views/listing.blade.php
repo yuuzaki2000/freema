@@ -12,13 +12,11 @@
     <div>
         <img src="{{asset($imageFilePath)}}" alt="サンプル画像" width="200px">
     </div>
-    <form action="/upload/product" method="POST" enctype="multipart/form-data">
-        @csrf
-        <input type="file" name="file">
-        <button type="submit">アップロード</button>
-    </form>
-    <form action="/sell" method="post">
+    <form action="/sell" method="post" enctype="multipart/form-data">
     @csrf
+        <div>
+            <input type="file" name="file">
+        </div>
         <div>
             <h3 class="h3">商品の詳細</h3>
         </div>
@@ -30,6 +28,7 @@
             <p>{{$errors->first('image')}}</p>
         </div>
         @enderror
+        {{--
         <div class="">
             <div>
                 <h4>カテゴリー</h4>
@@ -98,6 +97,7 @@
             </div>
             @enderror
         </div>
+        --}}
         <div class="condition-part">
             <div>
                 <h4>商品の状態</h4>
