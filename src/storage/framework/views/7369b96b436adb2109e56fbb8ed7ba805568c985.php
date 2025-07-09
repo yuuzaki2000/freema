@@ -1,9 +1,9 @@
 <?php $__env->startSection('css'); ?>
 <link rel="stylesheet" href="<?php echo e(asset('css/member_login.css')); ?>">
+<?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('title'); ?>
-ログイン
-    
+ログイン    
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>

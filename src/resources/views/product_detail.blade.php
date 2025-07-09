@@ -18,9 +18,10 @@
                 @csrf
                     <div>
                         <button type="submit">
-                            <img src="{{asset('img/star_icon.png')}}" alt="いいね" width="30px" height="30px">
+                            <img src="{{asset($imageUrl)}}" alt="いいね" width="30px" height="30px">
                         </button>
                         <p style="text-align: center;">{{$favoriteCount}}</p>
+                        <input type="hidden" name="isPushed" value="{{$isPushed}}">
                     </div>
                 </form>
                 <div>

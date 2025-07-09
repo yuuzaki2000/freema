@@ -29,6 +29,7 @@
                 <button wire:click="getAddressChangeView(<?php echo e($product->id); ?>)">変更する</button>
             </div>
             <div>
+                <input type="text" name="post_code" value="<?php echo e($profilePostCode); ?>">
                 <input type="text" name="address" value="<?php echo e($profileAddress); ?>">
                 <input type="text" name="building" value="<?php echo e($profileBuilding); ?>">
             </div>
@@ -45,7 +46,7 @@
                 <th><?php echo e($paymentMethod); ?></th>
             </tr>
         </table>
-        <button type="submit" wire:click="<?php echo e($product->id); ?>" class="btn">購入する</button>
+        <button type="submit" class="btn">購入する</button>
     </div>
 </form>
 <style>

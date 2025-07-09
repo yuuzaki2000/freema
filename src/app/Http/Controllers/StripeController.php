@@ -17,12 +17,14 @@ class StripeController extends Controller
     }
 
     public function checkout(Request $request){
-        $data = [
-            'user_id' => Auth::id(),
-            'product_id' => $request->product_id,
-            'payment_method' => $request->payment_method,
-        ];
-        Purchase::create($data);
+        $purchase = new Purchase();
+        $purchase->user_id = Auth::id();
+        $purchase->product_id = $request->product_id;
+        $purchase->payment_method = $request->payment_method;
+        $purchase->post_code = $request->post_code;
+        $purchase->address = $request->address;
+        $purchase->building = $request->building;
+        $purchase->save();
 
 
         Stripe::setApiKey(config('stripe.sk'));
@@ -49,6 +51,6 @@ class StripeController extends Controller
     }
 
     public function success(){
-        return view('stripe_index');
+        return view('stripe_success');
     }
 }

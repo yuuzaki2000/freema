@@ -2,10 +2,10 @@
 
 @section('css')
 <link rel="stylesheet" href="{{asset('css/member_register.css')}}">
+@endsection
 
 @section('title')
 会員登録
-
 @endsection
 
 @section('content')

@@ -9,10 +9,8 @@
                         <h4>商品画像</h4>
                     </div>
                     <div>
-                        <img src="{{asset($image_url)}}" alt="サンプル画像" width="200px">
-                    </div>
-                    <div>
-                        <input type="file" wire:model="file" wire:change = "onChange($event.target.value)">
+                        <input type="file" class="file-button" wire:change = "onChange($event.target.value)">
+                        <img class="product-image" src="{{asset($image_url)}}" alt="サンプル画像" width="200px">
                     </div>
                 </div>
                 <div>
@@ -177,6 +175,29 @@
     </div>
 </div>
 <style>
+.file-button {
+    border: 2px red dotted;
+    position: absolute;
+    padding:100px 100px;
+    height: 100px;
+    z-index: 0;
+}
+
+.product-image {
+    border: 2px red dotted;
+    position: relative;
+}
+
+.file-button::file-selector-button {
+    position: absolute;
+    top: 50%;
+    width:300px;
+    color: white;
+    background-color: red;
+    text-align: center;
+    z-index: 0;
+}
+
 .checkbox-group {
     display: flex;
     flex-wrap: wrap;

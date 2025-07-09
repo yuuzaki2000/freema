@@ -1,9 +1,9 @@
 <?php $__env->startSection('css'); ?>
 <link rel="stylesheet" href="<?php echo e(asset('css/member_register.css')); ?>">
+<?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('title'); ?>
 会員登録
-
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>

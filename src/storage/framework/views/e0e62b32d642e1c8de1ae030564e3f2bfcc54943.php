@@ -16,9 +16,10 @@
                 <?php echo csrf_field(); ?>
                     <div>
                         <button type="submit">
-                            <img src="<?php echo e(asset('img/star_icon.png')); ?>" alt="いいね" width="30px" height="30px">
+                            <img src="<?php echo e(asset($imageUrl)); ?>" alt="いいね" width="30px" height="30px">
                         </button>
                         <p style="text-align: center;"><?php echo e($favoriteCount); ?></p>
+                        <input type="hidden" name="isPushed" value="<?php echo e($isPushed); ?>">
                     </div>
                 </form>
                 <div>

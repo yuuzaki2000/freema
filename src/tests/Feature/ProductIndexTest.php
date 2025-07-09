@@ -32,9 +32,11 @@ class ProductIndexTest extends TestCase
     }
 
 
-    public function test_all_showed(){
+    public function test_all_products_are_showed_on_index(){
 
-        $firstProduct = Product::factory()->create();
+        $firstProduct = Product::factory()->create([
+            'image' => 'storage/product_img/banana.png',
+        ]);
         $secondProduct = Product::factory()->create();
         $thirdProduct = Product::factory()->create();
 

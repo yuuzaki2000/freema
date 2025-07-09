@@ -17,6 +17,7 @@ class Bind extends Component
     public $productPrice;
     public $profileAddress;
     public $profileBuilding;
+    public $profilePostCode;
 
 
     public function mount($productId){
@@ -26,16 +27,7 @@ class Bind extends Component
         $this->productImage = $this->product->image;
         $this->profileAddress = Profile::where('user_id', Auth::id())->first()->address;
         $this->profileBuilding = Profile::where('user_id', Auth::id())->first()->building;
-    }
-
-    public function store($productId){
-
-        $data = [
-            'user_id' => Auth::id(),
-            'product_id' => $productId,
-            'payment_method' => $this->paymentMethod
-        ];
-        Purchase::create($data);
+        $this->profilePostCode = Profile::where('user_id', Auth::id())->first()->post_code;
     }
 
     public function getAddressChangeView($productId){

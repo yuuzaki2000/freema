@@ -13,7 +13,7 @@
     <div class="bottom">
         <form action="/mypage" method="get" class="exhibition">
             <input type="hidden" name="page" value="sell">
-            <button type="submit">出品した商品</button>
+            <input type="button" value="出品した商品">
         </form>
         <form action="/mypage" method="get" class="purchase">
             <input type="hidden" name="page" value="buy">

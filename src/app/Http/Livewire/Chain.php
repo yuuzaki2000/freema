@@ -20,6 +20,7 @@ class Chain extends Component
     public function mount(){
     }
 
+
     public function onChange($value){
         $this->file_name = substr($value, 12);
         $this->image_url = 'storage/product_img/'. $this->file_name;

@@ -29,6 +29,7 @@
                 <button wire:click="getAddressChangeView({{$product->id}})">変更する</button>
             </div>
             <div>
+                <input type="text" name="post_code" value="{{$profilePostCode}}">
                 <input type="text" name="address" value="{{$profileAddress}}">
                 <input type="text" name="building" value="{{$profileBuilding}}">
             </div>
@@ -45,7 +46,7 @@
                 <th>{{$paymentMethod}}</th>
             </tr>
         </table>
-        <button type="submit" wire:click="{{$product->id}}" class="btn">購入する</button>
+        <button type="submit" class="btn">購入する</button>
     </div>
 </form>
 <style>

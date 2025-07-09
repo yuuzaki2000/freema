@@ -2,10 +2,10 @@
 
 @section('css')
 <link rel="stylesheet" href="{{asset('css/member_login.css')}}">
+@endsection
 
 @section('title')
-ログイン
-    
+ログイン    
 @endsection
 
 @section('content')

@@ -120,19 +120,32 @@ class ProductController extends Controller
         return view('search_result', compact('products', 'keyword'));
     }
 
-    public function getDetail($product_id){
+    public function getDetail($product_id, Request $request){
         $product = Product::find($product_id);
         $categories = Category::all();
-        $favorites = Favorite::all();
+        $favorites = Favorite::where('product_id', $product_id)->get();
         $favoriteCount = $favorites->count();
-        $comments = Comment::all();
+        $comments = Comment::where('product_id', $product_id)->get();
         $commentCount = $comments->count();
+        if(!$request){
+            $isPushed = false;
+            $imageUrl = 'img/star_icon.png';
+        }else{
+            $isPushed = $request->isPushed;
+            if($isPushed){
+                $imageUrl = 'img/red_star.png';
+            }else{
+                $imageUrl = 'img/star_icon.png';
+            }
+        }
 
         $data = [
             'product' => $product,
             'categories' => $categories,
             'favoriteCount' => $favoriteCount,
             'commentCount' => $commentCount,
+            'isPushed' => $isPushed,
+            'imageUrl' => $imageUrl,
         ];
         return view('product_detail', $data);
     }
