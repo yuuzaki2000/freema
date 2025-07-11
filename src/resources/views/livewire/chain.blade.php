@@ -9,7 +9,7 @@
                         <h4>商品画像</h4>
                     </div>
                     <div>
-                        <input type="file" class="file-button" wire:change = "onChange($event.target.value)">
+                        <input type="file" class="file-button" name="file" wire:change = "onChange($event.target.value)">
                         <img class="product-image" src="{{asset($image_url)}}" alt="サンプル画像" width="200px">
                     </div>
                 </div>
@@ -176,24 +176,21 @@
 </div>
 <style>
 .file-button {
-    border: 2px red dotted;
+    border: 2px #D9D9D9 dotted;
     position: absolute;
     padding:100px 100px;
     height: 100px;
     z-index: 0;
 }
 
-.product-image {
-    border: 2px red dotted;
-    position: relative;
-}
-
 .file-button::file-selector-button {
     position: absolute;
     top: 50%;
-    width:300px;
-    color: white;
-    background-color: red;
+    width:200px;
+    color: #ff5555;
+    background-color: #FFF;
+    border: 1px solid #ff5555;
+    border-radius: 10px;
     text-align: center;
     z-index: 0;
 }

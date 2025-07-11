@@ -23,22 +23,17 @@ class ProductIndexTest extends TestCase
 
     use DatabaseMigrations;
 
-
-    public function test_example()
-    {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
-    }
-
-
     public function test_all_products_are_showed_on_index(){
 
         $firstProduct = Product::factory()->create([
             'image' => 'storage/product_img/banana.png',
         ]);
-        $secondProduct = Product::factory()->create();
-        $thirdProduct = Product::factory()->create();
+        $secondProduct = Product::factory()->create([
+            'image' => 'storage/product_img/apple.png'
+        ]);
+        $thirdProduct = Product::factory()->create([
+            'image' => 'storage/product_img/peach.png'
+        ]);
 
         $response = $this->get('/');
         $response->assertSee($firstProduct->image);
@@ -48,26 +43,35 @@ class ProductIndexTest extends TestCase
 
     public function test_sold_in_purchase_product(){
 
-        $firstProduct = Product::factory()->create();
-
         $user = User::factory()->create();
         $this->actingAs($user);
 
-        $purchase = Purchase::factory()->create();
+        $product = Product::factory()->create([
+            'image' => 'storage/product_img/banana.png',
+        ]);
+        $purchase = Purchase::factory()->create([
+            'user_id' => $user->id,
+            'product_id' => $product->id,
+        ]);
 
-        $product = Product::find($purchase->product_id);
-
+        $purchase_product = Product::find($purchase->product_id);
         $response = $this->get('/');
         $response->assertSeeText('Sold');
     }
 
     public function test_my_own_listing_product_is_not_showed(){
-        $firstProduct = Product::factory()->create();
-
+       
         $user = User::factory()->create();
         $this->actingAs($user);
-        $listing = Listing::factory()->create();
-        $product = Product::find($listing->product_id);
+
+        $product = Product::factory()->create([
+            'image' => 'storage/product_img/banana.png',
+        ]);
+        $listing = Listing::factory()->create([
+            'user_id' => $user->id,
+            'product_id' => $product->id,
+        ]);
+
         $response = $this->get('/');
         !$response->assertSee($product->image);
     }

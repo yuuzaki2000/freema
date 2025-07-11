@@ -15,11 +15,11 @@
     <div class="bottom">
         <form action="/mypage" method="get" class="exhibition">
             <input type="hidden" name="page" value="sell">
-            <button type="submit">出品した商品</button>
+            <button type="submit" class="exhibition-btn">出品した商品</button>
         </form>
         <form action="/mypage" method="get" class="purchase">
             <input type="hidden" name="page" value="buy">
-            <button type="submit">購入した商品</button>
+            <button type="submit" class="purchase-btn">購入した商品</button>
         </form>
     </div>
     <div class="container">

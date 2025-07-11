@@ -22,6 +22,9 @@
                 <option value="コンビニ支払">コンビニ支払</option>
                 <option value="カード支払い">カード支払い</option>
             </select>
+            @error('payment_method')
+                <div style="color:red;">{{$errors->first('payment_method')}}</div>
+            @enderror
         </div>
         <div class="bottom">
             <div style="display: flex; justify-content:space-between;">

@@ -22,6 +22,16 @@
                 <option value="コンビニ支払">コンビニ支払</option>
                 <option value="カード支払い">カード支払い</option>
             </select>
+            <?php $__errorArgs = ['payment_method'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                <div style="color:red;"><?php echo e($errors->first('payment_method')); ?></div>
+            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
         </div>
         <div class="bottom">
             <div style="display: flex; justify-content:space-between;">

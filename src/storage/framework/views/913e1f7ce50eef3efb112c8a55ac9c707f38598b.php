@@ -10,6 +10,7 @@
         </form>
         <form action="/" method="get" class="mylist">
             <input type="hidden" name="page" value="mylist">
+            <input type="hidden" name="keyword" value="<?php echo e($keyword); ?>">
             <button type="submit" class="mylist-btn">マイリスト</button>
         </form>
     </div>

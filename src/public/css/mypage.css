@@ -14,7 +14,6 @@
     border-radius: 10px;
     text-align: center;
     text-decoration: none;
-
 }
 
 .bottom {
@@ -22,10 +21,16 @@
     border-bottom: 1px solid #000;
 }
 
-.exhibition {}
+.exhibition-btn:active {
+    color: #ff5555;
+}
 
 .purchase {
     margin-left: 30px;
+}
+
+.purchase-btn:active {
+    color: #ff5555;
 }
 
 .container {

@@ -15,8 +15,6 @@ class ListingFactory extends Factory
     {
         return [
             //
-            'user_id' => $this->faker->numberBetween(1, 1),
-            'product_id' => $this->faker->numberBetween(1, 1),
             'created_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
             'updated_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
         ];

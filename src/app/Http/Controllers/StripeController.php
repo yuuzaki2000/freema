@@ -7,6 +7,7 @@ use Stripe\Stripe;
 use Stripe\Checkout\Session;
 use App\Models\Purchase;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\PurchaseRequest;
 
 
 class StripeController extends Controller
@@ -16,7 +17,7 @@ class StripeController extends Controller
         return view('stripe_index');
     }
 
-    public function checkout(Request $request){
+    public function checkout(PurchaseRequest $request){
         $purchase = new Purchase();
         $purchase->user_id = Auth::id();
         $purchase->product_id = $request->product_id;

@@ -6,6 +6,7 @@
 </head>
 <body>
   <section>
+    <p>Thanks for your order!</p>
     <p>We appreciate your business!</p>
     <a href="/">商品一覧画面へ</a>
   </section>

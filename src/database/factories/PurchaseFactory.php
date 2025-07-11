@@ -14,8 +14,6 @@ class PurchaseFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => $this->faker->numberBetween(1, 1),
-            'product_id' => $this->faker->numberBetween(1, 1),
             'payment_method' => $this->faker->randomElement(['カード支払い','コンビニ支払い']),
             'post_code' => $this->faker->postcode,
             'address' => $this->faker->address,

@@ -29,31 +29,45 @@ class ProductController extends Controller
             $page = $request->page;
             $keyword = "";
         }else if($request->page == "mylist"){
-            $products = collect();
+            $particularProducts = collect();
             if(empty($particularFavorites)){
                 return;
             }else{
                 foreach($particularFavorites as $particularFavorite){
                     $product = Product::find($particularFavorite->product_id);
-                    $products->push($product);
+                    $particularProducts->push($product);
                 }
             }
             $page = $request->page;
             $keyword = $request->keyword;
+            if(!$keyword){
+            }else{
+                $products = $particularProducts->filter(function ($product) use ($keyword) {
+                    return strpos($product->name, $keyword) !== false;
+                });
+                /*
+                $filtered = $records->filter(function ($record) use ($key, $val) {
+                    return strpos($record[$key], $val) !== false;
+                });
+                */
+                /*dd($products);*/
+            }
         }else{
             $products = Product::all();
+            $keyword = $request->keyword;
 
             if(empty($particularListings)){
                 return;
             }else{
                 foreach($particularListings as $particularListing){
-                    $product = Product::find($particularListing->productId);
-                    dd($product);
-                    $products->pull($product->id);
+                    $product = Product::find($particularListing->product_id);
+                    if(!$product){
+                    }else{
+                        $products->pull($product->id);
+                    }
                 }
             }
             $page = "";
-            $keyword = "";
         }
 
         foreach($products as $product){
@@ -77,7 +91,7 @@ class ProductController extends Controller
         return view('listing', $data);
     }
 
-    public function store(Request $request){
+    public function store(ExhibitionRequest $request){
         try{
 
             DB::beginTransaction();
@@ -116,8 +130,9 @@ class ProductController extends Controller
 
     public function search(Request $request){
         $keyword = $request->keyword;
+        $page = $request->page;
         $products = Product::where('name', 'like', "%{$keyword}%")->get();
-        return view('search_result', compact('products', 'keyword'));
+        return view('index', compact('products', 'keyword','page'));
     }
 
     public function getDetail($product_id, Request $request){
