@@ -26,7 +26,7 @@
                     <div>
                         <img src="<?php echo e(asset('img/comment_icon.png')); ?>" alt="いいね" width="30px" height="30px">
                     </div>
-                    <p style="text-align: center;"><?php echo e($commentCount); ?></p>
+                    <p style="text-align: center;"><?php echo e($comments->count()); ?></p>
                 </div>
             </div>
             <form action="/purchase/<?php echo e($product->id); ?>" method="get">
@@ -57,14 +57,17 @@
             </div>
         </div>
         <div>
-            <div class="subtitle">コメント（１）</div>
+            <div class="subtitle">コメント（<?php echo e($comments->count()); ?>）</div>
             <div style="display: flex; flex-direction: row;">
-                <div>
-                    <img src="" alt="プロフィール画像">
-                </div>
                 <div>admin</div>
             </div>
-            <div style="background-color: #E6E6E6">こちらにコメントが入ります</div>
+            <?php $__currentLoopData = $comments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $comment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <div>
+                    <img src="<?php echo e(asset($comment->user->profile->image)); ?>" alt="プロフィール画像">
+                </div>
+                <div style="background-color: #E6E6E6"><?php echo e($comment->content); ?></div>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            
         </div>
         <form action="/comment/<?php echo e($product->id); ?>" method="post">
         <?php echo csrf_field(); ?>

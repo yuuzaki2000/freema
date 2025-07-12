@@ -41,13 +41,11 @@ class ProfileController extends Controller
     }
 
     public function configure(){
-        $user = Auth::user();
-        $imageFilePath = 'storage/profile_img/' . $user->name . "_image.png";
+        $userId = Auth::id();
         $profile = Profile::where('user_id', Auth::id())->first();
 
         $data = [
-            'user' => $user,
-            'imageFilePath' => $imageFilePath,
+            'userId' => $userId,
             'profile' => $profile,
         ];
         return view('profile_update', $data);

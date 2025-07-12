@@ -28,7 +28,7 @@
                     <div>
                         <img src="{{asset('img/comment_icon.png')}}" alt="いいね" width="30px" height="30px">
                     </div>
-                    <p style="text-align: center;">{{$commentCount}}</p>
+                    <p style="text-align: center;">{{$comments->count()}}</p>
                 </div>
             </div>
             <form action="/purchase/{{$product->id}}" method="get">
@@ -59,14 +59,17 @@
             </div>
         </div>
         <div>
-            <div class="subtitle">コメント（１）</div>
+            <div class="subtitle">コメント（{{$comments->count()}}）</div>
             <div style="display: flex; flex-direction: row;">
-                <div>
-                    <img src="" alt="プロフィール画像">
-                </div>
                 <div>admin</div>
             </div>
-            <div style="background-color: #E6E6E6">こちらにコメントが入ります</div>
+            @foreach ($comments as $comment)
+                <div>
+                    <img src="{{asset($comment->user->profile->image)}}" alt="プロフィール画像">
+                </div>
+                <div style="background-color: #E6E6E6">{{$comment->content}}</div>
+            @endforeach
+            
         </div>
         <form action="/comment/{{$product->id}}" method="post">
         @csrf

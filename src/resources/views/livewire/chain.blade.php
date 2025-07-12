@@ -10,14 +10,14 @@
                     </div>
                     <div>
                         <input type="file" class="file-button" name="file" wire:change = "onChange($event.target.value)">
-                        <img class="product-image" src="{{asset($image_url)}}" alt="サンプル画像" width="200px">
+                        <img class="product-image" src="{{asset($image_url)}}" alt="商品画像" width="200px">
                     </div>
                 </div>
                 <div>
                     <h3 class="h3">商品の詳細</h3>
                 </div>
                 <div>
-                    <input type="hidden" name="image" value="storage/product_img/uranai_tarot_card.png">
+                    <input type="hidden" name="image" value="{{$image_url}}">
                 </div>
                 @error('image')
                 <div>
@@ -175,24 +175,26 @@
     </div>
 </div>
 <style>
+.product-image {
+}
+
 .file-button {
     border: 2px #D9D9D9 dotted;
     position: absolute;
-    padding:100px 100px;
-    height: 100px;
-    z-index: 0;
+    padding:100px 0px;
+    height: 50px;
+    width: 200px;
 }
 
 .file-button::file-selector-button {
     position: absolute;
     top: 50%;
-    width:200px;
+    width:195px;
     color: #ff5555;
     background-color: #FFF;
     border: 1px solid #ff5555;
     border-radius: 10px;
     text-align: center;
-    z-index: 0;
 }
 
 .checkbox-group {

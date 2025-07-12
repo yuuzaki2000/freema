@@ -141,7 +141,6 @@ class ProductController extends Controller
         $favorites = Favorite::where('product_id', $product_id)->get();
         $favoriteCount = $favorites->count();
         $comments = Comment::where('product_id', $product_id)->get();
-        $commentCount = $comments->count();
         if(!$request){
             $isPushed = false;
             $imageUrl = 'img/star_icon.png';
@@ -158,7 +157,7 @@ class ProductController extends Controller
             'product' => $product,
             'categories' => $categories,
             'favoriteCount' => $favoriteCount,
-            'commentCount' => $commentCount,
+            'comments' => $comments,
             'isPushed' => $isPushed,
             'imageUrl' => $imageUrl,
         ];
