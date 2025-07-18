@@ -7,16 +7,16 @@
 <div>
     <?php
 if (! isset($_instance)) {
-    $html = \Livewire\Livewire::mount('chain', [])->html();
-} elseif ($_instance->childHasBeenRendered('FhD13kX')) {
-    $componentId = $_instance->getRenderedChildComponentId('FhD13kX');
-    $componentTag = $_instance->getRenderedChildComponentTagName('FhD13kX');
+    $html = \Livewire\Livewire::mount('listing-modal', [])->html();
+} elseif ($_instance->childHasBeenRendered('B2eobM6')) {
+    $componentId = $_instance->getRenderedChildComponentId('B2eobM6');
+    $componentTag = $_instance->getRenderedChildComponentTagName('B2eobM6');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('FhD13kX');
+    $_instance->preserveRenderedChild('B2eobM6');
 } else {
-    $response = \Livewire\Livewire::mount('chain', []);
+    $response = \Livewire\Livewire::mount('listing-modal', []);
     $html = $response->html();
-    $_instance->logRenderedChild('FhD13kX', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('B2eobM6', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>

@@ -2,11 +2,12 @@
 
 @section('css')
 <link rel="stylesheet" href="{{asset('css/product_detail.css')}}">
+@endsection
 
 @section('content')
 <div class="total-container">
     <div class="left-container">
-        <div><img src="{{asset($product->image)}}" alt="" width="400px"></div>
+        <div><img src="{{asset($product->image)}}" alt="商品画像" width="400px"></div>
     </div>
     <div class="right-container">
         <div>
@@ -37,37 +38,38 @@
         </div>
         <div>
             <div class="subtitle"><p>商品説明</p></div>
-            <div><p>カラー：</p></div>
-            <div><p>新品</p></div>
-            <div><p>商品の状態は良好です。傷もありません。</p></div>
-            <div><p>購入後、即発送いたします。</p></div>
+            <div>{{$product->description}}</div>
         </div>
         <div>
             <div class="subtitle">商品の情報</div>
-            <div>
+            <div class="category">
                 <div class="item-label">カテゴリー</div>
-                <div class="item-content">
+                <div class="category-content" style="display: flex;">
                     @foreach ($categories as $category)
                     <input type="checkbox" id="category" class="checkbox" value="{{$category->id}}" {{in_array($category->id, $product->categories->pluck('id')->toArray()) ? 'checked' : ''}} name="category_product[]">
                     <label for="category" class="category-label">{{$category->content}}</label>                    
                     @endforeach
                 </div>
             </div>
-            <div>
+            <div class="condition">
                 <div class="item-label">商品の状態</div>
-                <div class="item-content"></div>
+                <div class="condition-content">{{$product->condition}}</div>
             </div>
         </div>
         <div>
             <div class="subtitle">コメント（{{$comments->count()}}）</div>
-            <div style="display: flex; flex-direction: row;">
-                <div>admin</div>
-            </div>
             @foreach ($comments as $comment)
-                <div>
-                    <img src="{{asset($comment->user->profile->image)}}" alt="プロフィール画像">
+                <div class="comment-container">
+                    <div class="comment-header">
+                        @isset($comment->user->profile->image)
+                        <div class="profile-image-wrapper">
+                            <img src="{{asset($comment->user->profile->image)}}" alt="プロフィール画像" width="50px">
+                        </div>
+                        @endisset
+                        <div>{{$comment->user->name}}</div>
+                    </div>
+                    <div style="background-color: #E6E6E6">{{$comment->content}}</div>
                 </div>
-                <div style="background-color: #E6E6E6">{{$comment->content}}</div>
             @endforeach
             
         </div>
@@ -77,6 +79,9 @@
                 <p>商品へのコメント</p>
             </div>
             <textarea name="content" cols="80" rows="8" style="border:1px solid #000"></textarea>
+            @error('content')
+                <div>{{$errors->first('content')}}</div>
+            @enderror
             <button type="submit" class="btn">コメントを送信する</button>
         </form>
     </div>

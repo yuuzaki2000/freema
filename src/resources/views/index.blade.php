@@ -18,6 +18,7 @@
     </div>
     <div class="container">
         <ul class="group">
+                @if (!empty($products))
                 @foreach ($products as $product)
                         <li class="compartment">
                             <a href="/item/{{$product->id}}" class="item">
@@ -29,9 +30,8 @@
                             </a>
                         </li>
                 @endforeach
+                @endif
         </ul>
-        <p>{{$page}}</p>
-        <p>{{$keyword}}</p>
     </div>
 </div>
 @endsection

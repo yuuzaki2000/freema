@@ -1,10 +1,11 @@
 <?php $__env->startSection('css'); ?>
 <link rel="stylesheet" href="<?php echo e(asset('css/product_detail.css')); ?>">
+<?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
 <div class="total-container">
     <div class="left-container">
-        <div><img src="<?php echo e(asset($product->image)); ?>" alt="" width="400px"></div>
+        <div><img src="<?php echo e(asset($product->image)); ?>" alt="商品画像" width="400px"></div>
     </div>
     <div class="right-container">
         <div>
@@ -35,37 +36,38 @@
         </div>
         <div>
             <div class="subtitle"><p>商品説明</p></div>
-            <div><p>カラー：</p></div>
-            <div><p>新品</p></div>
-            <div><p>商品の状態は良好です。傷もありません。</p></div>
-            <div><p>購入後、即発送いたします。</p></div>
+            <div><?php echo e($product->description); ?></div>
         </div>
         <div>
             <div class="subtitle">商品の情報</div>
-            <div>
+            <div class="category">
                 <div class="item-label">カテゴリー</div>
-                <div class="item-content">
+                <div class="category-content" style="display: flex;">
                     <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <input type="checkbox" id="category" class="checkbox" value="<?php echo e($category->id); ?>" <?php echo e(in_array($category->id, $product->categories->pluck('id')->toArray()) ? 'checked' : ''); ?> name="category_product[]">
                     <label for="category" class="category-label"><?php echo e($category->content); ?></label>                    
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
             </div>
-            <div>
+            <div class="condition">
                 <div class="item-label">商品の状態</div>
-                <div class="item-content"></div>
+                <div class="condition-content"><?php echo e($product->condition); ?></div>
             </div>
         </div>
         <div>
             <div class="subtitle">コメント（<?php echo e($comments->count()); ?>）</div>
-            <div style="display: flex; flex-direction: row;">
-                <div>admin</div>
-            </div>
             <?php $__currentLoopData = $comments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $comment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <div>
-                    <img src="<?php echo e(asset($comment->user->profile->image)); ?>" alt="プロフィール画像">
+                <div class="comment-container">
+                    <div class="comment-header">
+                        <?php if(isset($comment->user->profile->image)): ?>
+                        <div class="profile-image-wrapper">
+                            <img src="<?php echo e(asset($comment->user->profile->image)); ?>" alt="プロフィール画像" width="50px">
+                        </div>
+                        <?php endif; ?>
+                        <div><?php echo e($comment->user->name); ?></div>
+                    </div>
+                    <div style="background-color: #E6E6E6"><?php echo e($comment->content); ?></div>
                 </div>
-                <div style="background-color: #E6E6E6"><?php echo e($comment->content); ?></div>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             
         </div>
@@ -75,6 +77,16 @@
                 <p>商品へのコメント</p>
             </div>
             <textarea name="content" cols="80" rows="8" style="border:1px solid #000"></textarea>
+            <?php $__errorArgs = ['content'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                <div><?php echo e($errors->first('content')); ?></div>
+            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
             <button type="submit" class="btn">コメントを送信する</button>
         </form>
     </div>

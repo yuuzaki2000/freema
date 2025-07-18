@@ -2,9 +2,10 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\Product;
 
 class ProductDetailTest extends TestCase
 {
@@ -13,18 +14,26 @@ class ProductDetailTest extends TestCase
      *
      * @return void
      */
-    public function test_example()
-    {
-        $response = $this->get('/');
 
-        $response->assertStatus(200);
-    }
+
+    use DatabaseMigrations;
 
     public function test_details_of_product_are_displayed(){
         $product = Product::factory()->create([
+            'name' => 'banana',
             'image' => 'storage/product_img/banana.png',
+            'brand' => 'dole',
+            'price' => 100,
+            'description' => 'とてもおいしいです',
+            'condition' => '良好'
         ]);
 
-        
+        $data = [
+            'product_id' => $product->id,
+        ];
+
+        $response = $this->get(route('item.detail', $data));
+
+        $response->assertSee($product->image);
     }
 }

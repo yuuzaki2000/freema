@@ -6,7 +6,7 @@
 
 @section('content')
 <div>
-    <livewire:bind productId="{{$product->id}}">
+    <livewire:purchase-modal productId="{{$product->id}}">
     @livewireScripts
 </div>
 @endsection

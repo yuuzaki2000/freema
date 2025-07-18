@@ -5,13 +5,18 @@
 
 .favorite {}
 
-.farorite-btn {}
+.favorite-btn:active {
+    color: #ff5555;
+}
 
 .mylist {}
 
+.mylist-btn:active {
+    color: #ff5555;
+}
+
 .mylist-btn {
     margin-left: 40px;
-    color: #ff0000;
 }
 
 .container {

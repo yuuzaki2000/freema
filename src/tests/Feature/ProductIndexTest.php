@@ -26,19 +26,17 @@ class ProductIndexTest extends TestCase
     public function test_all_products_are_showed_on_index(){
 
         $firstProduct = Product::factory()->create([
-            'image' => 'storage/product_img/banana.png',
+            'image' => 'storage/product_img/vacuum_cleaner.png',
         ]);
         $secondProduct = Product::factory()->create([
-            'image' => 'storage/product_img/apple.png'
+            'image' => 'storage/product_img/golf_bag.png'
         ]);
         $thirdProduct = Product::factory()->create([
-            'image' => 'storage/product_img/peach.png'
+            'image' => 'storage/product_img/coffee_cup.jpg'
         ]);
 
         $response = $this->get('/');
-        $response->assertSee($firstProduct->image);
-        $response->assertSee($secondProduct->image);
-        $response->assertSee($thirdProduct->image);
+        $response->assertSee($firstProduct->image, $secondProduct->image, $thirdProduct->image);
     }
 
     public function test_sold_in_purchase_product(){

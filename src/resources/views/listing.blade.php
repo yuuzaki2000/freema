@@ -6,7 +6,7 @@
 
 @section('content')
 <div>
-    <livewire:chain>
+    <livewire:listing-modal>
     @livewireScripts
 </div>    
 @endsection

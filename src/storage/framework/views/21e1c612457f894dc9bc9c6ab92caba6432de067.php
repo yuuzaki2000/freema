@@ -7,16 +7,16 @@
 <div>
     <?php
 if (! isset($_instance)) {
-    $html = \Livewire\Livewire::mount('bind', ['productId' => ''.e($product->id).''])->html();
-} elseif ($_instance->childHasBeenRendered('mIiKIa5')) {
-    $componentId = $_instance->getRenderedChildComponentId('mIiKIa5');
-    $componentTag = $_instance->getRenderedChildComponentTagName('mIiKIa5');
+    $html = \Livewire\Livewire::mount('purchase-modal', ['productId' => ''.e($product->id).''])->html();
+} elseif ($_instance->childHasBeenRendered('U8c34NC')) {
+    $componentId = $_instance->getRenderedChildComponentId('U8c34NC');
+    $componentTag = $_instance->getRenderedChildComponentTagName('U8c34NC');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('mIiKIa5');
+    $_instance->preserveRenderedChild('U8c34NC');
 } else {
-    $response = \Livewire\Livewire::mount('bind', ['productId' => ''.e($product->id).'']);
+    $response = \Livewire\Livewire::mount('purchase-modal', ['productId' => ''.e($product->id).'']);
     $html = $response->html();
-    $_instance->logRenderedChild('mIiKIa5', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('U8c34NC', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>

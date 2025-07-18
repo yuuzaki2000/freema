@@ -23,13 +23,6 @@ class MylistTest extends TestCase
 
     use DatabaseMigrations;
 
-    public function test_example()
-    {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
-    }
-
     public function test_only_favorite_products_are_showed_on_mylist(){
         $user = User::factory()->create();
         $this->actingAs($user);

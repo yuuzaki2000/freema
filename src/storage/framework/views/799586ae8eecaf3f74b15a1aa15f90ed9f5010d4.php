@@ -2,21 +2,26 @@
 <link rel="stylesheet" href="<?php echo e(asset('css/profile_update.css')); ?>">
 <?php echo \Livewire\Livewire::styles(); ?>
 
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('title'); ?>
+プロフィール設定
+<?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
 <div>
     <?php
 if (! isset($_instance)) {
-    $html = \Livewire\Livewire::mount('connect', ['userId' => ''.e($userId).''])->html();
-} elseif ($_instance->childHasBeenRendered('vrGHsQt')) {
-    $componentId = $_instance->getRenderedChildComponentId('vrGHsQt');
-    $componentTag = $_instance->getRenderedChildComponentTagName('vrGHsQt');
+    $html = \Livewire\Livewire::mount('profile-modal', ['userId' => ''.e($userId).'','profileId' => ''.e($profileId).''])->html();
+} elseif ($_instance->childHasBeenRendered('W3djOrM')) {
+    $componentId = $_instance->getRenderedChildComponentId('W3djOrM');
+    $componentTag = $_instance->getRenderedChildComponentTagName('W3djOrM');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('vrGHsQt');
+    $_instance->preserveRenderedChild('W3djOrM');
 } else {
-    $response = \Livewire\Livewire::mount('connect', ['userId' => ''.e($userId).'']);
+    $response = \Livewire\Livewire::mount('profile-modal', ['userId' => ''.e($userId).'','profileId' => ''.e($profileId).'']);
     $html = $response->html();
-    $_instance->logRenderedChild('vrGHsQt', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('W3djOrM', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>

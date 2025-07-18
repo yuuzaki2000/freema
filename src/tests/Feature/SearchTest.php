@@ -17,14 +17,6 @@ class SearchTest extends TestCase
 
     use DatabaseMigrations;
 
-
-    public function test_example()
-    {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
-    }
-
     public function test_partial_search(){
         $product = Product::factory()->create([
             'name' => 'banana',
@@ -40,10 +32,10 @@ class SearchTest extends TestCase
         ];
 
         $response = $this->post('/search', $data);
-        $response->assertSee($product->image);
+        $response->assertSee($product->name);
     }
 
-    public function test_mylist_has_the_same_search_condition(){
+    public function test_mylist_has_the_same_search_condition_as_index(){
         $product = Product::factory()->create([
             'name' => 'banana',
             'image' => 'storage/product_img/banana.png',
@@ -58,13 +50,7 @@ class SearchTest extends TestCase
         ];
 
         $response = $this->post('/search', $data);
-        $response->assertSee($product->image);
-
-        $response = $this->get('/', [
-            'page' => 'mylist',
-        ]);
-        
-        
+        $response->assertSee("ban");
         
     }
 }

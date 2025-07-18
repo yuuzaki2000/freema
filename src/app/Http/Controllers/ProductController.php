@@ -40,30 +40,25 @@ class ProductController extends Controller
             }
             $page = $request->page;
             $keyword = $request->keyword;
-            if(!$keyword){
-            }else{
+
+            if($keyword !== null){
                 $products = $particularProducts->filter(function ($product) use ($keyword) {
                     return strpos($product->name, $keyword) !== false;
                 });
-                /*
-                $filtered = $records->filter(function ($record) use ($key, $val) {
-                    return strpos($record[$key], $val) !== false;
-                });
-                */
-                /*dd($products);*/
+            }else{
+                $products = $particularProducts;
             }
-        }else{
+        }else if($request->page == "favorite"){
             $products = Product::all();
             $keyword = $request->keyword;
 
             if(empty($particularListings)){
-                return;
             }else{
                 foreach($particularListings as $particularListing){
                     $product = Product::find($particularListing->product_id);
-                    if(!$product){
+                    if($product == null){
                     }else{
-                        $products->pull($product->id);
+                        $products = Product::where('id', '!=', $product->id)->get();
                     }
                 }
             }
@@ -91,7 +86,7 @@ class ProductController extends Controller
         return view('listing', $data);
     }
 
-    public function store(ExhibitionRequest $request){
+    public function store(Request $request){
         try{
 
             DB::beginTransaction();
@@ -140,7 +135,9 @@ class ProductController extends Controller
         $categories = Category::all();
         $favorites = Favorite::where('product_id', $product_id)->get();
         $favoriteCount = $favorites->count();
+        
         $comments = Comment::where('product_id', $product_id)->get();
+
         if(!$request){
             $isPushed = false;
             $imageUrl = 'img/star_icon.png';

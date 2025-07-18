@@ -16,6 +16,7 @@
     </div>
     <div class="container">
         <ul class="group">
+                <?php if(!empty($products)): ?>
                 <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <li class="compartment">
                             <a href="/item/<?php echo e($product->id); ?>" class="item">
@@ -27,9 +28,8 @@
                             </a>
                         </li>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                <?php endif; ?>
         </ul>
-        <p><?php echo e($page); ?></p>
-        <p><?php echo e($keyword); ?></p>
     </div>
 </div>
 <?php $__env->stopSection(); ?>

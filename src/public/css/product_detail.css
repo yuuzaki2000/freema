@@ -29,10 +29,14 @@
 
 .subtitle {
     font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .item-label {
     font-size: 15px;
+    margin-bottom: 20px;
 }
 
 .item-content {
@@ -57,4 +61,32 @@
 
 .checkbox:checked+.category-label {
     display: block;
+}
+
+.category {
+    display: flex;
+}
+
+.category-content {
+    margin-left: 40px;
+}
+
+.condition {
+    display: flex;
+}
+
+.condition-content {
+    margin-left: 40px;
+}
+
+.comment-container {
+    margin-bottom: 20px;
+}
+
+.comment-header {
+    display: flex;
+}
+
+.profile-image-wrapper {
+    width: 50px;
 }

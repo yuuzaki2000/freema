@@ -62,18 +62,6 @@ unset($__errorArgs, $__bag); ?>
                 <p>確認用パスワード</p>
                 <input class="input" type="password" name="password_confirmation">
             </div>
-            <div>
-                <?php $__errorArgs = ['password_confirmation'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                    <p><?php echo e($errors->first('password_confirmation')); ?></p>
-                <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-            </div>
             <button type="submit" class="btn">登録する</button>
             <div class="login-text-container"><a href="/login" class="login-text">ログインはこちら</a></div>
         </div>

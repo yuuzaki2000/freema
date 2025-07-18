@@ -43,11 +43,6 @@
                 <p>確認用パスワード</p>
                 <input class="input" type="password" name="password_confirmation">
             </div>
-            <div>
-                @error('password_confirmation')
-                    <p>{{$errors->first('password_confirmation')}}</p>
-                @enderror
-            </div>
             <button type="submit" class="btn">登録する</button>
             <div class="login-text-container"><a href="/login" class="login-text">ログインはこちら</a></div>
         </div>

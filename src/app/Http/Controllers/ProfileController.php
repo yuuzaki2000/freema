@@ -44,10 +44,19 @@ class ProfileController extends Controller
         $userId = Auth::id();
         $profile = Profile::where('user_id', Auth::id())->first();
 
-        $data = [
+        if(empty($profile)){
+            $data = [
             'userId' => $userId,
-            'profile' => $profile,
-        ];
+            'profileId' => null,
+            ];
+
+        }else{
+            $data = [
+            'userId' => $userId,
+            'profileId' => $profile->id,
+            ];
+        }
+        
         return view('profile_update', $data);
     }
 
@@ -62,13 +71,23 @@ class ProfileController extends Controller
         return view('profile_register', $data);
     }  */
 
-    public function store(AddressRequest $request){
-        $profile = $request->all();
-        Profile::create($profile);
+    public function store(Request $request){
+        $dir = 'profile_img';
+        $file_name = $request->file('file')->getClientOriginalName();
+        $request->file('file')->storeAs('public/' . $dir, $file_name);
+
+        $profile = new Profile();
+        $profile->image = 'storage/' . $dir . '/' . $file_name;
+        $profile->user_id = $request->user_id;
+        $profile->post_code = $request->post_code;
+        $profile->address = $request->address;
+        $profile->building = $request->building;
+        $profile->save();
+
         return redirect('/login');
     }
 
-    public function update(AddressRequest $request){
+    public function update(Request $request){
         $profile = Profile::where('user_id', $request->user_id)->first();
         $profile->update($request->all());
         return redirect('/mypage');
