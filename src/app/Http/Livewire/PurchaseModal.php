@@ -14,24 +14,22 @@ class PurchaseModal extends Component
     public $product;
     public $productName;
     public $productPrice;
-    public $profileAddress;
-    public $profileBuilding;
-    public $profilePostCode;
+    public $address;
+    public $building;
+    public $post_code;
 
 
-    public function mount($productId){
+    public function mount($productId, $post_code, $address, $building){
         $this->product = Product::find($productId);
         $this->productName = $this->product->name;
         $this->productPrice = $this->product->price;
         $this->productImage = $this->product->image;
-        if(!empty(Profile::where('user_id', Auth::id())->first())){
-            $this->profileAddress = Profile::where('user_id', Auth::id())->first()->address;
-            $this->profileBuilding = Profile::where('user_id', Auth::id())->first()->building;
-            $this->profilePostCode = Profile::where('user_id', Auth::id())->first()->post_code;
-        }
+        $this->address = $address;
+        $this->building = $building;
+        $this->post_code = $post_code;
     }
 
-    public function getAddressChangeView($productId){
+    public function getAddressChange($productId){
         $product = Product::find($productId);
         return redirect()->route('addressChange', $product);
     }

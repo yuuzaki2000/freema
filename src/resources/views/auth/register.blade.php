@@ -18,7 +18,7 @@
             </div>
             <div>
                 @error('name')
-                    <p>{{$errors->first('name')}}</p>
+                    <p class="error-message">{{$errors->first('name')}}</p>
                 @enderror
             </div>
             <div>
@@ -27,7 +27,7 @@
             </div>
             <div>
                 @error('email')
-                    <p>{{$errors->first('email')}}</p>
+                    <p class="error-message">{{$errors->first('email')}}</p>
                 @enderror
             </div>
             <div>
@@ -36,7 +36,7 @@
             </div>
             <div>
                 @error('password')
-                    <p>{{$errors->first('password')}}</p>
+                    <p class="error-message">{{$errors->first('password')}}</p>
                 @enderror
             </div>
             <div>

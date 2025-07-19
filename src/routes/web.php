@@ -38,7 +38,7 @@ Route::middleware('auth')->group(function(){
     Route::post('/favorite/{product_id}', [FavoriteController::class, 'store']);
     Route::post('/comment/{product_id}', [CommentController::class, 'store'])->name('comment');
     Route::get('/purchase/address/{product_id}', [ProfileController::class, 'getAddressChangeView'])->name('addressChange');
-    Route::post('/purchase/address/{product_id}', [ProfileController::class, 'updateAddress']);
+    Route::post('/purchase/address/{product_id}', [ProfileController::class, 'sendAddress']);
     Route::get('/stripe', [StripeController::class, 'index'])->name('index');
     Route::post('/checkout', [StripeController::class, 'checkout'])->name('checkout');
     Route::get('/success', [StripeController::class, 'success'])->name('success');

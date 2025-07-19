@@ -28,15 +28,21 @@ class ProductIndexTest extends TestCase
         $firstProduct = Product::factory()->create([
             'image' => 'storage/product_img/vacuum_cleaner.png',
         ]);
+        $firstProductImageUrl = asset($firstProduct->image);
         $secondProduct = Product::factory()->create([
             'image' => 'storage/product_img/golf_bag.png'
         ]);
+        $secondProductImageUrl = asset($secondProduct->image);
         $thirdProduct = Product::factory()->create([
             'image' => 'storage/product_img/coffee_cup.jpg'
         ]);
+        $thirdProductImageUrl = asset($thirdProduct->image);
+
 
         $response = $this->get('/');
-        $response->assertSee($firstProduct->image, $secondProduct->image, $thirdProduct->image);
+        $response->assertSee($firstProductImageUrl, false);
+        $response->assertSee($secondProductImageUrl, false);
+        $response->assertSee($thirdProductImageUrl, false);
     }
 
     public function test_sold_in_purchase_product(){
@@ -65,12 +71,13 @@ class ProductIndexTest extends TestCase
         $product = Product::factory()->create([
             'image' => 'storage/product_img/banana.png',
         ]);
+        $productImageUrl = asset($product->image);
         $listing = Listing::factory()->create([
             'user_id' => $user->id,
             'product_id' => $product->id,
         ]);
 
         $response = $this->get('/');
-        !$response->assertSee($product->image);
+        !$response->assertSee($productImageUrl);
     }
 }

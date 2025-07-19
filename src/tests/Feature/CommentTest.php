@@ -48,11 +48,7 @@ class CommentTest extends TestCase
 
         $response = $this->post(route('comment', $data));
 
-        $this->assertDatabaseHas('comments', [
-            'user_id' => Auth::id(),
-            'product_id' => $product->id,
-            'content' => 'とてもおいしいです',
-        ]);
+        $this->assertDatabaseHas('comments',$data);
     }
 
     public function test_guest_user_cannot_post_comment(){

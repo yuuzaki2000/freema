@@ -60,18 +60,7 @@ class ProfileController extends Controller
         return view('profile_update', $data);
     }
 
-    /*
-    public function configure(){
-        $userInfo = Auth::user();
-        $profile = Profile::where('user_id', $userInfo->id);
-        $data = [
-            'userInfo' => $userInfo,
-            'profile' => $profile,
-        ];
-        return view('profile_register', $data);
-    }  */
-
-    public function store(Request $request){
+    public function store(AddressRequest $request){
         $dir = 'profile_img';
         $file_name = $request->file('file')->getClientOriginalName();
         $request->file('file')->storeAs('public/' . $dir, $file_name);
@@ -87,7 +76,7 @@ class ProfileController extends Controller
         return redirect('/login');
     }
 
-    public function update(Request $request){
+    public function update(AddressRequest $request){
         $profile = Profile::where('user_id', $request->user_id)->first();
         $profile->update($request->all());
         return redirect('/mypage');
@@ -96,13 +85,24 @@ class ProfileController extends Controller
     public function getAddressChangeView($product_id){
         $product = Product::find($product_id);
         $profile = Profile::where('user_id', Auth::id())->first();
-        return view('address_change',compact('product', 'profile'));
+        $data = [
+            'product' => $product,
+            'post_code' => $profile->post_code,
+            'address' => $profile->address,
+            'building' => $profile->building,
+        ];
+
+        return view('address_change', $data);
     }
 
-    public function updateAddress(Request $request, $product_id){
-        $profile = Profile::where('user_id', Auth::id())->first();
-        $profile->update($request->all());
+    public function sendAddress(Request $request, $product_id){
         $product = Product::find($product_id);
-        return view('purchase', compact('product'));
+        $data = [
+            'product' => $product,
+            'post_code' => $request->post_code,
+            'address' => $request->address,
+            'building' => $request->building,
+        ];
+        return view('purchase', $data);
     }
 }

@@ -1,3 +1,7 @@
+.error-message {
+    color: #FF5555;
+}
+
 .checkbox-group {
     display: flex;
     flex-wrap: wrap;

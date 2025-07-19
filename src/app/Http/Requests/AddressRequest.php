@@ -25,7 +25,7 @@ class AddressRequest extends FormRequest
     {
         return [
             //
-            'user_name' => 'required',
+            'name' => 'required',
             'post_code' => "required|regex:/^\d{3}[-]\d{4}$/",
             'address' => 'required',
             'building' => 'required',
@@ -34,7 +34,7 @@ class AddressRequest extends FormRequest
 
     public function messages(){
         return [
-            'user_id.required' => 'お名前を入力してください。',
+            'name.required' => 'お名前を入力してください。',
             'post_code.required' => '郵便番号を入力してください。',
             'post_code.regex' => '郵便番号の形式が正しくありません。',
             'address.required' => '住所を入力してください。',

@@ -1,15 +1,15 @@
 <div>
     <form action="/mypage/profile" method="post" class="inner" enctype="multipart/form-data">
     <?php echo csrf_field(); ?>
-    <?php if(empty($profile) == true): ?>
+    <?php if(empty($profile)): ?>
         <div class="content">
                     <div>
-                        <img class="profile-image" src="<?php echo e(asset($image_url)); ?>" alt="プロフィール画像" width="200px">
+                        <img class="profile-image" src="" alt="プロフィール画像" width="200px">
                         <input type="file" class="file-button" name="file" wire:change = "onChange($event.target.value)">
                     </div>
                 </div>
                 <div>
-                    <input type="hidden" name="image" value="<?php echo e($image_url); ?>">
+                    <input type="hidden" name="image" value="">
                 </div>
             <div>
                 <p>ユーザー名</p>
@@ -33,15 +33,12 @@
     <?php else: ?>
         <?php echo method_field('PATCH'); ?>
         <div class="content">
-            <div>
-                <h4>画像</h4>
-            </div>
-            <div>
-                <input type="file" class="file-button" name="file" wire:change="onChange($event.target.value)">
+            <div class="upper-container">
                 <div>
-                    <img class="profile-image" src="<?php echo e(asset($image_url)); ?>" alt="商品画像" width="200px">
+                    <img class="profile-image" src="<?php echo e(asset($profile->image)); ?>" alt="プロフィール画像" width="200px">
                 </div>
-                <input type="hidden" name="image" value="<?php echo e($image_url); ?>">
+                <input type="file" class="file-button" name="file" wire:change="onChange($event.target.value)">
+                <input type="hidden" name="image" value="<?php echo e($profile->image); ?>">
             </div>
             <div>
                 <p>ユーザー名</p>
@@ -68,6 +65,14 @@
     </form>
 </div>
 <style>
+.error-message {
+    color: #FF5555;
+}
+
+.upper-container {
+    display: flex;
+}
+
 .profile-image {
 }
 

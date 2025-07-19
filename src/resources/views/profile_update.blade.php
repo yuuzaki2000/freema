@@ -6,7 +6,9 @@
 @endsection
 
 @section('title')
-プロフィール設定
+<div class="title">
+    <p>プロフィール設定</p>
+</div>
 @endsection
 
 @section('content')

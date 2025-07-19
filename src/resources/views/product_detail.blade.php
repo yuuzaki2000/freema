@@ -17,7 +17,7 @@
             <div class="btn-group">
                 <form action="/favorite/{{$product->id}}" method="post">
                 @csrf
-                    <div>
+                    <div>\
                         <button type="submit">
                             <img src="{{asset($imageUrl)}}" alt="いいね" width="30px" height="30px">
                         </button>
@@ -80,7 +80,7 @@
             </div>
             <textarea name="content" cols="80" rows="8" style="border:1px solid #000"></textarea>
             @error('content')
-                <div>{{$errors->first('content')}}</div>
+                <div><p class="error-message">{{$errors->first('content')}}</p></div>
             @enderror
             <button type="submit" class="btn">コメントを送信する</button>
         </form>

@@ -30,6 +30,7 @@ class MylistTest extends TestCase
         $product = Product::factory()->create([
             'image' => 'storage/product_img/banana.png',
         ]);
+        $productImageUrl = asset($product->image);
         $favorite = Favorite::factory()->create([
             'user_id' => $user->id,
             'product_id' => $product->id
@@ -38,7 +39,7 @@ class MylistTest extends TestCase
         $response = $this->get('/', [
             'page' => 'mylist',
         ]);
-        $response->assertSee($product->image);
+        $response->assertSee($productImageUrl, false);
     }
 
     public function test_purchase_products_are_sold_on_mylist(){
@@ -68,6 +69,7 @@ class MylistTest extends TestCase
         $product = Product::factory()->create([
             'image' => 'storage/product_img/banana.png',
         ]);
+        $productImageUrl = asset($product->image);
         $listing = Listing::factory()->create([
             'user_id' => $user->id,
             'product_id' => $product->id,
@@ -76,7 +78,7 @@ class MylistTest extends TestCase
         $response = $this->get('/', [
             'page' => 'mylist',
         ]);
-        !$response->assertSee($product->image);
+        !$response->assertSee($productImageUrl);
     }
 
     public function test_user_who_is_not_verified_cant_show_any_products(){
@@ -88,6 +90,7 @@ class MylistTest extends TestCase
         $product = Product::factory()->create([
             'image' => 'storage/product_img/banana.png',
         ]);
+        $productImageUrl = asset($product->image);
 
         $favorite = Favorite::factory()->create([
             'user_id' => $user->id,
@@ -97,7 +100,7 @@ class MylistTest extends TestCase
         $response = $this->get('/', [
             'page' => 'mylist',
         ]);
-        !$response->assertSee($product->image);
+        !$response->assertSee($productImageUrl);
         
     }
 }

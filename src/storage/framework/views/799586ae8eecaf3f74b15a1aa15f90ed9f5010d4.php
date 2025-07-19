@@ -5,7 +5,9 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('title'); ?>
-プロフィール設定
+<div class="title">
+    <p>プロフィール設定</p>
+</div>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -13,15 +15,15 @@
     <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('profile-modal', ['userId' => ''.e($userId).'','profileId' => ''.e($profileId).''])->html();
-} elseif ($_instance->childHasBeenRendered('W3djOrM')) {
-    $componentId = $_instance->getRenderedChildComponentId('W3djOrM');
-    $componentTag = $_instance->getRenderedChildComponentTagName('W3djOrM');
+} elseif ($_instance->childHasBeenRendered('2RuJVKT')) {
+    $componentId = $_instance->getRenderedChildComponentId('2RuJVKT');
+    $componentTag = $_instance->getRenderedChildComponentTagName('2RuJVKT');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('W3djOrM');
+    $_instance->preserveRenderedChild('2RuJVKT');
 } else {
     $response = \Livewire\Livewire::mount('profile-modal', ['userId' => ''.e($userId).'','profileId' => ''.e($profileId).'']);
     $html = $response->html();
-    $_instance->logRenderedChild('W3djOrM', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('2RuJVKT', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>

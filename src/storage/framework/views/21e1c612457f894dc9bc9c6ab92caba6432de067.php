@@ -7,16 +7,16 @@
 <div>
     <?php
 if (! isset($_instance)) {
-    $html = \Livewire\Livewire::mount('purchase-modal', ['productId' => ''.e($product->id).''])->html();
-} elseif ($_instance->childHasBeenRendered('U8c34NC')) {
-    $componentId = $_instance->getRenderedChildComponentId('U8c34NC');
-    $componentTag = $_instance->getRenderedChildComponentTagName('U8c34NC');
+    $html = \Livewire\Livewire::mount('purchase-modal', ['postCode' => ''.e($post_code).'','productId' => ''.e($product->id).'','post_code' => ''.e($post_code).'','address' => ''.e($address).'','building' => ''.e($building).''])->html();
+} elseif ($_instance->childHasBeenRendered('CgjNzYn')) {
+    $componentId = $_instance->getRenderedChildComponentId('CgjNzYn');
+    $componentTag = $_instance->getRenderedChildComponentTagName('CgjNzYn');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('U8c34NC');
+    $_instance->preserveRenderedChild('CgjNzYn');
 } else {
-    $response = \Livewire\Livewire::mount('purchase-modal', ['productId' => ''.e($product->id).'']);
+    $response = \Livewire\Livewire::mount('purchase-modal', ['postCode' => ''.e($post_code).'','productId' => ''.e($product->id).'','post_code' => ''.e($post_code).'','address' => ''.e($address).'','building' => ''.e($building).'']);
     $html = $response->html();
-    $_instance->logRenderedChild('U8c34NC', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('CgjNzYn', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>

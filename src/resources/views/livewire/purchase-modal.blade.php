@@ -7,7 +7,7 @@
             </div>
             <div class="upper-right">
                 <p>{{$productName}}</p>
-                <p>{{$productPrice}}</p>
+                <p>&yen{{$productPrice}}</p>
             </div>
             <div>
                 <input type="hidden" name="product_id" value="{{$product->id}}">
@@ -29,17 +29,17 @@
         <div class="bottom">
             <div style="display: flex; justify-content:space-between;">
                 <p>配送先:</p>
-                <button wire:click="getAddressChangeView({{$product->id}})">変更する</button>
+                <button type="button" wire:click="getAddressChange({{$product->id}})">変更する</button>
             </div>
             <div>
-                @isset($profilePostCode)
-                    <input type="text" name="post_code" value="{{$profilePostCode}}">
+                @isset($post_code)
+                    <input type="text" name="post_code" value="{{$post_code}}">
                 @endisset
-                @isset($profileAddress)
-                    <input type="text" name="address" value="{{$profileAddress}}">                    
+                @isset($address)
+                    <input type="text" name="address" value="{{$address}}">                    
                 @endisset
-                @isset($profileBuilding)
-                    <input type="text" name="building" value="{{$profileBuilding}}">                    
+                @isset($building)
+                    <input type="text" name="building" value="{{$building}}">                    
                 @endisset
             </div>
         </div>
@@ -48,7 +48,7 @@
         <table border="1" style="border:1px solid #000;width:400px;border-collapse: collapse;">
             <tr>
                 <td>商品代金</td>
-                <th>{{$productPrice}}</th>
+                <th>&yen{{$productPrice}}</th>
             </tr>
             <tr style="border-top:1px solid #000;">
                 <td>支払方法</td>
@@ -59,6 +59,10 @@
     </div>
 </form>
 <style>
+    .error-message {
+        color: #FF5555;
+    }
+    
     .upper {
         width:100%;
         display: flex;

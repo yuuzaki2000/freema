@@ -164,6 +164,12 @@ class ProductController extends Controller
     public function purchase($product_id){
         $product = Product::find($product_id);
         $profile = Profile::where('user_id', Auth::id())->first();
-        return view('purchase', compact('product', 'profile'));
+        $data = [
+            'product' => $product,
+            'post_code' => $profile->post_code,
+            'address' => $profile->address,
+            'building' => $profile->building,
+        ];
+        return view('purchase', $data);
     }
 }

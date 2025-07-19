@@ -1,3 +1,7 @@
+.error-message {
+    color: #FF5555;
+}
+
 .input {
     border: 1px solid #000;
     width: 600px;

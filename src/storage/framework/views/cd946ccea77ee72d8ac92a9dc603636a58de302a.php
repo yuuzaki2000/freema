@@ -7,7 +7,7 @@
             </div>
             <div class="upper-right">
                 <p><?php echo e($productName); ?></p>
-                <p><?php echo e($productPrice); ?></p>
+                <p>&yen<?php echo e($productPrice); ?></p>
             </div>
             <div>
                 <input type="hidden" name="product_id" value="<?php echo e($product->id); ?>">
@@ -36,17 +36,17 @@ unset($__errorArgs, $__bag); ?>
         <div class="bottom">
             <div style="display: flex; justify-content:space-between;">
                 <p>配送先:</p>
-                <button wire:click="getAddressChangeView(<?php echo e($product->id); ?>)">変更する</button>
+                <button type="button" wire:click="getAddressChange(<?php echo e($product->id); ?>)">変更する</button>
             </div>
             <div>
-                <?php if(isset($profilePostCode)): ?>
-                    <input type="text" name="post_code" value="<?php echo e($profilePostCode); ?>">
+                <?php if(isset($post_code)): ?>
+                    <input type="text" name="post_code" value="<?php echo e($post_code); ?>">
                 <?php endif; ?>
-                <?php if(isset($profileAddress)): ?>
-                    <input type="text" name="address" value="<?php echo e($profileAddress); ?>">                    
+                <?php if(isset($address)): ?>
+                    <input type="text" name="address" value="<?php echo e($address); ?>">                    
                 <?php endif; ?>
-                <?php if(isset($profileBuilding)): ?>
-                    <input type="text" name="building" value="<?php echo e($profileBuilding); ?>">                    
+                <?php if(isset($building)): ?>
+                    <input type="text" name="building" value="<?php echo e($building); ?>">                    
                 <?php endif; ?>
             </div>
         </div>
@@ -55,7 +55,7 @@ unset($__errorArgs, $__bag); ?>
         <table border="1" style="border:1px solid #000;width:400px;border-collapse: collapse;">
             <tr>
                 <td>商品代金</td>
-                <th><?php echo e($productPrice); ?></th>
+                <th>&yen<?php echo e($productPrice); ?></th>
             </tr>
             <tr style="border-top:1px solid #000;">
                 <td>支払方法</td>
@@ -66,6 +66,10 @@ unset($__errorArgs, $__bag); ?>
     </div>
 </form>
 <style>
+    .error-message {
+        color: #FF5555;
+    }
+    
     .upper {
         width:100%;
         display: flex;

@@ -22,6 +22,7 @@ class SearchTest extends TestCase
             'name' => 'banana',
             'image' => 'storage/product_img/banana.png',
         ]);
+        $productImageUrl = asset($product->image);
 
         $products = Product::all();
 
@@ -32,7 +33,7 @@ class SearchTest extends TestCase
         ];
 
         $response = $this->post('/search', $data);
-        $response->assertSee($product->name);
+        $response->assertSee($productImageUrl, false);
     }
 
     public function test_mylist_has_the_same_search_condition_as_index(){

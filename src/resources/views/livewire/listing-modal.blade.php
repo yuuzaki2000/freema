@@ -177,6 +177,10 @@
     </div>
 </div>
 <style>
+.error-message {
+    color: #FF5555;
+}
+
 .product-image {
 }
 

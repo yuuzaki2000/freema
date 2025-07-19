@@ -15,7 +15,7 @@
             <div class="btn-group">
                 <form action="/favorite/<?php echo e($product->id); ?>" method="post">
                 <?php echo csrf_field(); ?>
-                    <div>
+                    <div>\
                         <button type="submit">
                             <img src="<?php echo e(asset($imageUrl)); ?>" alt="いいね" width="30px" height="30px">
                         </button>
@@ -82,7 +82,7 @@ $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                <div><?php echo e($errors->first('content')); ?></div>
+                <div><p class="error-message"><?php echo e($errors->first('content')); ?></p></div>
             <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
