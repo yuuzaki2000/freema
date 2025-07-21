@@ -7,16 +7,16 @@
 <div>
     <?php
 if (! isset($_instance)) {
-    $html = \Livewire\Livewire::mount('purchase-modal', ['postCode' => ''.e($post_code).'','productId' => ''.e($product->id).'','post_code' => ''.e($post_code).'','address' => ''.e($address).'','building' => ''.e($building).''])->html();
-} elseif ($_instance->childHasBeenRendered('CgjNzYn')) {
-    $componentId = $_instance->getRenderedChildComponentId('CgjNzYn');
-    $componentTag = $_instance->getRenderedChildComponentTagName('CgjNzYn');
+    $html = \Livewire\Livewire::mount('purchase-cover', ['postCode' => ''.e($post_code).'','productId' => ''.e($product->id).'','post_code' => ''.e($post_code).'','address' => ''.e($address).'','building' => ''.e($building).''])->html();
+} elseif ($_instance->childHasBeenRendered('cgfnNaI')) {
+    $componentId = $_instance->getRenderedChildComponentId('cgfnNaI');
+    $componentTag = $_instance->getRenderedChildComponentTagName('cgfnNaI');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('CgjNzYn');
+    $_instance->preserveRenderedChild('cgfnNaI');
 } else {
-    $response = \Livewire\Livewire::mount('purchase-modal', ['postCode' => ''.e($post_code).'','productId' => ''.e($product->id).'','post_code' => ''.e($post_code).'','address' => ''.e($address).'','building' => ''.e($building).'']);
+    $response = \Livewire\Livewire::mount('purchase-cover', ['postCode' => ''.e($post_code).'','productId' => ''.e($product->id).'','post_code' => ''.e($post_code).'','address' => ''.e($address).'','building' => ''.e($building).'']);
     $html = $response->html();
-    $_instance->logRenderedChild('CgjNzYn', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('cgfnNaI', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>

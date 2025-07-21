@@ -40,8 +40,16 @@
     margin-right: 30px;
 }
 
+.logtout-text {
+    color: #fff
+}
+
 .mypage-form {
     margin-right: 30px;
+}
+
+.mypage-text {
+    color: #fff
 }
 
 .sell-from {

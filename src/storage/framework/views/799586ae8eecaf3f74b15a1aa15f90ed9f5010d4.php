@@ -4,26 +4,20 @@
 
 <?php $__env->stopSection(); ?>
 
-<?php $__env->startSection('title'); ?>
-<div class="title">
-    <p>プロフィール設定</p>
-</div>
-<?php $__env->stopSection(); ?>
-
 <?php $__env->startSection('content'); ?>
 <div>
     <?php
 if (! isset($_instance)) {
-    $html = \Livewire\Livewire::mount('profile-modal', ['userId' => ''.e($userId).'','profileId' => ''.e($profileId).''])->html();
-} elseif ($_instance->childHasBeenRendered('2RuJVKT')) {
-    $componentId = $_instance->getRenderedChildComponentId('2RuJVKT');
-    $componentTag = $_instance->getRenderedChildComponentTagName('2RuJVKT');
+    $html = \Livewire\Livewire::mount('profile-cover', ['userId' => ''.e($userId).'','profileId' => ''.e($profileId).''])->html();
+} elseif ($_instance->childHasBeenRendered('2ep33W6')) {
+    $componentId = $_instance->getRenderedChildComponentId('2ep33W6');
+    $componentTag = $_instance->getRenderedChildComponentTagName('2ep33W6');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('2RuJVKT');
+    $_instance->preserveRenderedChild('2ep33W6');
 } else {
-    $response = \Livewire\Livewire::mount('profile-modal', ['userId' => ''.e($userId).'','profileId' => ''.e($profileId).'']);
+    $response = \Livewire\Livewire::mount('profile-cover', ['userId' => ''.e($userId).'','profileId' => ''.e($profileId).'']);
     $html = $response->html();
-    $_instance->logRenderedChild('2RuJVKT', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('2ep33W6', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>

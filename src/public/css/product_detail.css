@@ -25,6 +25,22 @@
     flex-direction: row;
 }
 
+.favorite-count {
+    text-align: center;
+}
+
+.comment-count {
+    text-align: center;
+}
+
+.comment-content {
+    background-color: #E6E6E6
+}
+
+.product-comment {
+    border: 1px solid #000
+}
+
 .btn {
     width: 100%;
     background-color: #FF5555;
@@ -73,6 +89,7 @@
 
 .category-content {
     margin-left: 40px;
+    display: flex;
 }
 
 .condition {
@@ -91,6 +108,6 @@
     display: flex;
 }
 
-.profile-image-wrapper {
+.comment .profile-image-wrapper {
     width: 50px;
 }

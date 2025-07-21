@@ -91,13 +91,14 @@ class ProductController extends Controller
 
             DB::beginTransaction();
 
+            /*
             $dir = 'product_img';
             $file_name = $request->file('file')->getClientOriginalName();
-            $request->file('file')->storeAs('public/' . $dir, $file_name);
+            $request->file('file')->storeAs('public/' . $dir, $file_name); */
 
             $product = new Product();
             $product->name = $request->name;
-            $product->image = 'storage/' . $dir . '/' . $file_name;
+            $product->image = $request->image;
             $product->brand = $request->brand;
             $product->price = $request->price;
             $product->description = $request->description;
@@ -164,12 +165,22 @@ class ProductController extends Controller
     public function purchase($product_id){
         $product = Product::find($product_id);
         $profile = Profile::where('user_id', Auth::id())->first();
-        $data = [
+        if(!empty($profile)){
+            $data = [
             'product' => $product,
             'post_code' => $profile->post_code,
             'address' => $profile->address,
             'building' => $profile->building,
-        ];
+            ];
+        }else{
+            $data = [
+            'product' => $product,
+            'post_code' => "",
+            'address' => "",
+            'building' => "",
+            ];
+        }
+        
         return view('purchase', $data);
     }
 }

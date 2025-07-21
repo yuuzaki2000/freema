@@ -17,19 +17,20 @@
             <div class="btn-group">
                 <form action="/favorite/{{$product->id}}" method="post">
                 @csrf
-                    <div>\
+                    <div>
                         <button type="submit">
                             <img src="{{asset($imageUrl)}}" alt="いいね" width="30px" height="30px">
                         </button>
-                        <p style="text-align: center;">{{$favoriteCount}}</p>
+                        <p class="favorite-count">{{$favoriteCount}}</p>
                         <input type="hidden" name="isPushed" value="{{$isPushed}}">
+                        <input type="hidden" name="user_id" value="{{Auth::id()}}">
                     </div>
                 </form>
                 <div>
                     <div>
                         <img src="{{asset('img/comment_icon.png')}}" alt="いいね" width="30px" height="30px">
                     </div>
-                    <p style="text-align: center;">{{$comments->count()}}</p>
+                    <p class="comment-count">{{$comments->count()}}</p>
                 </div>
             </div>
             <form action="/purchase/{{$product->id}}" method="get">
@@ -44,7 +45,7 @@
             <div class="subtitle">商品の情報</div>
             <div class="category">
                 <div class="item-label">カテゴリー</div>
-                <div class="category-content" style="display: flex;">
+                <div class="category-content">
                     @foreach ($categories as $category)
                     <input type="checkbox" id="category" class="checkbox" value="{{$category->id}}" {{in_array($category->id, $product->categories->pluck('id')->toArray()) ? 'checked' : ''}} name="category_product[]">
                     <label for="category" class="category-label">{{$category->content}}</label>                    
@@ -68,7 +69,7 @@
                         @endisset
                         <div>{{$comment->user->name}}</div>
                     </div>
-                    <div style="background-color: #E6E6E6">{{$comment->content}}</div>
+                    <div class="comment-content">{{$comment->content}}</div>
                 </div>
             @endforeach
             
@@ -78,7 +79,7 @@
             <div>
                 <p>商品へのコメント</p>
             </div>
-            <textarea name="content" cols="80" rows="8" style="border:1px solid #000"></textarea>
+            <textarea name="content" cols="80" rows="8" class="product-comment"></textarea>
             @error('content')
                 <div><p class="error-message">{{$errors->first('content')}}</p></div>
             @enderror

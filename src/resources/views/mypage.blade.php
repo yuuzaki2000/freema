@@ -7,9 +7,11 @@
 @section('content')
 <div>
     <div class="upper">
+        @isset($profile)
         <div>
             <img src="{{asset($profile->image)}}" alt="プロフィール画像">
         </div>
+        @endisset
         <h2>{{$user->name}}</h2>
         <a href="/mypage/profile" class="skt-btn">プロフィールを編集</a>
     </div>

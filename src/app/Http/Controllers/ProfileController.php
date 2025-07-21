@@ -60,13 +60,14 @@ class ProfileController extends Controller
         return view('profile_update', $data);
     }
 
-    public function store(AddressRequest $request){
+    public function store(Request $request){
+        /*
         $dir = 'profile_img';
         $file_name = $request->file('file')->getClientOriginalName();
-        $request->file('file')->storeAs('public/' . $dir, $file_name);
+        $request->file('file')->storeAs('public/' . $dir, $file_name);  */
 
         $profile = new Profile();
-        $profile->image = 'storage/' . $dir . '/' . $file_name;
+        $profile->image = $request->image;
         $profile->user_id = $request->user_id;
         $profile->post_code = $request->post_code;
         $profile->address = $request->address;
@@ -76,7 +77,7 @@ class ProfileController extends Controller
         return redirect('/login');
     }
 
-    public function update(AddressRequest $request){
+    public function update(Request $request){
         $profile = Profile::where('user_id', $request->user_id)->first();
         $profile->update($request->all());
         return redirect('/mypage');

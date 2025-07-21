@@ -22,13 +22,13 @@
             <form class="logout-form" action="/logout" method="post">
             @csrf
                 <button>
-                    <p style="color:#fff">ログアウト</p>
+                    <p class="logout-text">ログアウト</p>
                 </button>
             </form>
             <form class="mypage-form" action="/mypage" method="get">
                 @csrf
                 <button>
-                    <p style="color:#fff">マイページ</p>
+                    <p class="mypage-text">マイページ</p>
                 </button>
             </form>
             <form class="sell-form" action="/sell" method="get">

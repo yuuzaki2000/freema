@@ -15,19 +15,20 @@
             <div class="btn-group">
                 <form action="/favorite/<?php echo e($product->id); ?>" method="post">
                 <?php echo csrf_field(); ?>
-                    <div>\
+                    <div>
                         <button type="submit">
                             <img src="<?php echo e(asset($imageUrl)); ?>" alt="いいね" width="30px" height="30px">
                         </button>
-                        <p style="text-align: center;"><?php echo e($favoriteCount); ?></p>
+                        <p class="favorite-count"><?php echo e($favoriteCount); ?></p>
                         <input type="hidden" name="isPushed" value="<?php echo e($isPushed); ?>">
+                        <input type="hidden" name="user_id" value="<?php echo e(Auth::id()); ?>">
                     </div>
                 </form>
                 <div>
                     <div>
                         <img src="<?php echo e(asset('img/comment_icon.png')); ?>" alt="いいね" width="30px" height="30px">
                     </div>
-                    <p style="text-align: center;"><?php echo e($comments->count()); ?></p>
+                    <p class="comment-count"><?php echo e($comments->count()); ?></p>
                 </div>
             </div>
             <form action="/purchase/<?php echo e($product->id); ?>" method="get">
@@ -42,7 +43,7 @@
             <div class="subtitle">商品の情報</div>
             <div class="category">
                 <div class="item-label">カテゴリー</div>
-                <div class="category-content" style="display: flex;">
+                <div class="category-content">
                     <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <input type="checkbox" id="category" class="checkbox" value="<?php echo e($category->id); ?>" <?php echo e(in_array($category->id, $product->categories->pluck('id')->toArray()) ? 'checked' : ''); ?> name="category_product[]">
                     <label for="category" class="category-label"><?php echo e($category->content); ?></label>                    
@@ -66,7 +67,7 @@
                         <?php endif; ?>
                         <div><?php echo e($comment->user->name); ?></div>
                     </div>
-                    <div style="background-color: #E6E6E6"><?php echo e($comment->content); ?></div>
+                    <div class="comment-content"><?php echo e($comment->content); ?></div>
                 </div>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             
@@ -76,7 +77,7 @@
             <div>
                 <p>商品へのコメント</p>
             </div>
-            <textarea name="content" cols="80" rows="8" style="border:1px solid #000"></textarea>
+            <textarea name="content" cols="80" rows="8" class="product-comment"></textarea>
             <?php $__errorArgs = ['content'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
