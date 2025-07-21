@@ -11,14 +11,14 @@ use App\Http\Requests\CommentRequest;
 class CommentController extends Controller
 {
     //
-    public function store(CommentRequest $request, $product_id){
+    public function store(CommentRequest $request, $item_id){
         $data = [
             'user_id' => Auth::id(),
-            'product_id' => $product_id,
+            'product_id' => $item_id,
             'content' => $request->content,
         ];
         Comment::create($data);
-        $product = Product::find($product_id);
-        return redirect()->route('item.detail', ['product_id' => $product_id]);
+        $product = Product::find($item_id);
+        return redirect()->route('item.detail', ['item_id' => $item_id]);
     }
 }

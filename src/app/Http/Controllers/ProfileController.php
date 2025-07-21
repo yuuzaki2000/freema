@@ -83,8 +83,8 @@ class ProfileController extends Controller
         return redirect('/mypage');
     }
 
-    public function getAddressChangeView($product_id){
-        $product = Product::find($product_id);
+    public function getAddressChangeView($item_id){
+        $product = Product::find($item_id);
         $profile = Profile::where('user_id', Auth::id())->first();
         $data = [
             'product' => $product,
@@ -96,8 +96,8 @@ class ProfileController extends Controller
         return view('address_change', $data);
     }
 
-    public function sendAddress(Request $request, $product_id){
-        $product = Product::find($product_id);
+    public function sendAddress(Request $request, $item_id){
+        $product = Product::find($item_id);
         $data = [
             'product' => $product,
             'post_code' => $request->post_code,

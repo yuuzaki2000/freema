@@ -22,8 +22,6 @@
                             <img src="{{asset($imageUrl)}}" alt="いいね" width="30px" height="30px">
                         </button>
                         <p class="favorite-count">{{$favoriteCount}}</p>
-                        <input type="hidden" name="isPushed" value="{{$isPushed}}">
-                        <input type="hidden" name="user_id" value="{{Auth::id()}}">
                     </div>
                 </form>
                 <div>

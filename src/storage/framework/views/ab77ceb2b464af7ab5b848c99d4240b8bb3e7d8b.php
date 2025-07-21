@@ -14,6 +14,9 @@
                         <div>
                             <img class="product-image" src="<?php echo e(asset($photo_path)); ?>" alt="商品画像" width="200px" height="200px">
                         </div>
+                        <div>
+                            <input type="hidden" name="image" value="<?php echo e($photo_path); ?>">
+                        </div>
                     </div>
                 </div>
                 <?php $__errorArgs = ['image'];
@@ -30,9 +33,6 @@ endif;
 unset($__errorArgs, $__bag); ?>
                 <div>
                     <h3 class="h3">商品の詳細</h3>
-                </div>
-                <div>
-                    <input type="hidden" name="image" value="<?php echo e($photo_path); ?>">
                 </div>
                 <div class="">
                     <div>
@@ -115,6 +115,7 @@ unset($__errorArgs, $__bag); ?>
                     </div>
                     <div>
                         <select name="condition">
+                            <option value="選択してください" selected disabled>選択してください</option>
                             <option value="良好">良好</option>
                             <option value="目立った傷や汚れなし">目立った傷や汚れなし</option>
                             <option value="やや傷や汚れあり">やや傷や汚れあり</option>
@@ -142,7 +143,7 @@ unset($__errorArgs, $__bag); ?>
                         <h4>商品名</h4>
                     </div>
                     <div>
-                        <input type="text" name="name">
+                        <input type="text" name="name" class="input">
                     </div>
                     <?php $__errorArgs = ['name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -162,7 +163,7 @@ unset($__errorArgs, $__bag); ?>
                         <h4>ブランド名</h4>
                     </div>
                     <div>
-                        <input type="text" name="brand">
+                        <input type="text" name="brand" class="input">
                     </div>
                     <?php $__errorArgs = ['brand'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -182,7 +183,7 @@ unset($__errorArgs, $__bag); ?>
                         <h4>商品の説明</h4>
                     </div>
                     <div>
-                        <input type="text" name="description">
+                        <input type="text" name="description" class="input">
                     </div>
                     <?php $__errorArgs = ['description'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -202,7 +203,7 @@ unset($__errorArgs, $__bag); ?>
                         <h4>販売価格</h4>
                     </div>
                     <div>
-                        <input type="text" name="price">
+                        <input type="text" name="price" class="input">
                     </div>
                     <?php $__errorArgs = ['price'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -713,6 +714,11 @@ unset($__errorArgs, $__bag); ?>
     color: #FFF;
 }
 
+.input {
+    border:1px #000 solid;
+    margin-bottom: 20px;
+    width: 400px;
+}
 </style>
 
 <?php /**PATH /var/www/resources/views/livewire/listing-cover.blade.php ENDPATH**/ ?>

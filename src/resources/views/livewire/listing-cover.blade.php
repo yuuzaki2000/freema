@@ -14,6 +14,9 @@
                         <div>
                             <img class="product-image" src="{{asset($photo_path)}}" alt="商品画像" width="200px" height="200px">
                         </div>
+                        <div>
+                            <input type="hidden" name="image" value="{{$photo_path}}">
+                        </div>
                     </div>
                 </div>
                 @error('image')
@@ -23,9 +26,6 @@
                 @enderror
                 <div>
                     <h3 class="h3">商品の詳細</h3>
-                </div>
-                <div>
-                    <input type="hidden" name="image" value="{{$photo_path}}">
                 </div>
                 <div class="">
                     <div>
@@ -101,6 +101,7 @@
                     </div>
                     <div>
                         <select name="condition">
+                            <option value="選択してください" selected disabled>選択してください</option>
                             <option value="良好">良好</option>
                             <option value="目立った傷や汚れなし">目立った傷や汚れなし</option>
                             <option value="やや傷や汚れあり">やや傷や汚れあり</option>
@@ -121,7 +122,7 @@
                         <h4>商品名</h4>
                     </div>
                     <div>
-                        <input type="text" name="name">
+                        <input type="text" name="name" class="input">
                     </div>
                     @error('name')
                     <div>
@@ -134,7 +135,7 @@
                         <h4>ブランド名</h4>
                     </div>
                     <div>
-                        <input type="text" name="brand">
+                        <input type="text" name="brand" class="input">
                     </div>
                     @error('brand')
                     <div>
@@ -147,7 +148,7 @@
                         <h4>商品の説明</h4>
                     </div>
                     <div>
-                        <input type="text" name="description">
+                        <input type="text" name="description" class="input">
                     </div>
                     @error('description')
                     <div>
@@ -160,7 +161,7 @@
                         <h4>販売価格</h4>
                     </div>
                     <div>
-                        <input type="text" name="price">
+                        <input type="text" name="price" class="input">
                     </div>
                     @error('price')
                     <div>
@@ -664,5 +665,10 @@
     color: #FFF;
 }
 
+.input {
+    border:1px #000 solid;
+    margin-bottom: 20px;
+    width: 400px;
+}
 </style>
 

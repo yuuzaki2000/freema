@@ -12,43 +12,33 @@ use App\Models\Listing;
 class FavoriteController extends Controller
 {
     //
-    public function store($product_id, Request $request){
-        $particularListing = Listing::where('product_id', $product_id)->first();
-        $listingUserId = $particularListing->user_id;
+    public function store($item_id, Request $request){
+        $particularListing = Listing::where('product_id', $item_id)->first();
+        if($particularListing !== null){
+            $listingUserId = $particularListing->user_id;
+        }else{
+            $listingUserId = null;
+        }
 
         if($listingUserId !== Auth::id()){
-            $particularFavorite = Favorite::where('user_id', Auth::id())->where('product_id', $product_id)->first();
-            $particularFavorites = Favorite::where('user_id', Auth::id())->where('product_id', $product_id)->get();
-            if($particularFavorites->count() == 0){
-                $isPushed = $request->isPushed;
+            $particularFavorite = Favorite::where('user_id', Auth::id())->where('product_id', $item_id)->first();
 
-                if($isPushed == false){
+            if(empty($particularFavorite)){
                     $data = [
                         'user_id' => Auth::id(),
-                        'product_id' => $product_id
+                        'product_id' => $item_id,
                     ];
                     Favorite::create($data);
-                    $isPushed = true;
                     $imageUrl = 'img/red_star.png';
-                    return redirect()->route('item.detail', ['product_id' => $product_id, 'isPushed' => $isPushed, 'imageUrl' => $imageUrl]);
-                }else{
-                    $isPushed = false;
-                    $imageUrl = 'img/star_icon.png';
-                    return redirect()->route('item.detail', ['product_id' => $product_id, 'isPushed' => $isPushed, 'imageUrl' => $imageUrl]);    
-                }
+                    return redirect()->route('item.detail', ['item_id' => $item_id, 'imageUrl' => $imageUrl]);
             }else{
-                $isPushed = $request->isPushed;
-
-                if($isPushed == false){ 
-                    $imageUrl = 'img/red_star.png';
-                    return redirect()->route('item.detail', ['product_id' => $product_id, 'isPushed' => $isPushed, 'imageUrl' => $imageUrl]);
-                }else{
-                    $particularFavorite->delete();
-                    $isPushed = false;
-                    $imageUrl = 'img/star_icon.png';
-                    return redirect()->route('item.detail', ['product_id' => $product_id, 'isPushed' => $isPushed, 'imageUrl' => $imageUrl]);    
-                }
+                $particularFavorite->delete();
+                $imageUrl = 'img/white_star.png';
+                return redirect()->route('item.detail', ['item_id' => $item_id, 'imageUrl' => $imageUrl]);
             }
+        }else{
+            $imageUrl = 'img/white_star.png';
+            return redirect()->route('item.detail', ['item_id' => $item_id, 'imageUrl' => $imageUrl]);
         }
     }
 }

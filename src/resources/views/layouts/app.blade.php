@@ -22,7 +22,7 @@
             <form class="logout-form" action="/logout" method="post">
             @csrf
                 <button>
-                    <p class="logout-text">ログアウト</p>
+                    <p class="logout">ログアウト</p>
                 </button>
             </form>
             <form class="mypage-form" action="/mypage" method="get">

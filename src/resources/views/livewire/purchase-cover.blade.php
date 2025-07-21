@@ -14,7 +14,7 @@
                 <p>支払い方法</p>
             </div>
             <select wire:model="paymentMethod" name="payment_method" class="select">
-                <option value="">選択してください</option>
+                <option value="選択してください" selected disabled>選択してください</option>
                 <option value="コンビニ支払">コンビニ支払</option>
                 <option value="カード支払い">カード支払い</option>
             </select>
