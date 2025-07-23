@@ -32,7 +32,12 @@ class FavoriteTest extends TestCase
         $this->actingAs($user);
 
         $product = Product::factory()->create([
+            'name' => 'banana',
             'image' => 'storage/product_img/banana.png',
+            'brand' => 'dole',
+            'price' => 100,
+            'description' => 'とてもおいしいです',
+            'condition' => '良好'
         ]);
 
         $data = [
@@ -40,7 +45,11 @@ class FavoriteTest extends TestCase
             'product_id' => $product->id,
         ];
 
-        $response = $this->post('/favorite/{product_id}', $data);
+        $item_id = $product->id;
+
+        $this->post(route('favorite', $item_id), $data);
+        $this->assertDatabaseHas('favorites', $data);
+        
 
     }
 }

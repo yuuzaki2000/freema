@@ -91,11 +91,6 @@ class ItemController extends Controller
 
             DB::beginTransaction();
 
-            /*
-            $dir = 'product_img';
-            $file_name = $request->file('file')->getClientOriginalName();
-            $request->file('file')->storeAs('public/' . $dir, $file_name); */
-
             $product = new Product();
             $product->name = $request->name;
             $product->image = $request->image;
