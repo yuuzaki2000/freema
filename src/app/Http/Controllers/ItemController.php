@@ -135,15 +135,9 @@ class ItemController extends Controller
         $comments = Comment::where('product_id', $item_id)->get();
 
         if(!$request){
-            $isPushed = false;
             $imageUrl = 'img/star_icon.png';
         }else{
-            $isPushed = $request->isPushed;
-            if($isPushed){
-                $imageUrl = 'img/red_star.png';
-            }else{
-                $imageUrl = 'img/star_icon.png';
-            }
+            $imageUrl = $request->imageUrl;
         }
 
         $data = [
@@ -151,7 +145,6 @@ class ItemController extends Controller
             'categories' => $categories,
             'favoriteCount' => $favoriteCount,
             'comments' => $comments,
-            'isPushed' => $isPushed,
             'imageUrl' => $imageUrl,
         ];
         return view('product_detail', $data);
