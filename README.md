@@ -21,6 +21,12 @@
 7. シーディングを実行する
   php artisan db:seed
 
+[実行環境]
+MySQL 8.0.26
+PHP 7.4.9-fpm
+Laravel 8
+nginx 1.21.1
+
 [mailtrapの設定]
 mailtrapのメールボックスを作成し、
 .env内の下記※の部分を、自分のmailtrapの設定に書き換える
