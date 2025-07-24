@@ -20,6 +20,7 @@
   php artisan migrate:
 7. シーディングを実行する
   php artisan db:seed
+
 [mailtrapの設定]
 mailtrapのメールボックスを作成し、
 .env内の下記※の部分を、自分のmailtrapの設定に書き換える
@@ -30,6 +31,7 @@ MAIL_PORT=2525
 MAIL_USERNAME=bc0792fcbad78f
 MAIL_PASSWORD=20bbe0136d3bc6
 MAIL_ENCRYPTION=tls
+
 [stripeの決済画面でのデモ入力]
 下記を入力して試してください。
 カード番号：4242 4242 4242 4242
