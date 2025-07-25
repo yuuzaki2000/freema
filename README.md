@@ -20,6 +20,7 @@
   php artisan migrate:
 7. シーディングを実行する
   php artisan db:seed
+8. chmod -R 777 ./storage
 
 [実行環境]
 MySQL 8.0.26
