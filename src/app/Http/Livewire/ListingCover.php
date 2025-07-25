@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use Livewire\WithFileUploads;
 
+
 class ListingCover extends Component
 {
     use WithFileUploads;
@@ -22,7 +23,7 @@ class ListingCover extends Component
 
     public function updatedPhoto(){
         $file_name = $this->photo->getClientOriginalName();
-        $this->photo->storeAs('public/product_img', $file_name);
+        $this->photo->storeAs('public/product_img'. $file_name);
         $this->photo_path = 'storage/product_img/' . $file_name;
     }
 

@@ -21,13 +21,14 @@
                 @if (!empty($products))
                 @foreach ($products as $product)
                         <li class="compartment">
-                            <a href="/item/{{$product->id}}" class="item">
-                                <img src="{{asset($product->image)}}" alt="商品画像" width="100%">
+                            <form action="/item/{{$product->id}}" class="item" method="GET">
+                                <button type="submit"><img src="{{asset($product->image)}}" alt="商品画像" width="100%"></button>
                                 <div class="product-info">
                                     <p>{{$product->name}}</p>
                                     <p>{{$product->isSold}}</p>
                                 </div>
-                            </a>
+                                <input type="hidden" name="imageUrl" value="img/white_star.png">
+                            </form>
                         </li>
                 @endforeach
                 @endif

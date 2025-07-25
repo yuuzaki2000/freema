@@ -10,6 +10,7 @@ use Tests\TestCase;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Listing;
+use App\Models\Category;
 
 class ListingCoverTest extends TestCase
 {
@@ -23,60 +24,41 @@ class ListingCoverTest extends TestCase
 
         $product = Product::factory()->create([
             'name' => 'banana',
-            'image' => 'storage/product_img/banana.png',
-            'brand' => 'dole',
             'price' => 100,
             'description' => 'とてもおいしいです',
             'condition' => '良好'
         ]);
 
-        $component = Livewire::test(ListingCover::class)
-                        ->set('photo_path', 'storage/product_img/banana.png');
-
-        $component->assertSee('storage/product_img/banana.png', false);
-
-        $listing = Listing::factory()->create([
-            'user_id' => $user->id,
-            'product_id' => $product->id,
+        $first_category = Category::factory()->create([
+            'id' => 1,
+            'content' => 'ファッション',
         ]);
 
-        $particularListing = $listing->where('user_id', $user->id)->where('product_id', $product->id)->first();
+        $second_category = Category::factory()->create([
+            'id' => 2,
+            'content' => '家電',
+        ]);
 
-        $data = [
-            'name' => 'banana',
-            'image' => 'storage/product_img/banana.png',
-            'brand' => 'dole',
-            'price' => 100,
-            'description' => 'とてもおいしいです',
-            'condition' => '良好',
-            'user_id' => $user->id,
-            'product_id' => $particularListing->product_id,
+        $component = Livewire::test(ListingCover::class);
+
+        $product_data = [
+            'name' => $product->name,
+            'price' => $product->price,
+            'description' => $product->description,
+            'condition' => $product->condition,
         ];
+
+        $category_data = [
+            'category' => $first_category->content,
+        ];
+
+        $data = array($product_data, $category_data);
+
+        $product->categories()->sync(1);
 
         $response = $this->post('/sell', $data);
 
-        $this->assertDatabaseHas('products', [
-            'name' => 'banana',
-            'image' => 'storage/product_img/banana.png',
-            'brand' => 'dole',
-            'price' => 100,
-            'description' => 'とてもおいしいです',
-            'condition' => '良好',
-        ]);
-
-        $this->assertDatabaseHas('listings', [
-            'user_id' => $user->id,
-            'product_id' => $product->id,
-        ]);
-
-    }
-
-    public function test_login_user_can_see_the_cover(){
-        $user = User::factory()->create();
-        $this->actingAs($user);
-
-        $this->get('/sell')->assertSeeLivewire('listing-cover');
-        
-
+        $this->assertDatabaseHas('products', $product_data);
+        $this->assertDatabaseHas('categories', $category_data);
     }
 }

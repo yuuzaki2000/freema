@@ -20,13 +20,6 @@ class PaymentMethodTest extends TestCase
 
     use DatabaseMigrations;
 
-    public function test_example()
-    {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
-    }
-
     public function test_immediate_reflection(){
         $user = User::factory()->create();
         $this->actingAs($user);

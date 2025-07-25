@@ -134,8 +134,8 @@ class ItemController extends Controller
         
         $comments = Comment::where('product_id', $item_id)->get();
 
-        if(!$request){
-            $imageUrl = 'img/star_icon.png';
+        if(empty($request)){
+            $imageUrl = 'img/white_star.png';
         }else{
             $imageUrl = $request->imageUrl;
         }

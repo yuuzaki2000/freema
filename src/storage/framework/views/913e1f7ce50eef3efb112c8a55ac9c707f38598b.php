@@ -19,13 +19,14 @@
                 <?php if(!empty($products)): ?>
                 <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <li class="compartment">
-                            <a href="/item/<?php echo e($product->id); ?>" class="item">
-                                <img src="<?php echo e(asset($product->image)); ?>" alt="商品画像" width="100%">
+                            <form action="/item/<?php echo e($product->id); ?>" class="item" method="GET">
+                                <button type="submit"><img src="<?php echo e(asset($product->image)); ?>" alt="商品画像" width="100%"></button>
                                 <div class="product-info">
                                     <p><?php echo e($product->name); ?></p>
                                     <p><?php echo e($product->isSold); ?></p>
                                 </div>
-                            </a>
+                                <input type="hidden" name="imageUrl" value="img/white_star.png">
+                            </form>
                         </li>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 <?php endif; ?>

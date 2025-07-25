@@ -2,21 +2,22 @@
 <link rel="stylesheet" href="<?php echo e(asset('css/app_wide.css')); ?>">
 <?php echo \Livewire\Livewire::styles(); ?>
 
+<?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
 <div>
     <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('purchase-cover', ['postCode' => ''.e($post_code).'','productId' => ''.e($product->id).'','post_code' => ''.e($post_code).'','address' => ''.e($address).'','building' => ''.e($building).''])->html();
-} elseif ($_instance->childHasBeenRendered('3FIFYDP')) {
-    $componentId = $_instance->getRenderedChildComponentId('3FIFYDP');
-    $componentTag = $_instance->getRenderedChildComponentTagName('3FIFYDP');
+} elseif ($_instance->childHasBeenRendered('1yAmweQ')) {
+    $componentId = $_instance->getRenderedChildComponentId('1yAmweQ');
+    $componentTag = $_instance->getRenderedChildComponentTagName('1yAmweQ');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('3FIFYDP');
+    $_instance->preserveRenderedChild('1yAmweQ');
 } else {
     $response = \Livewire\Livewire::mount('purchase-cover', ['postCode' => ''.e($post_code).'','productId' => ''.e($product->id).'','post_code' => ''.e($post_code).'','address' => ''.e($address).'','building' => ''.e($building).'']);
     $html = $response->html();
-    $_instance->logRenderedChild('3FIFYDP', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('1yAmweQ', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>

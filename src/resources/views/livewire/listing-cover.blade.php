@@ -11,11 +11,12 @@
                     </div>
                     <div>
                         <input type="file" class="file-button" name="file" wire:model="photo">
+                        <input type="hidden" name="image" value="{{$photo_path}}">
                         <div>
                             <img class="product-image" src="{{asset($photo_path)}}" alt="商品画像" width="200px" height="200px">
                         </div>
                         <div>
-                            <input type="hidden" name="image" value="{{$photo_path}}">
+                            
                         </div>
                     </div>
                 </div>

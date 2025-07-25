@@ -61,10 +61,6 @@ class ProfileController extends Controller
     }
 
     public function store(Request $request){
-        /*
-        $dir = 'profile_img';
-        $file_name = $request->file('file')->getClientOriginalName();
-        $request->file('file')->storeAs('public/' . $dir, $file_name);  */
 
         $profile = new Profile();
         $profile->image = $request->image;

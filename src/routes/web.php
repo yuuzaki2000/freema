@@ -34,9 +34,9 @@ Route::middleware('auth')->group(function(){
     Route::get('/mypage/profile', [ProfileController::class, 'configure']);
     Route::patch('/mypage/profile', [ProfileController::class, 'update']);
     Route::post('/mypage/profile', [ProfileController::class, 'store']);
-    Route::get('/mypage', [ProfileController::class, 'index']);
+    Route::get('/mypage', [ProfileController::class, 'index'])->name('mypage');
     Route::post('/favorite/{item_id}', [FavoriteController::class, 'store'])->name('favorite');
-    Route::post('/comment/{item_id}', [CommentController::class, 'store']);
+    Route::post('/comment/{item_id}', [CommentController::class, 'store'])->name('comment');
     Route::get('/purchase/address/{item_id}', [ProfileController::class, 'getAddressChangeView'])->name('addressChange');
     Route::post('/purchase/address/{item_id}', [ProfileController::class, 'sendAddress']);
     Route::get('/stripe', [StripeController::class, 'index'])->name('index');

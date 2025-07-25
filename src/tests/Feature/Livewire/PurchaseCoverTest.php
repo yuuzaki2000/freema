@@ -32,7 +32,7 @@ class PurchaseCoverTest extends TestCase
             'condition' => '良好'
         ]);
 
-        $productId = $product->id;
+        $item_id = $product->id;
 
         $profile = Profile::factory()->create();
 
@@ -43,12 +43,12 @@ class PurchaseCoverTest extends TestCase
             'building' => $profile->building,
         ];
 
-        $this->get(route('purchase', $productId), $data);
+        $this->get(route('purchase', $item_id), $data);
 
-        $component = Livewire::test(PurchaseCover::class)
-                        ->set('productId', $productId)
-                        ->set('postCode', $profile->post_code)
-                        ->set('address', $profile->address)
-                        ->set('building', $profile->building);
+        $component = Livewire::test(PurchaseCover::class, ['productId' => $product->id, 'post_code' => $profile->post_code, 'address' => $profile->address, 'building' => $profile->building])
+            ->set('paymentMethod', 'コンビニ支払い');
+        
+        $component->assertSee('コンビニ支払い');
+
     }
 }

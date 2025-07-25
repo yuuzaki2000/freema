@@ -20,14 +20,7 @@ class FavoriteTest extends TestCase
 
     use DatabaseMigrations;
 
-    public function test_example()
-    {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
-    }
-
-    public function test_login_user_can_favorite_a_reply(){
+    public function test_login_user_can_like_a_post(){
         $user = User::factory()->create();
         $this->actingAs($user);
 
@@ -49,7 +42,29 @@ class FavoriteTest extends TestCase
 
         $this->post(route('favorite', $item_id), $data);
         $this->assertDatabaseHas('favorites', $data);
-        
+    }
 
+    public function test_the_favorite_icon_changes_when_he_give_a_like(){
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $product = Product::factory()->create([
+            'name' => 'banana',
+            'image' => 'storage/product_img/banana.png',
+            'brand' => 'dole',
+            'price' => 100,
+            'description' => 'とてもおいしいです',
+            'condition' => '良好'
+        ]);
+
+        $data = [
+            'user_id' => Auth::id(),
+            'product_id' => $product->id,
+        ];
+
+        $item_id = $product->id;
+
+        $response = $this->post(route('favorite', $item_id), $data);
+        $response->assertSee('red_star.png');
     }
 }
