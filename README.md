@@ -31,6 +31,8 @@ nginx 1.21.1
 [mailtrapの設定]
 mailtrapのメールボックスを作成し、
 .env内の下記※と※の間の部分を、自分のmailtrapの設定に書き換える
+
+
 ※
 MAIL_MAILER=smtp
 MAIL_HOST=sandbox.smtp.mailtrap.io
