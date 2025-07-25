@@ -23,13 +23,6 @@ class MypageTest extends TestCase
 
     use DatabaseMigrations;
 
-    public function test_example()
-    {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
-    }
-
     public function test_get_mypage(){
         $user = User::factory()->create();
         $this->actingAs($user);
