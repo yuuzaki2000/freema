@@ -23,7 +23,7 @@ class ProfileCover extends Component
 
     public function updatedPhoto(){
         $file_name = $this->photo->getClientOriginalName();
-        $this->photo->storeAs('public/profile_img' . $file_name);
+        $this->photo->storeAs('public/profile_img/' . $file_name);
         $this->photo_path = 'storage/profile_img/' . $file_name;
     }
 
