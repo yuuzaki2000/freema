@@ -21,6 +21,7 @@
 7. シーディングを実行する
   php artisan db:seed
 8. chmod -R 777 ./storage
+9. chmod 777 bootstrap/cache -R
 
 [実行環境]
 MySQL 8.0.26
@@ -30,7 +31,9 @@ nginx 1.21.1
 
 [mailtrapの設定]
 mailtrapのメールボックスを作成し、
-.env内の下記※の部分を、自分のmailtrapの設定に書き換える
+.env内の下記※と※の間の部分を、自分のmailtrapの設定に書き換える
+
+
 ※
 MAIL_MAILER=smtp
 MAIL_HOST=sandbox.smtp.mailtrap.io
@@ -38,6 +41,9 @@ MAIL_PORT=2525
 MAIL_USERNAME=bc0792fcbad78f
 MAIL_PASSWORD=20bbe0136d3bc6
 MAIL_ENCRYPTION=tls
+※
+MAIL_FROM_ADDRESS=from@example.com
+MAIL_FROM_NAME="${APP_NAME}"
 
 [stripeの決済画面でのデモ入力]
 下記を入力して試してください。
