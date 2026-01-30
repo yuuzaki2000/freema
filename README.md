@@ -54,3 +54,4 @@ MAIL_FROM_NAME="${APP_NAME}"
 国籍：United States
 パスワード：12345
 
+# example-freema
