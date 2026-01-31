@@ -1,0 +1,52 @@
+/*  {}は、パスパラメータ、[]はクエリパラメータ、{{}}は、渡すデータ、ルート名やURLは''で囲む
+'/{product_id}'
+POST → ItemController@getDetail → GET '/' || GET route('item.index', { product_id }) [keyword]
+*/
+--------------------------------------------------------------------------------------------------------------
+
+'/'
+GET → ItemController@index → view:index{{products,page,keyword}}
+--------------------------------------------------------------------------------------------------------------
+'/item/{item_id}'
+GET → ItemController@getDetail → view:product_detail{{product,categories,favoriteCount,comments,imageUrl}}
+
+'/search'
+POST → ItemController@search → view:index{{products,page,keyword}}
+
+'/email/verify'
+GET → EmailController@index → view:email_vertification
+
+'/sell'
+GET → ItemController@add → view:listing{{request}}
+POST → ItemController@store → try{GET '/'}catch{GET '/sell'}
+
+'/purchase/{item_id}'
+GET → ItemController@purchase → view:purchase{{product,post_code,address,building}}
+
+'/mypage/profile'
+GET → ProfileController@configure → view:profile_update{{userId,profileId}}
+PATCH → ProfileController@update → GET '/mypage'
+POST → ProfileController@store → GET '/login'
+
+'/mypage'
+GET → ProfileController@index → view:mypage{{products,page,user,profile}}
+
+'/favorite/{item_id}'
+POST → FavoriteController@store → GET '/item/{item_id} || GET route('favorite',{item_id})[imageUrl]
+
+'/comment/{item_id}
+POST →　CommentController@store → GET '/comment/{item_id} || GET route('comment',{item_id})
+
+'/puruchase/address/{item_id}'
+GET → ProfileController@getAddressChangeView → 
+POST → ProfileController@sendAddress →
+
+'/stripe'
+GET → StripeController@index →　
+
+'/checkout'
+POST → StripeController@checkout →
+
+'/success'
+GET → StripeController@success →
+

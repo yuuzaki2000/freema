@@ -24,13 +24,20 @@ class ProfileController extends Controller
                 $products->push($product);
             }
             $page = $request->page;
-        }else{
+        }else if($request->page == "sell"){
             $listings = Listing::where('user_id', Auth::id())->get();
             $products = collect();
             foreach($listings as $listing){
                 $product = Product::find($listing->product_id);
                 $products->push($product);
             }
+            $page = $request->page;
+        }else if($request->page == "trade"){
+            //ここに実装
+            $products = Product::all();
+            $page = $request->page;
+        }else{
+            $products = collect();
             $page = $request->page;
         }
 

@@ -24,17 +24,25 @@
             <input type="hidden" name="page" value="buy">
             <button type="submit" class="purchase-btn">購入した商品</button>
         </form>
+        <form action="/mypage" method="get" class="purchase">
+            <input type="hidden" name="page" value="trade">
+            <button type="submit" class="purchase-btn">取引中の商品</button>
+        </form>
     </div>
     <div class="container">
         <ul class="group">
-            @foreach ($products as $product)
-                    <li class="compartment">
-                        <div class="img-wrapper">
-                            <img src="{{asset($product->image)}}" alt="商品画像" width="100%">
-                            <p>{{$product->name}}</p>
-                        </div>
-                    </li>
-            @endforeach
+                @if (!empty($products))
+                @foreach ($products as $product)
+                        <li class="compartment">
+                            <form action="" class="item" method="GET">
+                                <button type="submit"><img src="{{asset($product->image)}}" alt="商品画像" width="100%"></button>
+                                <div class="product-info">
+                                    <p>{{$product->name}}</p>
+                                </div>
+                            </form>
+                        </li>
+                @endforeach
+                @endif
         </ul>
     </div>
 </div>

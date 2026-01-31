@@ -22,17 +22,25 @@
             <input type="hidden" name="page" value="buy">
             <button type="submit" class="purchase-btn">購入した商品</button>
         </form>
+        <form action="/mypage" method="get" class="purchase">
+            <input type="hidden" name="page" value="trade">
+            <button type="submit" class="purchase-btn">取引中の商品</button>
+        </form>
     </div>
     <div class="container">
         <ul class="group">
-            <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <li class="compartment">
-                        <div class="img-wrapper">
-                            <img src="<?php echo e(asset($product->image)); ?>" alt="商品画像" width="100%">
-                            <p><?php echo e($product->name); ?></p>
-                        </div>
-                    </li>
-            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                <?php if(!empty($products)): ?>
+                <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <li class="compartment">
+                            <form action="" class="item" method="GET">
+                                <button type="submit"><img src="<?php echo e(asset($product->image)); ?>" alt="商品画像" width="100%"></button>
+                                <div class="product-info">
+                                    <p><?php echo e($product->name); ?></p>
+                                </div>
+                            </form>
+                        </li>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                <?php endif; ?>
         </ul>
     </div>
 </div>
