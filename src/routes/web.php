@@ -9,6 +9,9 @@ use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\StripeController;
+use App\Http\Controllers\TradeController;
+use App\Http\Controllers\StarController;
+use App\Http\Controllers\PurchaseController;
 
 
 /*
@@ -26,8 +29,11 @@ Route::get('/', [ItemController::class, 'index']);
 Route::get('/item/{item_id}', [ItemController::class, 'getDetail'])->name('item.detail');
 Route::post('/search', [ItemController::class, 'search']);
 Route::get('/email/verify', [EmailController::class, 'index']);
+Route::get('/products/{item_id}/trade', [TradeController::class, 'index']);
+Route::post('/products/{item_id}/trade', [PurchaseController::class, 'store']);
+Route::post('/star', [StarController::class, 'store']);
 //仮に設置
-Route::get('/preview', function () {
+Route::get('/preview/buy', function () {
     return view('trade_chat_buyer');
 });
 

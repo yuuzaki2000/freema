@@ -11,6 +11,29 @@
 
 .center {
     width: 80%;
+    height: 100%;
+}
+
+.center-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.title-bar-container {
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+}
+
+.product-info-container {
+    height: 20%;
+    border-top: 2px solid #000;
+}
+
+.message-container {
+    height: 70%;
+    border-top: 2px solid #000;
 }
 
 .modal {

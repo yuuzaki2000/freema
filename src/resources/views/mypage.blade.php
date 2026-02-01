@@ -34,7 +34,7 @@
                 @if (!empty($products))
                 @foreach ($products as $product)
                         <li class="compartment">
-                            <form action="" class="item" method="GET">
+                            <form action="/products/{{$product->id}}/trade" class="item" method="GET">
                                 <button type="submit"><img src="{{asset($product->image)}}" alt="商品画像" width="100%"></button>
                                 <div class="product-info">
                                     <p>{{$product->name}}</p>

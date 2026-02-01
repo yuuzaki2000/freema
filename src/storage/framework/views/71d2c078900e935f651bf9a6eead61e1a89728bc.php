@@ -7,24 +7,37 @@
     <div class="side-bar">その他の取引</div>
     <div class="center">
         <div class="center-container">
-            <div class="title-container">
-                <a href="#modal">モーダルを表示</a>
-                <form action="#modal" method="GET">
+            <div class="title-bar-container">
+                <div>
+                    <img src="" alt="">
+                </div>
+                <h2>「」さんとの取引画面</h2>
+                <form action="/products/<?php echo e($item_id); ?>/trade" method="POST">
                     <?php echo csrf_field(); ?>
-                    <button type="submit">モーダルを表示</button>
+                    <button type="submit">取引を完了する</button>
                 </form>
             </div>
             <div class="product-info-container"></div>
-            <div class="message-container"></div>
+            <div class="message-container">
+                
+            </div>
         </div>
         <div class="modal" id="modal">
             <a href="#!" class="modal-overlay"></a>
             <div class="modal__inner">
                 <div class="modal__content">
-                    モーダルの中身
-                    <form action="/" method="GET">
+                    <form action="/star" method="POST">
+                    
                         <?php echo csrf_field(); ?>
-                        <button type="submit">トップページへ</button>
+                        <select name="star_point">
+                            <option value="">星の数を選択</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <button type="submit">送信</button>
                     </form>
                 </div>
             </div>
