@@ -32,10 +32,7 @@ Route::get('/email/verify', [EmailController::class, 'index']);
 Route::get('/products/{item_id}/trade', [TradeController::class, 'index']);
 Route::post('/products/{item_id}/trade', [PurchaseController::class, 'store']);
 Route::post('/star', [StarController::class, 'store']);
-//仮に設置
-Route::get('/preview/buy', function () {
-    return view('trade_chat_buyer');
-});
+Route::post('/products/{item_id}/trades/messages', [TradeController::class, 'sendMessage']);
 
 Route::middleware('auth')->group(function(){
     Route::get('/sell', [ItemController::class, 'add']);

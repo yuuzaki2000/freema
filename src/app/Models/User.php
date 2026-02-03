@@ -74,9 +74,13 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function buyerInTrade(){
         return $this->hasMany(Trade::class, 'buyer_id');
-    }33
+    }
 
     public function sellerInTrade(){
         return $this->hasMany(Trade::class, 'seller_id');
+    }
+
+    public function messages(){
+        return $this->hasMany(Message::class);
     }
 }

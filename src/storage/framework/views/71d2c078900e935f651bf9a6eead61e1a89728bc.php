@@ -19,6 +19,13 @@
             </div>
             <div class="product-info-container"></div>
             <div class="message-container">
+                <div></div>
+                <form action="/products/<?php echo e($item_id); ?>/trades/messages" method="POST">
+                <?php echo csrf_field(); ?>
+                    <input type="text" name="content">
+                    <input type="file" name="image">
+                    <button type="submit">メール送信</button>
+                </form>
                 
             </div>
         </div>

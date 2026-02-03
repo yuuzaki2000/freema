@@ -21,6 +21,13 @@
             </div>
             <div class="product-info-container"></div>
             <div class="message-container">
+                <div></div>
+                <form action="/products/{{$item_id}}/trades/messages" method="POST">
+                @csrf
+                    <input type="text" name="content">
+                    <input type="file" name="image">
+                    <button type="submit">メール送信</button>
+                </form>
                 {{--
                 @foreach($trade->messages as $msg){
                 <div>

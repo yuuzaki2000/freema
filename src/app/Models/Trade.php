@@ -16,4 +16,8 @@ class Trade extends Model
     public function seller(){
         return $this->belongsTo(User::class, 'seller_id');
     }
+
+    public function messages(){
+        return $this->hasMany(Message::class);
+    }
 }
