@@ -18,6 +18,6 @@ class PurchaseController extends Controller
             'address' => null,
             'building' => null,
         ]);
-        return redirect("/products/{$item_id}/trade#modal");
+        return redirect("/products/{$item_id}/trades/1#modal");
     }
 }

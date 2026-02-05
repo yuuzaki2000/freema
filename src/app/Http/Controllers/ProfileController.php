@@ -33,7 +33,8 @@ class ProfileController extends Controller
             }
             $page = $request->page;
         }else if($request->page == "trade"){
-            //ここに実装
+            //ここに実装・・・・・or検索
+            //Tradesテーブルのproduct_idが特定のもので、seller_idかbuyer_idがAuth::id（）であるデータを検索し、productsに詰め込む
             $products = Product::all();
             $page = $request->page;
         }else{

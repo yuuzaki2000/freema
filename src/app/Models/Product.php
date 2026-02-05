@@ -9,6 +9,7 @@ use App\Models\Listing;
 use App\Models\Category;
 use App\Models\Favorite;
 use App\Models\Comment;
+use App\Models\Trade;
 
 
 class Product extends Model
@@ -31,5 +32,9 @@ class Product extends Model
 
     public function comments(){
         return $this->hasMany(Comment::class);
+    }
+
+    public function trade(){
+        return $this->hasOne(Trade::class);
     }
 }

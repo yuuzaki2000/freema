@@ -20,4 +20,8 @@ class Trade extends Model
     public function messages(){
         return $this->hasMany(Message::class);
     }
+
+    public function product(){
+        return $this->belongsTo(Product::class);
+    }
 }

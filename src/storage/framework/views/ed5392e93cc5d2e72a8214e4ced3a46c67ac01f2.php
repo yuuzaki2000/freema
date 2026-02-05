@@ -32,7 +32,7 @@
                 <?php if(!empty($products)): ?>
                 <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <li class="compartment">
-                            <form action="/products/<?php echo e($product->id); ?>/trade" class="item" method="GET">
+                            <form action="/products/<?php echo e($product->id); ?>/trades/1" class="item" method="GET">
                                 <button type="submit"><img src="<?php echo e(asset($product->image)); ?>" alt="商品画像" width="100%"></button>
                                 <div class="product-info">
                                     <p><?php echo e($product->name); ?></p>

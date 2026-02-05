@@ -11,8 +11,8 @@
                 <div>
                     <img src="" alt="">
                 </div>
-                <h2>「」さんとの取引画面</h2>
-                <form action="/products/<?php echo e($item_id); ?>/trade" method="POST">
+                <h2>「<?php echo e($product->trade->seller->name); ?>」さんとの取引画面</h2>
+                <form action="/products/<?php echo e($product->id); ?>/trades/1" method="POST">
                     <?php echo csrf_field(); ?>
                     <button type="submit">取引を完了する</button>
                 </form>
@@ -20,7 +20,7 @@
             <div class="product-info-container"></div>
             <div class="message-container">
                 <div></div>
-                <form action="/products/<?php echo e($item_id); ?>/trades/messages" method="POST">
+                <form action="/products/<?php echo e($product->id); ?>/trades/messages" method="POST">
                 <?php echo csrf_field(); ?>
                     <input type="text" name="content">
                     <input type="file" name="image">
