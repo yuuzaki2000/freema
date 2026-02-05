@@ -12,8 +12,12 @@ use Illuminate\Support\Facades\Auth;
 class TradeController extends Controller
 {
     //
-    public function index($item_id, $trade_id)
-    {
+    public function index($item_id){
+        $trade = Product::find($item_id)->trade->first();
+        return redirect("/products/{$item_id}/trades/{$trade->id}");
+    }
+
+    public function getDetail($item_id, $trade_id){
         if(Trade::find($trade_id)->buyer->id == Auth::id()){
             $product = Product::find($item_id);
             return view('trade_chat_buyer', compact('product'));

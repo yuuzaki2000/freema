@@ -33,8 +33,12 @@
         <ul class="group">
                 @if (!empty($products))
                 @foreach ($products as $product)
+                        @php
+                            $trade = App\Models\Trade::where('product_id', $product->id)->where('buyer_id',Auth::id())->first();
+                        @endphp
                         <li class="compartment">
-                            <form action="/products/{{$product->id}}/trades/1" class="item" method="GET">
+                            <form action="/products/{{$product->id}}/trades" class="item" method="GET">
+                            @csrf
                                 <button type="submit"><img src="{{asset($product->image)}}" alt="商品画像" width="100%"></button>
                                 <div class="product-info">
                                     <p>{{$product->name}}</p>

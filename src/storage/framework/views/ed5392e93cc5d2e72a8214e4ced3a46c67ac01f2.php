@@ -31,8 +31,12 @@
         <ul class="group">
                 <?php if(!empty($products)): ?>
                 <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <?php
+                            $trade = App\Models\Trade::where('product_id', $product->id)->where('buyer_id',Auth::id())->first();
+                        ?>
                         <li class="compartment">
-                            <form action="/products/<?php echo e($product->id); ?>/trades/1" class="item" method="GET">
+                            <form action="/products/<?php echo e($product->id); ?>/trades" class="item" method="GET">
+                            <?php echo csrf_field(); ?>
                                 <button type="submit"><img src="<?php echo e(asset($product->image)); ?>" alt="商品画像" width="100%"></button>
                                 <div class="product-info">
                                     <p><?php echo e($product->name); ?></p>
