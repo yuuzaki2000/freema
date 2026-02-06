@@ -10,6 +10,7 @@ use App\Models\Listing;
 use App\Models\Purchase;
 use App\Http\Requests\AddressRequest;
 use App\Models\User;
+use App\Models\Trade;
 
 
 class ProfileController extends Controller
@@ -33,9 +34,17 @@ class ProfileController extends Controller
             }
             $page = $request->page;
         }else if($request->page == "trade"){
-            //ここに実装・・・・・or検索
-            //Tradesテーブルのproduct_idが特定のもので、seller_idかbuyer_idがAuth::id（）であるデータを検索し、productsに詰め込む
-            $products = Product::all();
+            $trades_buyer = Trade::where('buyer_id', Auth::id())->get();
+            $trades_seller = Trade::where('seller_id', Auth::id())->get();
+            $products = collect();
+            foreach($trades_buyer as $trade_buyer){
+                $product = Product::find($trade_buyer->product_id);
+                $products->push($product);
+            }
+            foreach($trades_seller as $trade_seller){
+                $product = Product::find($trade_seller->product_id);
+                $products->push($product);
+            }
             $page = $request->page;
         }else{
             $products = collect();

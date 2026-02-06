@@ -13,14 +13,10 @@
             <div class="title-bar-container">
                 <div>
                     <div>
-                        <img src="{{asset($product->trade->seller->profile->image)}}" alt="ユーザー画像">
+                        <img src="{{asset($product->trade->buyer->profile->image)}}" alt="ユーザー画像">
                     </div>
-                    <h2>「{{$product->trade->seller->name}}」さんとの取引画面</h2>
+                    <h2>「{{$product->trade->buyer->name}}」さんとの取引画面</h2>
                 </div>
-                <form action="/products/{{$product->id}}/trades/{{$product->trade->id}}" method="POST">
-                    @csrf
-                    <button type="submit" class="trade-complete__btn">取引を完了する</button>
-                </form>
             </div>
             <div class="product-info-container">
                 <div style="height:130px;width:130px;">
@@ -40,7 +36,7 @@
                         画像を追加
                         <input type="file" name="file" class="file-input">
                     </label>
-                    <input type="hidden" name="page" value="buyer">
+                    <input type="hidden" name="page" value="seller">
                     <button type="submit">メール送信<i class="fa-regular fa-paper-plane"></i></button>
                 </form>
             </div>
@@ -49,10 +45,8 @@
             <a href="#!" class="modal-overlay"></a>
             <div class="modal__inner">
                 <div class="modal__content">
-                    <form action="/star" method="POST" class="modal-container">
+                    <form action="/star" method="POST">
                         @csrf
-                        <h3>取引が完了しました</h3>
-                        <p>今回の取引相手はどうでしたか？</p>
                         <select name="star_point">
                             <option value="">星の数を選択</option>
                             <option value="1">1</option>
@@ -61,7 +55,7 @@
                             <option value="4">4</option>
                             <option value="5">5</option>
                         </select>
-                        <button type="submit" class="star__btn">送信する</button>
+                        <button type="submit">送信</button>
                     </form>
                 </div>
             </div>

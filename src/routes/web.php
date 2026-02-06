@@ -30,10 +30,10 @@ Route::get('/item/{item_id}', [ItemController::class, 'getDetail'])->name('item.
 Route::post('/search', [ItemController::class, 'search']);
 Route::get('/email/verify', [EmailController::class, 'index']);
 Route::get('/products/{item_id}/trades', [TradeController::class, 'index']);
+Route::post('/products/{item_id}/trades/messages', [TradeController::class, 'sendMessage']);
 Route::get('/products/{item_id}/trades/{trade_id}', [TradeController::class, 'getDetail']);
 Route::post('/products/{item_id}/trades/{trade_id}', [PurchaseController::class, 'store']);
 Route::post('/star', [StarController::class, 'store']);
-Route::post('/products/{item_id}/trades/messages', [TradeController::class, 'sendMessage']);
 
 Route::middleware('auth')->group(function(){
     Route::get('/sell', [ItemController::class, 'add']);

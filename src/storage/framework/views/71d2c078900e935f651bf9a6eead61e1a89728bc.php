@@ -1,41 +1,56 @@
 <?php $__env->startSection('css'); ?>
-<link rel="stylesheet" href="<?php echo e(asset('css/trade_chat_buyer.css')); ?>">
+<link rel="stylesheet" href="<?php echo e(asset('css/trade_chat.css')); ?>">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('total-container'); ?>
 <div class="total-container">
-    <div class="side-bar">その他の取引</div>
+    <div class="side-bar"><p class="side-bar-title">その他の取引</p></div>
     <div class="center">
         <div class="center-container">
             <div class="title-bar-container">
                 <div>
-                    <img src="" alt="">
+                    <div>
+                        <img src="<?php echo e(asset($product->trade->seller->profile->image)); ?>" alt="ユーザー画像">
+                    </div>
+                    <h2>「<?php echo e($product->trade->seller->name); ?>」さんとの取引画面</h2>
                 </div>
-                <h2>「<?php echo e($product->trade->seller->name); ?>」さんとの取引画面</h2>
-                <form action="/products/<?php echo e($product->id); ?>/trades/1" method="POST">
+                <form action="/products/<?php echo e($product->id); ?>/trades/<?php echo e($product->trade->id); ?>" method="POST">
                     <?php echo csrf_field(); ?>
-                    <button type="submit">取引を完了する</button>
+                    <button type="submit" class="trade-complete__btn">取引を完了する</button>
                 </form>
             </div>
-            <div class="product-info-container"></div>
+            <div class="product-info-container">
+                <div style="height:130px;width:130px;">
+                    <img src="<?php echo e(asset($product->image)); ?>" alt="商品画像" style="width:100%;">
+                </div>
+                <div class="product-info">
+                    <div class="product-name"><?php echo e($product->name); ?></div>
+                    <div class="product-price"><?php echo e($product->price); ?>円</div>
+                </div>
+            </div>
             <div class="message-container">
                 <div></div>
                 <form action="/products/<?php echo e($product->id); ?>/trades/messages" method="POST">
                 <?php echo csrf_field(); ?>
                     <input type="text" name="content">
-                    <input type="file" name="image">
-                    <button type="submit">メール送信</button>
+                    <label class="file-label">
+                        画像を追加
+                        <input type="file" name="file" class="file-input">
+                    </label>
+                    <input type="hidden" name="page" value="buyer">
+                    <button type="submit">メール送信<i class="fa-regular fa-paper-plane"></i></button>
                 </form>
-                
             </div>
         </div>
         <div class="modal" id="modal">
             <a href="#!" class="modal-overlay"></a>
             <div class="modal__inner">
                 <div class="modal__content">
-                    <form action="/star" method="POST">
-                    
+                    <form action="/star" method="POST" class="modal-container">
                         <?php echo csrf_field(); ?>
+                        <h3>取引が完了しました</h3>
+                        <p>今回の取引相手はどうでしたか？</p>
                         <select name="star_point">
                             <option value="">星の数を選択</option>
                             <option value="1">1</option>
@@ -44,7 +59,7 @@
                             <option value="4">4</option>
                             <option value="5">5</option>
                         </select>
-                        <button type="submit">送信</button>
+                        <button type="submit" class="star__btn">送信する</button>
                     </form>
                 </div>
             </div>

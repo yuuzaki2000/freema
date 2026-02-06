@@ -1,5 +1,6 @@
 <?php $__env->startSection('css'); ?>
 <link rel="stylesheet" href="<?php echo e(asset('css/mypage.css')); ?>">
+
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -11,6 +12,22 @@
         </div>
         <?php endif; ?>
         <h2><?php echo e($user->name); ?></h2>
+        <?php
+            $star = App\Models\Star::where('user_id', $profile->user_id)->first();
+            if($star !== null){
+                $star_point = $star->point;
+            //平均点を計算
+            //
+            }else{
+                $star_point = 0;
+            }
+            
+        ?>
+        <div class="stars">
+            <?php for($i = 1; $i <= 5; $i++): ?>
+                <span class="<?php echo e($i <= $star_point ? 'filled' : ''); ?>">★</span>
+            <?php endfor; ?>
+        </div>
         <a href="/mypage/profile" class="skt-btn">プロフィールを編集</a>
     </div>
     <div class="bottom">
@@ -48,6 +65,5 @@
         </ul>
     </div>
 </div>
-<div><p><?php echo e($page); ?></p></div>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/resources/views/mypage.blade.php ENDPATH**/ ?>

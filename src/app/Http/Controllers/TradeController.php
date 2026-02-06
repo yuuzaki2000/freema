@@ -19,32 +19,40 @@ class TradeController extends Controller
 
     public function getDetail($item_id, $trade_id){
         if(Trade::find($trade_id)->buyer->id == Auth::id()){
+            $trade = Trade::find($trade_id);
+            if($trade->status == 'negotiating'){
+                $product = Product::find($item_id);
+                //Messageデータも送る予定
+                return view('trade_chat_buyer', compact('product'));
+            }else if($trade->status == 'completed'){
+                return redirect('/products/{$item_id}/trades/{$trade->id}');
+            }
+        }else if(Trade::find($trade_id)->seller->id == Auth::id()){
             $product = Product::find($item_id);
-            return view('trade_chat_buyer', compact('product'));
+            return view('trade_chat_seller', compact('product'));
         }else{
-            
         }
     }
 
     public function sendMessage(Request $request, $item_id){
 
+        if($request->page == 'buyer'){
+            $trade = Trade::where('product_id', $item_id)->where('buyer_id', Auth::id())->first();
+        }else if($request->page == 'seller'){
+            $trade = Trade::where('product_id', $item_id)->where('seller_id', Auth::id())->first();
+        }else{
+            $trade = null;
+        }
 
-        $trade = new Trade();
-        $trade->product_id = $item_id;
-        $trade->buyer_id = Auth::id();
-        $trade->seller_id = Listing::where('product_id', $item_id)->first()->user_id;
-        $trade->status = 'negotiating';
-        $trade->save();
+        //選択した画像をstorage/message_imgに保存
 
-        $tradeId = $trade->id;
+        Message::create([
+            'trade_id' => $trade->id,
+            'user_id' => Auth::id(),
+            'content' => $request->input('content'),
+            'image' => null,
+        ]);
 
-        $message = new Message();
-        $message->trade_id = $tradeId;
-        $message->user_id = Auth::id();
-        $message->content = $request->content;
-        $message->image = null;
-        $message->save();
-
-        return redirect("/products/{$item_id}/trade");
+        return redirect("/products/{$item_id}/trades/{$trade->id}");
     }
 }

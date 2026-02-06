@@ -53,3 +53,12 @@
     width: 24%;
     margin-bottom: 20px;
 }
+
+.stars {
+    font-size: 32px;
+    color: gray;
+}
+
+.stars .filled {
+    color: yellow;
+}

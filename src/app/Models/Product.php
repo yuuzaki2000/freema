@@ -12,6 +12,7 @@ use App\Models\Comment;
 use App\Models\Trade;
 
 
+
 class Product extends Model
 {
     use HasFactory;
@@ -32,6 +33,10 @@ class Product extends Model
 
     public function comments(){
         return $this->hasMany(Comment::class);
+    }
+
+    public function listing(){
+        return $this->hasOne(Listing::class);
     }
 
     public function trade(){

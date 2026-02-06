@@ -2,6 +2,7 @@
 
 @section('css')
 <link rel="stylesheet" href="{{asset('css/mypage.css')}}">
+
 @endsection
 
 @section('content')
@@ -13,6 +14,22 @@
         </div>
         @endisset
         <h2>{{$user->name}}</h2>
+        @php
+            $star = App\Models\Star::where('user_id', $profile->user_id)->first();
+            if($star !== null){
+                $star_point = $star->point;
+            //平均点を計算
+            //
+            }else{
+                $star_point = 0;
+            }
+            
+        @endphp
+        <div class="stars">
+            @for ($i = 1; $i <= 5; $i++)
+                <span class="{{$i <= $star_point ? 'filled' : ''}}">★</span>
+            @endfor
+        </div>
         <a href="/mypage/profile" class="skt-btn">プロフィールを編集</a>
     </div>
     <div class="bottom">
@@ -50,5 +67,4 @@
         </ul>
     </div>
 </div>
-<div><p>{{$page}}</p></div>
 @endsection

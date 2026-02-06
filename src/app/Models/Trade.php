@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Trade extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'product_id',
+        'buyer_id',
+        'seller_id',
+        'status'
+    ];
 
     public function buyer(){
         return $this->belongsTo(User::class,'buyer_id');

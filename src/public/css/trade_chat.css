@@ -9,6 +9,10 @@
     background-color: #868686;
 }
 
+.side-bar-title {
+    color: #FFF;
+}
+
 .center {
     width: 80%;
     height: 100%;
@@ -24,16 +28,63 @@
     height: 10%;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+}
+
+.trade-complete__btn {
+    background-color: #FF8282;
+    color: #FFF;
+    width: 20vh;
+    height: 4vh;
+    border-radius: 2vh;
 }
 
 .product-info-container {
     height: 20%;
     border-top: 2px solid #000;
+    display: flex;
+    flex-direction: row;
+}
+
+.product-name {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.product-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-left: 20px;
 }
 
 .message-container {
     height: 70%;
     border-top: 2px solid #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-img__wrapper {
+    width: 50px;
+}
+
+.product-img {
+    width: 100%;
+}
+
+.file-input {
+    display: none;
+}
+
+.file-label {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: blue;
+    color: #FFF;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 .modal {
@@ -66,11 +117,23 @@
     left: 50%;
     width: 50%;
     border: 1px solid #868686;
-    background-color: #FFAAAA;
+    background-color: #FDFCE6;
     transform: translate(-50%, -50%);
 }
 
 .modal__content {
     position: relative;
     padding: 64px 64px;
+}
+
+.modal-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.star__btn {
+    background-color: #FF8282;
+    color: #FFF;
+    width: 20vh;
+    height: 4vh;
 }
