@@ -10,6 +10,7 @@ use App\Models\Listing;
 use App\Models\Purchase;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\MessageRequest;
+use App\Notifications\TradeNotification;
 
 class TradeController extends Controller
 {
@@ -93,6 +94,11 @@ class TradeController extends Controller
 
         $trade = Trade::where('product_id', $item_id)->where('buyer_id', Auth::id())->first();
         $trade->update(['status' => "completed"]);
+
+        $product = Product::find($item_id);
+
+        $trade->seller->notify(new TradeNotification($product));
+
         return redirect("/products/{$item_id}/trades/{$trade->id}#modal");
     }
 
