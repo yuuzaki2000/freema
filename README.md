@@ -45,6 +45,12 @@ MAIL_ENCRYPTION=tls
 MAIL_FROM_ADDRESS=from@example.com
 MAIL_FROM_NAME="${APP_NAME}"
 
+.envに下記の変数を追加（Secret KeyやPublic Keyは、mailtrapのホームページから自分のものをコピー）
+
+STRIPE_SK = (test用のSecret Key)
+
+STRIPE_PK = （test用のPublic Key）
+
 [stripeの決済画面でのデモ入力]
 下記を入力して試してください。
 カード番号：4242 4242 4242 4242
@@ -55,4 +61,8 @@ MAIL_FROM_NAME="${APP_NAME}"
 パスワード：12345
 
 E-R図<img width="1181" height="1122" alt="er drawio" src="https://github.com/user-attachments/assets/d9e6dd5b-d8aa-490a-a83f-59464e526775" />
+
+[取引チャット画面の作成について]
+
+ある商品の詳細画面から、コメントを送信すると、取引チャット画面が作成されますので、マイページの『取引中の商品』タブを押下し、表示された画像から、取引チャット画面に入って、メッセージのやり取りを続けることができます。
 
