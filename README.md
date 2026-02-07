@@ -54,4 +54,5 @@ MAIL_FROM_NAME="${APP_NAME}"
 国籍：United States
 パスワード：12345
 
-E-R図
+E-R図<img width="1181" height="1122" alt="er drawio" src="https://github.com/user-attachments/assets/d9e6dd5b-d8aa-490a-a83f-59464e526775" />
+
