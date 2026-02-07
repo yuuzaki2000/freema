@@ -45,6 +45,12 @@ MAIL_ENCRYPTION=tls
 MAIL_FROM_ADDRESS=from@example.com
 MAIL_FROM_NAME="${APP_NAME}"
 
+.envに下記の変数を追加（Secret KeyやPublic Keyは、mailtrapのホームページから自分のものをコピー）
+
+STRIPE_SK = (test用のSecret Key)
+
+STRIPE_PK = （test用のPublic Key）
+
 [stripeの決済画面でのデモ入力]
 下記を入力して試してください。
 カード番号：4242 4242 4242 4242
