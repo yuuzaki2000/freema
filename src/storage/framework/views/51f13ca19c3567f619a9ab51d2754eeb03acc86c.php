@@ -5,15 +5,24 @@
 
 <?php $__env->startSection('total-container'); ?>
 <div class="total-container">
-    <div class="side-bar"><p class="side-bar-title">その他の取引</p></div>
+    <div class="side-bar">
+        <p class="side-bar-title">その他の取引</p>
+        <?php $__currentLoopData = $side_trades; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $trade): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <form action="/products/<?php echo e($product->id); ?>/trades/<?php echo e($trade->id); ?>" method="GET">
+                <?php echo csrf_field(); ?>
+                <button type="submit">取引<?php echo e($trade->id); ?></button>
+
+            </form>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+    </div>
     <div class="center">
         <div class="center-container">
             <div class="title-bar-container">
                 <div>
                     <div>
-                        <img src="<?php echo e(asset($product->trade->buyer->profile->image)); ?>" alt="ユーザー画像">
+                        <img src="<?php echo e(asset($product->trade->seller->profile->image)); ?>" alt="ユーザー画像">
                     </div>
-                    <h2>「<?php echo e($product->trade->buyer->name); ?>」さんとの取引画面</h2>
+                    <h2>「<?php echo e($product->trade->seller->name); ?>」さんとの取引画面</h2>
                 </div>
             </div>
             <div class="product-info-container">
@@ -26,8 +35,14 @@
                 </div>
             </div>
             <div class="message-container">
-                <div></div>
-                <form action="/products/<?php echo e($product->id); ?>/trades/messages" method="POST">
+                <?php $__currentLoopData = $contents; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $content): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <?php if($content->user_id == Auth::id()): ?>
+                    <div style="margin-left: 60%;"><p><?php echo e($content->content); ?></p></div>
+                <?php else: ?>
+                    <div><p><?php echo e($content->content); ?></p></div>
+                <?php endif; ?>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                <form action="/products/<?php echo e($product->id); ?>/trades/messages" method="POST" enctype="multipart/form-data">
                 <?php echo csrf_field(); ?>
                     <input type="text" name="content">
                     <label class="file-label">
@@ -35,16 +50,17 @@
                         <input type="file" name="file" class="file-input">
                     </label>
                     <input type="hidden" name="page" value="seller">
-                    <button type="submit">メール送信<i class="fa-regular fa-paper-plane"></i></button>
+                    <button type="submit"><i class="fa-regular fa-paper-plane"></i></button>
                 </form>
-            </div>
         </div>
         <div class="modal" id="modal">
             <a href="#!" class="modal-overlay"></a>
             <div class="modal__inner">
                 <div class="modal__content">
-                    <form action="/star" method="POST">
+                    <form action="/star" method="POST" class="modal-container">
                         <?php echo csrf_field(); ?>
+                        <h3>取引が完了しました</h3>
+                        <p>今回の取引相手はどうでしたか？</p>
                         <select name="star_point">
                             <option value="">星の数を選択</option>
                             <option value="1">1</option>
@@ -53,7 +69,7 @@
                             <option value="4">4</option>
                             <option value="5">5</option>
                         </select>
-                        <button type="submit">送信</button>
+                        <button type="submit" class="star__btn">送信する</button>
                     </form>
                 </div>
             </div>

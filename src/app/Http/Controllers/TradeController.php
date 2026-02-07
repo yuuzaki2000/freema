@@ -7,29 +7,39 @@ use App\Models\Product;
 use App\Models\Trade;
 use App\Models\Message;
 use App\Models\Listing;
+use App\Models\Purchase;
 use Illuminate\Support\Facades\Auth;
 
 class TradeController extends Controller
 {
     //
     public function index($item_id){
-        $trade = Product::find($item_id)->trade->first();
-        return redirect("/products/{$item_id}/trades/{$trade->id}");
+        $trade = Trade::where('product_id', $item_id)->where('buyer_id', Auth::id())->first();
+
+        if($trade == null){
+            $trade = Trade::where('product_id', $item_id)->where('seller_id', Auth::id())->first();
+        }
+
+        if($trade->status == "negotiating"){
+            return redirect("/products/{$item_id}/trades/{$trade->id}");
+        }else{
+            return redirect("/products/{$item_id}/trades/{$trade->id}#modal");
+        }
+        
     }
 
     public function getDetail($item_id, $trade_id){
-        if(Trade::find($trade_id)->buyer->id == Auth::id()){
-            $trade = Trade::find($trade_id);
-            if($trade->status == 'negotiating'){
+        $trade = Trade::find($trade_id);
+        if($trade->buyer->id == Auth::id()){
+            //tradeデータのstatusカラムがcompletedの場合分けできず
                 $product = Product::find($item_id);
-                //Messageデータも送る予定
-                return view('trade_chat_buyer', compact('product'));
-            }else if($trade->status == 'completed'){
-                return redirect('/products/{$item_id}/trades/{$trade->id}');
-            }
+                $contents = Message::all();
+                return view('trade_chat_buyer', compact('product', 'contents'));
         }else if(Trade::find($trade_id)->seller->id == Auth::id()){
             $product = Product::find($item_id);
-            return view('trade_chat_seller', compact('product'));
+            $contents = Message::all();
+            $side_trades = Trade::where('product_id', $item_id)->where('seller_id', Auth::id())->get();
+            return view('trade_chat_seller', compact('product', 'contents','side_trades'));
         }else{
         }
     }
@@ -44,15 +54,50 @@ class TradeController extends Controller
             $trade = null;
         }
 
+        $data = $request->only(['content']);
         //選択した画像をstorage/message_imgに保存
+        $file = $request->file('file');
+        if($file !== null){
+            $file_name = $file->hashName(); 
+            $file->storeAs('public/message_img', $file_name);
+            $data['image'] = $file_name;
 
-        Message::create([
-            'trade_id' => $trade->id,
-            'user_id' => Auth::id(),
-            'content' => $request->input('content'),
-            'image' => null,
-        ]);
+            Message::create([
+                'trade_id' => $trade->id,
+                'user_id' => Auth::id(),
+                'content' => $request->input('content'),
+                'image' => $data['image'],
+            ]);
+        }else{
+            Message::create([
+                'trade_id' => $trade->id,
+                'user_id' => Auth::id(),
+                'content' => $request->input('content'),
+                'image' => null,
+            ]);
+        }
+
+        
+        
+        
+
+        
 
         return redirect("/products/{$item_id}/trades/{$trade->id}");
+    }
+
+    public function complete(Request $request, $item_id){
+        Purchase::create([
+            'user_id' => Auth::id(),
+            'product_id' => $item_id,
+            'payment_method' => null,
+            'post_code' => null,
+            'address' => null,
+            'building' => null,
+        ]);
+
+        $trade = Trade::where('product_id', $item_id)->where('buyer_id', Auth::id())->first();
+        $trade->update(['status' => "completed"]);
+        return redirect("/products/{$item_id}/trades/{$trade->id}#modal");
     }
 }

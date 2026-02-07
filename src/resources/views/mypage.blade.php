@@ -44,24 +44,37 @@
         <form action="/mypage" method="get" class="purchase">
             <input type="hidden" name="page" value="trade">
             <button type="submit" class="purchase-btn">取引中の商品</button>
+            @php
+                $trades = App\Models\Trade::where('seller_id', Auth::id())->get();
+                $trade_message_count = $trades->count();
+            @endphp
+            @if ($trade_message_count)
+                <div><p>{{$trade_message_count}}</p></div>
+            @else
+                <div><p></p></div>
+            @endif
         </form>
     </div>
     <div class="container">
+        @php
+            $particularProducts = $products->sortBy('created_at');
+        @endphp
         <ul class="group">
                 @if (!empty($products))
-                @foreach ($products as $product)
-                        @php
-                            $trade = App\Models\Trade::where('product_id', $product->id)->where('buyer_id',Auth::id())->first();
-                        @endphp
-                        <li class="compartment">
-                            <form action="/products/{{$product->id}}/trades" class="item" method="GET">
+                @foreach ($particularProducts as $product)
+                    @php
+                        $message_count = App\Models\Message::where('trade_id', $product->trade->id)->get()->count();
+                    @endphp
+                    <li class="compartment">
+                        <form action="/products/{{$product->id}}/trades" class="item" method="GET">
                             @csrf
                                 <button type="submit"><img src="{{asset($product->image)}}" alt="商品画像" width="100%"></button>
                                 <div class="product-info">
                                     <p>{{$product->name}}</p>
+                                    <p>{{$message_count}}</p>
                                 </div>
-                            </form>
-                        </li>
+                        </form>
+                    </li>
                 @endforeach
                 @endif
         </ul>

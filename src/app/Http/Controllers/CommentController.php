@@ -8,6 +8,7 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CommentRequest;
 use App\Models\Trade;
+use App\Models\Message;
 
 class CommentController extends Controller
 {
@@ -26,6 +27,13 @@ class CommentController extends Controller
             'buyer_id' => Auth::id(),
             'seller_id' => $product->listing->user_id,
             'status' => 'negotiating',
+        ]);
+
+        Message::create([
+            'trade_id' => $product->trade->id,
+            'user_id' => Auth::id(),
+            'content' => $request->content,
+            'image' => null,
         ]);
 
         return redirect()->route('item.detail', ['item_id' => $item_id]);

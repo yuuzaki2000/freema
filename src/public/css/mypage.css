@@ -32,6 +32,8 @@
 
 .purchase {
     margin-left: 30px;
+    display: flex;
+    flex-direction: row;
 }
 
 .purchase-btn:active {
@@ -61,4 +63,9 @@
 
 .stars .filled {
     color: yellow;
+}
+
+.product-info {
+    display: flex;
+    flex-direction: row;
 }

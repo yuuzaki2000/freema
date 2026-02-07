@@ -32,8 +32,8 @@ Route::get('/email/verify', [EmailController::class, 'index']);
 Route::get('/products/{item_id}/trades', [TradeController::class, 'index']);
 Route::post('/products/{item_id}/trades/messages', [TradeController::class, 'sendMessage']);
 Route::get('/products/{item_id}/trades/{trade_id}', [TradeController::class, 'getDetail']);
-Route::post('/products/{item_id}/trades/{trade_id}', [PurchaseController::class, 'store']);
-Route::post('/star', [StarController::class, 'store']);
+Route::post('/products/{item_id}/trades/{trade_id}', [TradeController::class, 'complete']);
+Route::post('/star/{item_id}', [StarController::class, 'store']);
 
 Route::middleware('auth')->group(function(){
     Route::get('/sell', [ItemController::class, 'add']);

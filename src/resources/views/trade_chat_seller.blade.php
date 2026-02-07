@@ -7,15 +7,24 @@
 
 @section('total-container')
 <div class="total-container">
-    <div class="side-bar"><p class="side-bar-title">その他の取引</p></div>
+    <div class="side-bar">
+        <p class="side-bar-title">その他の取引</p>
+        @foreach ($side_trades as $trade)
+            <form action="/products/{{$product->id}}/trades/{{$trade->id}}" method="GET">
+                @csrf
+                <button type="submit">取引{{$trade->id}}</button>
+
+            </form>
+        @endforeach
+    </div>
     <div class="center">
         <div class="center-container">
             <div class="title-bar-container">
                 <div>
                     <div>
-                        <img src="{{asset($product->trade->buyer->profile->image)}}" alt="ユーザー画像">
+                        <img src="{{asset($product->trade->seller->profile->image)}}" alt="ユーザー画像">
                     </div>
-                    <h2>「{{$product->trade->buyer->name}}」さんとの取引画面</h2>
+                    <h2>「{{$product->trade->seller->name}}」さんとの取引画面</h2>
                 </div>
             </div>
             <div class="product-info-container">
@@ -28,8 +37,14 @@
                 </div>
             </div>
             <div class="message-container">
-                <div></div>
-                <form action="/products/{{$product->id}}/trades/messages" method="POST">
+                @foreach ($contents as $content)
+                @if($content->user_id == Auth::id())
+                    <div style="margin-left: 60%;"><p>{{$content->content}}</p></div>
+                @else
+                    <div><p>{{$content->content}}</p></div>
+                @endif
+                @endforeach
+                <form action="/products/{{$product->id}}/trades/messages" method="POST" enctype="multipart/form-data">
                 @csrf
                     <input type="text" name="content">
                     <label class="file-label">
@@ -37,16 +52,17 @@
                         <input type="file" name="file" class="file-input">
                     </label>
                     <input type="hidden" name="page" value="seller">
-                    <button type="submit">メール送信<i class="fa-regular fa-paper-plane"></i></button>
+                    <button type="submit"><i class="fa-regular fa-paper-plane"></i></button>
                 </form>
-            </div>
         </div>
         <div class="modal" id="modal">
             <a href="#!" class="modal-overlay"></a>
             <div class="modal__inner">
                 <div class="modal__content">
-                    <form action="/star" method="POST">
+                    <form action="/star/{{$product->trade->id}}" method="POST" class="modal-container">
                         @csrf
+                        <h3>取引が完了しました</h3>
+                        <p>今回の取引相手はどうでしたか？</p>
                         <select name="star_point">
                             <option value="">星の数を選択</option>
                             <option value="1">1</option>
@@ -55,7 +71,7 @@
                             <option value="4">4</option>
                             <option value="5">5</option>
                         </select>
-                        <button type="submit">送信</button>
+                        <button type="submit" class="star__btn">送信する</button>
                     </form>
                 </div>
             </div>

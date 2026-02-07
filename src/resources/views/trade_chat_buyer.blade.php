@@ -32,8 +32,14 @@
                 </div>
             </div>
             <div class="message-container">
-                <div></div>
-                <form action="/products/{{$product->id}}/trades/messages" method="POST">
+                @foreach ($contents as $content)
+                @if($content->user_id == Auth::id())
+                    <div style="margin-left: 60%;"><p>{{$content->content}}</p></div>
+                @else
+                    <div><p>{{$content->content}}</p></div>
+                @endif
+                @endforeach
+                <form action="/products/{{$product->id}}/trades/messages" method="POST" enctype="multipart/form-data">
                 @csrf
                     <input type="text" name="content">
                     <label class="file-label">
@@ -41,7 +47,7 @@
                         <input type="file" name="file" class="file-input">
                     </label>
                     <input type="hidden" name="page" value="buyer">
-                    <button type="submit">メール送信<i class="fa-regular fa-paper-plane"></i></button>
+                    <button type="submit"><i class="fa-regular fa-paper-plane"></i></button>
                 </form>
             </div>
         </div>
@@ -49,7 +55,7 @@
             <a href="#!" class="modal-overlay"></a>
             <div class="modal__inner">
                 <div class="modal__content">
-                    <form action="/star" method="POST" class="modal-container">
+                    <form action="/star/{{$product->trade->id}}" method="POST" class="modal-container">
                         @csrf
                         <h3>取引が完了しました</h3>
                         <p>今回の取引相手はどうでしたか？</p>
@@ -61,6 +67,7 @@
                             <option value="4">4</option>
                             <option value="5">5</option>
                         </select>
+                        <input type="hidden" name="star_receiver_id" value="{{$product->trade->seller->id}}">
                         <button type="submit" class="star__btn">送信する</button>
                     </form>
                 </div>
