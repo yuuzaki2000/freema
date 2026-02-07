@@ -1,6 +1,5 @@
 <?php $__env->startSection('css'); ?>
 <link rel="stylesheet" href="<?php echo e(asset('css/mypage.css')); ?>">
-
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -13,20 +12,23 @@
         <?php endif; ?>
         <h2><?php echo e($user->name); ?></h2>
         <?php
-            $star = App\Models\Star::where('user_id', $profile->user_id)->first();
-            if($star !== null){
-                $star_point = $star->point;
-            //平均点を計算
-            //
+            $stars = App\Models\Star::where('user_id', $profile->user_id)->get();
+            $stars_count = $stars->count();
+            if($stars){
+                $star_point = round($stars->pluck('point')->avg());
             }else{
                 $star_point = 0;
             }
             
         ?>
         <div class="stars">
-            <?php for($i = 1; $i <= 5; $i++): ?>
-                <span class="<?php echo e($i <= $star_point ? 'filled' : ''); ?>">★</span>
-            <?php endfor; ?>
+            <?php if($star_point < 1): ?>
+                <div></div>
+            <?php else: ?>
+                <?php for($i = 1; $i <= 5; $i++): ?>
+                    <span class="<?php echo e($i <= $star_point ? 'filled' : ''); ?>">★</span>
+                <?php endfor; ?>   
+            <?php endif; ?>
         </div>
         <a href="/mypage/profile" class="skt-btn">プロフィールを編集</a>
     </div>
@@ -47,7 +49,9 @@
                 $trade_message_count = $trades->count();
             ?>
             <?php if($trade_message_count): ?>
-                <div><p><?php echo e($trade_message_count); ?></p></div>
+                <div class="icon-wrapper">
+                    <span class="badge"><?php echo e($trade_message_count); ?></span>
+                </div>
             <?php else: ?>
                 <div><p></p></div>
             <?php endif; ?>
@@ -61,15 +65,24 @@
                 <?php if(!empty($products)): ?>
                 <?php $__currentLoopData = $particularProducts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <?php
-                        $message_count = App\Models\Message::where('trade_id', $product->trade->id)->get()->count();
+                        $message_count = App\Models\Message::where('trade_id', $product->trade->id)
+                                        ->whereHas('trade', function ($query) {
+                                                $query->where('seller_id', Auth::id());
+                                        })->count();
                     ?>
                     <li class="compartment">
                         <form action="/products/<?php echo e($product->id); ?>/trades" class="item" method="GET">
                             <?php echo csrf_field(); ?>
+                                    <?php if($message_count): ?>
+                                        <div class="icon-wrapper">
+                                            <span class="badge"><?php echo e($message_count); ?></span>
+                                        </div>
+                                    <?php else: ?>
+                                        <div><p></p></div>
+                                    <?php endif; ?>
                                 <button type="submit"><img src="<?php echo e(asset($product->image)); ?>" alt="商品画像" width="100%"></button>
                                 <div class="product-info">
                                     <p><?php echo e($product->name); ?></p>
-                                    <p><?php echo e($message_count); ?></p>
                                 </div>
                         </form>
                     </li>

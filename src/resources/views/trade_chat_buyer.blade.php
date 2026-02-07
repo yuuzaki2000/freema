@@ -32,13 +32,49 @@
                 </div>
             </div>
             <div class="message-container">
-                @foreach ($contents as $content)
-                @if($content->user_id == Auth::id())
-                    <div style="margin-left: 60%;"><p>{{$content->content}}</p></div>
-                @else
-                    <div><p>{{$content->content}}</p></div>
-                @endif
-                @endforeach
+                <div class="message-group">
+                    @foreach ($contents as $content)
+                        @if($content->user_id == Auth::id())
+                            <div style="margin-left: 60%;"><p>{{$content->content}}</p></div>
+                            @if ($content->image)
+                            <div style="margin-left: 60%;">
+                                <img src="{{asset('storage/message_img/' . $content->image)}}" alt="画像メッセージ">
+                            </div>
+                            @endif
+                            <div class="update-delete-btn" style="margin-left: 60%;font-weight:200;">
+                                <form action="/products/{{$product->id}}/trades/messages/{{$content->id}}" method="POST">
+                                @csrf
+                                @method('PATCH')
+                                    <button type="submit">編集</button>
+                                </form>
+                                <form class="delete-btn" action="/products/{{$product->id}}/trades/messages/{{$content->id}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                    <button type="submit">削除</button>
+                                </form>
+                            </div>
+                        @else
+                            <div><p>{{$content->content}}</p></div>
+                            @if ($content->image)
+                            <div>
+                                <img src="{{asset('storage/message_img/' . $content->image)}}" alt="画像メッセージ">
+                            </div>
+                            <div class="update-delete-btn" style="font-weight:200;">
+                                <form action="/products/{{$product->id}}/trades/messages/{{$content->id}}" method="POST">
+                                @csrf
+                                @method('PATCH')
+                                    <button type="submit">編集</button>
+                                </form>
+                                <form class="delete-btn" action="/products/{{$product->id}}/trades/messages/{{$content->id}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                    <button type="submit">削除</button>
+                                </form>
+                            </div>
+                        @endif
+                        @endif
+                    @endforeach
+                </div>
                 <form action="/products/{{$product->id}}/trades/messages" method="POST" enctype="multipart/form-data">
                 @csrf
                     <input type="text" name="content">
@@ -46,8 +82,14 @@
                         画像を追加
                         <input type="file" name="file" class="file-input">
                     </label>
-                    <input type="hidden" name="page" value="buyer">
+                    <input type="hidden" name="page" value="buyer" placeholder="取引メッセージを入力してください">
                     <button type="submit"><i class="fa-regular fa-paper-plane"></i></button>
+                    @error('content')
+                        <div>{{$message}}</div>
+                    @enderror
+                    @error('file')
+                        <div>{{$message}}</div>
+                    @enderror
                 </form>
             </div>
         </div>

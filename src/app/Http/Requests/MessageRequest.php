@@ -26,7 +26,7 @@ class MessageRequest extends FormRequest
         return [
             //
             'content' => 'required|max:400',
-            'image' => 'file|mimes:jpeg,png',
+            'file' => 'file|mimes:jpeg,png',
         ];
     }
 
@@ -34,7 +34,7 @@ class MessageRequest extends FormRequest
         return [
             'content.required' => '本文を入力してください',
             'content.max' => '本文は400文字以内で入力してください',
-            'image.mimes' => '.pngまたは.jpeg形式でアップロードしてください',
+            'file.mimes' => '.pngまたは.jpeg形式でアップロードしてください',
         ];
     }
 }

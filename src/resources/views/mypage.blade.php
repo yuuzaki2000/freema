@@ -2,7 +2,6 @@
 
 @section('css')
 <link rel="stylesheet" href="{{asset('css/mypage.css')}}">
-
 @endsection
 
 @section('content')
@@ -15,20 +14,23 @@
         @endisset
         <h2>{{$user->name}}</h2>
         @php
-            $star = App\Models\Star::where('user_id', $profile->user_id)->first();
-            if($star !== null){
-                $star_point = $star->point;
-            //平均点を計算
-            //
+            $stars = App\Models\Star::where('user_id', $profile->user_id)->get();
+            $stars_count = $stars->count();
+            if($stars){
+                $star_point = round($stars->pluck('point')->avg());
             }else{
                 $star_point = 0;
             }
             
         @endphp
         <div class="stars">
-            @for ($i = 1; $i <= 5; $i++)
-                <span class="{{$i <= $star_point ? 'filled' : ''}}">★</span>
-            @endfor
+            @if ($star_point < 1)
+                <div></div>
+            @else
+                @for ($i = 1; $i <= 5; $i++)
+                    <span class="{{$i <= $star_point ? 'filled' : ''}}">★</span>
+                @endfor   
+            @endif
         </div>
         <a href="/mypage/profile" class="skt-btn">プロフィールを編集</a>
     </div>
@@ -49,7 +51,9 @@
                 $trade_message_count = $trades->count();
             @endphp
             @if ($trade_message_count)
-                <div><p>{{$trade_message_count}}</p></div>
+                <div class="icon-wrapper">
+                    <span class="badge">{{$trade_message_count}}</span>
+                </div>
             @else
                 <div><p></p></div>
             @endif
@@ -63,15 +67,24 @@
                 @if (!empty($products))
                 @foreach ($particularProducts as $product)
                     @php
-                        $message_count = App\Models\Message::where('trade_id', $product->trade->id)->get()->count();
+                        $message_count = App\Models\Message::where('trade_id', $product->trade->id)
+                                        ->whereHas('trade', function ($query) {
+                                                $query->where('seller_id', Auth::id());
+                                        })->count();
                     @endphp
                     <li class="compartment">
                         <form action="/products/{{$product->id}}/trades" class="item" method="GET">
                             @csrf
+                                    @if ($message_count)
+                                        <div class="icon-wrapper">
+                                            <span class="badge">{{$message_count}}</span>
+                                        </div>
+                                    @else
+                                        <div><p></p></div>
+                                    @endif
                                 <button type="submit"><img src="{{asset($product->image)}}" alt="商品画像" width="100%"></button>
                                 <div class="product-info">
                                     <p>{{$product->name}}</p>
-                                    <p>{{$message_count}}</p>
                                 </div>
                         </form>
                     </li>

@@ -30,13 +30,49 @@
                 </div>
             </div>
             <div class="message-container">
-                <?php $__currentLoopData = $contents; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $content): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <?php if($content->user_id == Auth::id()): ?>
-                    <div style="margin-left: 60%;"><p><?php echo e($content->content); ?></p></div>
-                <?php else: ?>
-                    <div><p><?php echo e($content->content); ?></p></div>
-                <?php endif; ?>
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                <div class="message-group">
+                    <?php $__currentLoopData = $contents; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $content): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <?php if($content->user_id == Auth::id()): ?>
+                            <div style="margin-left: 60%;"><p><?php echo e($content->content); ?></p></div>
+                            <?php if($content->image): ?>
+                            <div style="margin-left: 60%;">
+                                <img src="<?php echo e(asset('storage/message_img/' . $content->image)); ?>" alt="画像メッセージ">
+                            </div>
+                            <?php endif; ?>
+                            <div class="update-delete-btn" style="margin-left: 60%;font-weight:200;">
+                                <form action="/products/<?php echo e($product->id); ?>/trades/messages/<?php echo e($content->id); ?>" method="POST">
+                                <?php echo csrf_field(); ?>
+                                <?php echo method_field('PATCH'); ?>
+                                    <button type="submit">編集</button>
+                                </form>
+                                <form class="delete-btn" action="/products/<?php echo e($product->id); ?>/trades/messages/<?php echo e($content->id); ?>" method="POST">
+                                <?php echo csrf_field(); ?>
+                                <?php echo method_field('DELETE'); ?>
+                                    <button type="submit">削除</button>
+                                </form>
+                            </div>
+                        <?php else: ?>
+                            <div><p><?php echo e($content->content); ?></p></div>
+                            <?php if($content->image): ?>
+                            <div>
+                                <img src="<?php echo e(asset('storage/message_img/' . $content->image)); ?>" alt="画像メッセージ">
+                            </div>
+                            <div class="update-delete-btn" style="font-weight:200;">
+                                <form action="/products/<?php echo e($product->id); ?>/trades/messages/<?php echo e($content->id); ?>" method="POST">
+                                <?php echo csrf_field(); ?>
+                                <?php echo method_field('PATCH'); ?>
+                                    <button type="submit">編集</button>
+                                </form>
+                                <form class="delete-btn" action="/products/<?php echo e($product->id); ?>/trades/messages/<?php echo e($content->id); ?>" method="POST">
+                                <?php echo csrf_field(); ?>
+                                <?php echo method_field('DELETE'); ?>
+                                    <button type="submit">削除</button>
+                                </form>
+                            </div>
+                        <?php endif; ?>
+                        <?php endif; ?>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </div>
                 <form action="/products/<?php echo e($product->id); ?>/trades/messages" method="POST" enctype="multipart/form-data">
                 <?php echo csrf_field(); ?>
                     <input type="text" name="content">
@@ -44,8 +80,28 @@
                         画像を追加
                         <input type="file" name="file" class="file-input">
                     </label>
-                    <input type="hidden" name="page" value="buyer">
+                    <input type="hidden" name="page" value="buyer" placeholder="取引メッセージを入力してください">
                     <button type="submit"><i class="fa-regular fa-paper-plane"></i></button>
+                    <?php $__errorArgs = ['content'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                        <div><?php echo e($message); ?></div>
+                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                    <?php $__errorArgs = ['file'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                        <div><?php echo e($message); ?></div>
+                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                 </form>
             </div>
         </div>

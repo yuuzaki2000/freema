@@ -31,6 +31,8 @@ Route::post('/search', [ItemController::class, 'search']);
 Route::get('/email/verify', [EmailController::class, 'index']);
 Route::get('/products/{item_id}/trades', [TradeController::class, 'index']);
 Route::post('/products/{item_id}/trades/messages', [TradeController::class, 'sendMessage']);
+Route::patch('/products/{item_id}/trades/messages/{message_id}', [TradeController::class, 'update']);
+Route::delete('/products/{item_id}/trades/messages/{message_id}',[TradeController::class, 'delete']);
 Route::get('/products/{item_id}/trades/{trade_id}', [TradeController::class, 'getDetail']);
 Route::post('/products/{item_id}/trades/{trade_id}', [TradeController::class, 'complete']);
 Route::post('/star/{item_id}', [StarController::class, 'store']);

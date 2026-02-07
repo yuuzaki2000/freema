@@ -137,3 +137,12 @@
     width: 20vh;
     height: 4vh;
 }
+
+.update-delete-btn {
+    display: flex;
+    flex-direction: row;
+}
+
+.delete-btn {
+    margin-left: 15px;
+}

@@ -53,6 +53,12 @@
                     </label>
                     <input type="hidden" name="page" value="seller">
                     <button type="submit"><i class="fa-regular fa-paper-plane"></i></button>
+                    @error('content')
+                        <div>{{$message}}</div>
+                    @enderror
+                    @error('file')
+                        <div>{{$message}}</div>
+                    @enderror
                 </form>
         </div>
         <div class="modal" id="modal">
@@ -71,6 +77,7 @@
                             <option value="4">4</option>
                             <option value="5">5</option>
                         </select>
+                        <input type="hidden" name="star_receiver_id" value="{{$product->trade->seller->id}}">
                         <button type="submit" class="star__btn">送信する</button>
                     </form>
                 </div>

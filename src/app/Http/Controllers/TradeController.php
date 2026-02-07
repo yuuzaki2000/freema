@@ -9,6 +9,7 @@ use App\Models\Message;
 use App\Models\Listing;
 use App\Models\Purchase;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\MessageRequest;
 
 class TradeController extends Controller
 {
@@ -44,7 +45,7 @@ class TradeController extends Controller
         }
     }
 
-    public function sendMessage(Request $request, $item_id){
+    public function sendMessage(MessageRequest $request, $item_id){
 
         if($request->page == 'buyer'){
             $trade = Trade::where('product_id', $item_id)->where('buyer_id', Auth::id())->first();
@@ -58,7 +59,7 @@ class TradeController extends Controller
         //選択した画像をstorage/message_imgに保存
         $file = $request->file('file');
         if($file !== null){
-            $file_name = $file->hashName(); 
+            $file_name = $file->getClientOriginalName(); 
             $file->storeAs('public/message_img', $file_name);
             $data['image'] = $file_name;
 
@@ -77,12 +78,6 @@ class TradeController extends Controller
             ]);
         }
 
-        
-        
-        
-
-        
-
         return redirect("/products/{$item_id}/trades/{$trade->id}");
     }
 
@@ -99,5 +94,16 @@ class TradeController extends Controller
         $trade = Trade::where('product_id', $item_id)->where('buyer_id', Auth::id())->first();
         $trade->update(['status' => "completed"]);
         return redirect("/products/{$item_id}/trades/{$trade->id}#modal");
+    }
+
+    public function update(Request $request, $item_id, $message_id){
+        $message = Message::find($message_id);
+        return redirect("/products/{$item_id}/trades/{$message->trade_id}");
+    }
+
+    public function delete(Request $request, $item_id, $message_id){
+        $message = Message::find($message_id);
+        $message->delete();
+        return redirect("/products/{$item_id}/trades/{$message->trade_id}");
     }
 }

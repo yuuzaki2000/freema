@@ -51,13 +51,33 @@
                     </label>
                     <input type="hidden" name="page" value="seller">
                     <button type="submit"><i class="fa-regular fa-paper-plane"></i></button>
+                    <?php $__errorArgs = ['content'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                        <div><?php echo e($message); ?></div>
+                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                    <?php $__errorArgs = ['file'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                        <div><?php echo e($message); ?></div>
+                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                 </form>
         </div>
         <div class="modal" id="modal">
             <a href="#!" class="modal-overlay"></a>
             <div class="modal__inner">
                 <div class="modal__content">
-                    <form action="/star" method="POST" class="modal-container">
+                    <form action="/star/<?php echo e($product->trade->id); ?>" method="POST" class="modal-container">
                         <?php echo csrf_field(); ?>
                         <h3>取引が完了しました</h3>
                         <p>今回の取引相手はどうでしたか？</p>
@@ -69,6 +89,7 @@
                             <option value="4">4</option>
                             <option value="5">5</option>
                         </select>
+                        <input type="hidden" name="star_receiver_id" value="<?php echo e($product->trade->seller->id); ?>">
                         <button type="submit" class="star__btn">送信する</button>
                     </form>
                 </div>
