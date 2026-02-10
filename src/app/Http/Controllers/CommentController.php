@@ -22,20 +22,7 @@ class CommentController extends Controller
         Comment::create($data);
         $product = Product::find($item_id);
 
-        Trade::create([
-            'product_id' =>$item_id,
-            'buyer_id' => Auth::id(),
-            'seller_id' => $product->listing->user_id,
-            'status' => 'negotiating',
-        ]);
-
-        Message::create([
-            'trade_id' => $product->trade->id,
-            'user_id' => Auth::id(),
-            'content' => $request->content,
-            'image' => null,
-        ]);
-
         return redirect()->route('item.detail', ['item_id' => $item_id]);
     }
 }
+
