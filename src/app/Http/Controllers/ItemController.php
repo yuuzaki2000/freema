@@ -14,6 +14,7 @@ use App\Models\Category;
 use App\Models\Purchase;
 use App\Models\Favorite;
 use App\Models\Comment;
+use App\Models\Trade;
 
 
 class ItemController extends Controller
@@ -168,6 +169,13 @@ class ItemController extends Controller
             'building' => "",
             ];
         }
+
+        Trade::create([
+            'product_id' => $item_id,
+            'buyer_id' => Auth::id(),
+            'seller_id' => $product->listing->user_id,
+            'status' => 'negotiating'
+        ]);
         
         return view('purchase', $data);
     }

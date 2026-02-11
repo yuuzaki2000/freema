@@ -16,11 +16,15 @@ class TradeController extends Controller
 {
     //
     public function index($item_id){
+        $product = Product::find($item_id);
+        $trade = $product->trade;
+
+        /*
         $trade = Trade::where('product_id', $item_id)->where('buyer_id', Auth::id())->first();
 
         if($trade == null){
             $trade = Trade::where('product_id', $item_id)->where('seller_id', Auth::id())->first();
-        }
+        }  */
 
         if($trade->status == "negotiating"){
             return redirect("/products/{$item_id}/trades/{$trade->id}");

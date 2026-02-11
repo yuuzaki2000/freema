@@ -34,17 +34,32 @@ class ProfileController extends Controller
             }
             $page = $request->page;
         }else if($request->page == "trade"){
-            $trades_buyer = Trade::where('buyer_id', Auth::id())->get();
-            $trades_seller = Trade::where('seller_id', Auth::id())->get();
-            $products = collect();
-            foreach($trades_buyer as $trade_buyer){
-                $product = Product::find($trade_buyer->product_id);
-                $products->push($product);
+            $particularProducts = Product::all();
+
+            foreach($particularProducts as $product){
+                $purchase = Purchase::where('product_id', $product->id)->first();
+                if($purchase){
+                    $product['isSold'] = 'true';
+                }else{
+                    $product['isSold'] = 'false';
+                }
             }
-            foreach($trades_seller as $trade_seller){
-                $product = Product::find($trade_seller->product_id);
-                $products->push($product);
-            }
+
+            $buyer_products = Product::whereHas('purchase', function ($q) {
+                                                    $q->where('user_id', Auth::id());
+                                                })->get();
+
+            $seller_products = $particularProducts
+                                ->filter(function ($product) {
+                                            return $product->listing && $product->listing->user_id === Auth::id() && $product->isSold === 'true';
+                                    })->values();
+            $seller_products = $seller_products->map(function ($product) {
+                                                        unset($product['isSold']);
+                                                        return $product;
+                                                    });
+
+            $products = $buyer_products->merge($seller_products)->values();
+
             $page = $request->page;
         }else{
             $products = collect();

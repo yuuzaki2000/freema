@@ -60,15 +60,20 @@
     <div class="container">
         <?php
             $particularProducts = $products->sortBy('created_at');
+            //変更要
         ?>
         <ul class="group">
-                <?php if(!empty($products)): ?>
-                <?php $__currentLoopData = $particularProducts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <?php if($products->count() > 0): ?>
+                <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <?php
-                        $message_count = App\Models\Message::where('trade_id', $product->trade->id)
+                        if($product->trade){
+                            $message_count = App\Models\Message::where('trade_id', $product->trade->id)
                                         ->whereHas('trade', function ($query) {
                                                 $query->where('seller_id', Auth::id());
                                         })->count();
+                        }else{
+                            $message_count = 0;
+                        }
                     ?>
                     <li class="compartment">
                         <form action="/products/<?php echo e($product->id); ?>/trades" class="item" method="GET">
