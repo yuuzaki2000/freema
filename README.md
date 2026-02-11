@@ -38,14 +38,14 @@ mailtrapのメールボックスを作成し、
 MAIL_MAILER=smtp
 MAIL_HOST=sandbox.smtp.mailtrap.io
 MAIL_PORT=2525
-MAIL_USERNAME=bc0792fcbad78f
-MAIL_PASSWORD=20bbe0136d3bc6
+MAIL_USERNAME=(自分のusername)
+MAIL_PASSWORD=(自分のpassword)
 MAIL_ENCRYPTION=tls
 ※
 MAIL_FROM_ADDRESS=from@example.com
 MAIL_FROM_NAME="${APP_NAME}"
 
-.envに下記の変数を追加（Secret KeyやPublic Keyは、mailtrapのホームページから自分のものをコピー）
+.envに下記の変数を追加（Secret KeyやPublic Keyは、stripeのホームページから自分のものをコピー）
 
 STRIPE_SK = (test用のSecret Key)
 
