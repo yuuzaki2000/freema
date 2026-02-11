@@ -8,7 +8,7 @@
     <div class="side-bar">
         <p class="side-bar-title">その他の取引</p>
         <?php $__currentLoopData = $side_trades; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $trade): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-            <form action="/products/<?php echo e($product->id); ?>/trades/<?php echo e($trade->id); ?>" method="GET">
+            <form action="/products/<?php echo e($trade->product->id); ?>/trades" method="GET">
                 <?php echo csrf_field(); ?>
                 <button type="submit">取引<?php echo e($trade->id); ?></button>
 

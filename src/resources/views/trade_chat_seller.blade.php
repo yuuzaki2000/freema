@@ -10,7 +10,7 @@
     <div class="side-bar">
         <p class="side-bar-title">その他の取引</p>
         @foreach ($side_trades as $trade)
-            <form action="/products/{{$product->id}}/trades/{{$trade->id}}" method="GET">
+            <form action="/products/{{$trade->product->id}}/trades" method="GET">
                 @csrf
                 <button type="submit">取引{{$trade->id}}</button>
 

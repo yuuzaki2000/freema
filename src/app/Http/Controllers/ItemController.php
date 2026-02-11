@@ -26,7 +26,9 @@ class ItemController extends Controller
         $particularListings = Listing::where('user_id', Auth::id())->get();
 
         if($request->page == null){
-            $products = Product::all();
+            $products = Product::whereHas('listing', function($query){
+                $query->where('user_id','!=', Auth::id());
+            })->get();
             $page = $request->page;
             $keyword = "";
         }else if($request->page == "mylist"){
