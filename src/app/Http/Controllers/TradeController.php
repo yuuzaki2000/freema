@@ -19,13 +19,6 @@ class TradeController extends Controller
         $product = Product::find($item_id);
         $trade = $product->trade;
 
-        /*
-        $trade = Trade::where('product_id', $item_id)->where('buyer_id', Auth::id())->first();
-
-        if($trade == null){
-            $trade = Trade::where('product_id', $item_id)->where('seller_id', Auth::id())->first();
-        }  */
-
         if($trade->status == "negotiating"){
             return redirect("/products/{$item_id}/trades/{$trade->id}");
         }else{
@@ -88,7 +81,7 @@ class TradeController extends Controller
 
     public function complete(Request $request, $item_id){
 
-        $trade = Trade::where('product_id', $item_id)->where('buyer_id', Auth::id())->first();
+        $trade = Trade::where('product_id', $item_id)->first();
         $trade->update(['status' => "completed"]);
 
         $product = Product::find($item_id);

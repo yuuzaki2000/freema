@@ -46,7 +46,7 @@
                 @endforeach
                 <form action="/products/{{$product->id}}/trades/messages" method="POST" enctype="multipart/form-data">
                 @csrf
-                    <input type="text" name="content">
+                    <input type="text" name="content" style="width:400px;" placeholder="取引メッセージを入力してください">
                     <label class="file-label">
                         画像を追加
                         <input type="file" name="file" class="file-input">
@@ -54,10 +54,10 @@
                     <input type="hidden" name="page" value="seller">
                     <button type="submit"><i class="fa-regular fa-paper-plane"></i></button>
                     @error('content')
-                        <div>{{$message}}</div>
+                        <div style="color:red;">{{$message}}</div>
                     @enderror
                     @error('file')
-                        <div>{{$message}}</div>
+                        <div style="color:red;">{{$message}}</div>
                     @enderror
                 </form>
         </div>
