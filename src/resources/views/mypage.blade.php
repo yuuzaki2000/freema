@@ -9,7 +9,7 @@
     <div class="upper">
         @isset($profile)
         <div>
-            <img src="{{asset($profile->image)}}" alt="プロフィール画像">
+            <img src="{{asset('storage/profile_img/' . $profile->image)}}" alt="プロフィール画像">
         </div>
         @endisset
         <h2>{{$user->name}}</h2>

@@ -7,7 +7,7 @@
     <div class="upper">
         <?php if(isset($profile)): ?>
         <div>
-            <img src="<?php echo e(asset($profile->image)); ?>" alt="プロフィール画像">
+            <img src="<?php echo e(asset('storage/profile_img/' . $profile->image)); ?>" alt="プロフィール画像">
         </div>
         <?php endif; ?>
         <h2><?php echo e($user->name); ?></h2>
